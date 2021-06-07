@@ -1,2 +1,4 @@
-p { font-family: 'Open Sans Condensed', sans-serif;
+html { 
+	font-size: 30px;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
