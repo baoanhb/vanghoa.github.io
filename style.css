@@ -1,21 +1,92 @@
-html { 
-	font-size: 10px;
-	font-family:Arial, Helvetica, sans-serif;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+	--colmax: 21;
+	--rowmax: 21;
+	--navsz: 50px;
+	--navszhover: 200px;
 }
 
 body {
-  width: 600px;
-  margin: 0 auto;
-  padding: 0 20px 20px 20px;
+	width: 100vw;
+	height: 100vh;
 }
 
-p {
-	margin:  0;
-	padding: 50px 0;
+main {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
 }
 
-img {
-	display: block;
-	margin: 0 auto;
-	width: 300px;
+section {
+	width: 500vw;
+	height: 500vh;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+li {
+	list-style-type: none;
+	background-color: blue;
+	border-radius: 10px;
+	transition: width 0.5s, height 0.5s;
+	padding: 5px;
+	word-break: break-word;
+}
+
+.li_col {
+	height: var(--navsz);
+}
+
+.li_col:hover {
+	height: var(--navszhover);
+}
+
+.li_row {
+	width: var(--navsz);
+	writing-mode: vertical-rl;
+}
+
+.li_row:hover {
+	width: var(--navszhover);
+	writing-mode: horizontal-tb;
+}
+
+#nav {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: auto repeat(var(--colmax), 1fr) auto;
+	grid-template-rows: auto repeat(var(--rowmax), 1fr) auto;
+}
+
+#main {
+	padding: 0;
+	background-color: red;
+	grid-column: 2 / calc(var(--colmax) + 2);
+	grid-row: 2 / calc(var(--rowmax) + 2);
+}
+
+#main iframe {
+	height:100%;
+	width:100%;
+	border:none;
+}
+
+@media only screen and (max-width: 1000px) {
+	
 }
