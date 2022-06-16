@@ -10,4 +10,14 @@ body {
 	height: 10000px;
 	width: 100%;
 	padding: 20px;
+	text-align: center;
+}
+
+img {
+	margin: 30px auto;
+	display: block;
+	width: 80%;
+	max-width: 1600px;
+	height: auto;
+	object-fit: contain;
 }

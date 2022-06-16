@@ -11,12 +11,20 @@
 
   <link href="style.css" rel="stylesheet">
 
-  <script src="scripts/all_function.js"></script>
   <script src="scripts/script_start.js"></script>
 </head>
 
 <body>
   <nav>
+    <div class="seemore" style="grid-column: 1; grid-row: 1;">
+
+    </div>
+    <div class="seemore" style="grid-column: 2; grid-row: 1;">
+
+    </div>
+    <div class="seemore" style="grid-column: 2; grid-row: 2;">
+
+    </div>
     <ul id="nav">
       <li onclick="nav_navigate(this)" id="1">
         Kasper Florio - Atypical Swiss | Visual Analysis
@@ -51,10 +59,45 @@
       <li onclick="nav_navigate(this)" id="11">
         Love is Hard, HIV Prevention is Easy website
       </li>
+      <li onclick="nav_navigate(this)" id="12" class="soon">
+        Coming soon
+      </li>
+      <li onclick="nav_navigate(this)" id="13" class="soon">
+        Coming soon
+      </li>
+      <li onclick="nav_navigate(this)" id="14" class="soon">
+        Coming soon
+      </li>
+      <li onclick="nav_navigate(this)" id="15" class="soon">
+        Coming soon
+      </li>
+      <li onclick="nav_navigate(this)" id="16" class="soon">
+        Coming soon
+      </li>
       <li id="main">
-        <iframe src="project_pages/project_1.html" title="see my project here" onload="ifr_widthfit()">
-          
-        </iframe>
+        <section id="welcome">
+          welcome to my portfolio
+        </section>
+        <section id="iframe">
+          <iframe hidecheck="1" src="project_pages/project_1.html" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">
+            
+          </iframe>
+          <iframe class="hide" hidecheck="0" src="" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">
+
+          </iframe>
+        </section>
+      </li>
+      <li class="btn" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2;">
+        
+      </li>
+      <li class="btn" onclick="seemore()" style="grid-column: var(--colmaxreal1) / var(--colmaxreal2); grid-row: 1 / 2;">
+        
+      </li>
+      <li class="btn" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal1) / var(--colmaxreal2);">
+        ←
+      </li>
+      <li class="btn" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal1) / var(--colmaxreal2); grid-row: var(--colmaxreal1) / var(--colmaxreal2);">
+        →
       </li>
     </ul>
   </nav>
