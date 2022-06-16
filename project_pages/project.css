@@ -4,20 +4,40 @@
 	padding: 0;
 	font-size: 15px;
 	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+:root {
+	--minsz: 70vw;
+	--maxsz: 1600px;
 }
 
 body {
-	height: 10000px;
 	width: 100%;
 	padding: 20px;
 	text-align: center;
 }
 
-img {
+img, .item {
 	margin: 30px auto;
 	display: block;
-	width: 80%;
-	max-width: 1600px;
+	width: var(--minsz);
+	max-width: var(--maxsz);
 	height: auto;
 	object-fit: contain;
+}
+
+.pdf {
+	height: calc(calc(var(--minsz) / 1) * 1.4142);
+	max-height: calc(calc(var(--maxsz) / 1) * 1.4142);
+}
+
+.vimeosqr {
+	height: var(--minsz);
+	max-height: var(--maxsz);
+}
+
+.vimeo169 {
+	height: calc(calc(var(--minsz) / 16) * 9);
+	max-height: calc(calc(var(--maxsz) / 16) * 9);
 }

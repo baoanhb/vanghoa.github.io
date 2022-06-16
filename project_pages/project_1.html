@@ -12,6 +12,10 @@
         <img src="../src/1/image (1).jpg" alt="something">
         <img src="../src/1/image (2).jpg" alt="something">
         <img class="lazy" data-src="../src/1/image (3).jpg" alt="something">
+        <iframe class="lazy item vimeosqr" data-src="https://drive.google.com/file/d/1AKd_JRizcygwuIPYIy5puMq6LmRyHde8/preview" allow="autoplay">
+
+        </iframe>
+        <!-- <div id="adobe-dc-view-1" class="item pdf"></div> -->
         <img class="lazy" data-src="../src/1/image (4).jpg" alt="something">
         <img class="lazy" data-src="../src/1/image (5).jpg" alt="something">
         <img class="lazy" data-src="../src/1/image (6).jpg" alt="something">
@@ -19,22 +23,37 @@
         <img class="lazy" data-src="../src/1/image (8).jpg" alt="something">
         <img class="lazy" data-src="../src/1/image (9).jpg" alt="something">
         <img class="lazy" data-src="../src/1/image (10).jpg" alt="something">
-        <img class="lazy" data-src="../src/1/image (11).jpg" alt="something">
+        <!-- <div id="adobe-dc-view-2" class="item pdf"></div> -->
+        <iframe class="lazy item pdf" data-src="https://drive.google.com/file/d/1cbmYYLIPlogw2hOarbPpS5NCNiRheP1G/preview" allow="autoplay">
+
+        </iframe>
     </div>
 
-    <div id="adobe-dc-view"></div>
+    <!-- 
     <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
     <script type="text/javascript">
         document.addEventListener("adobe_dc_view_sdk.ready", function()
         {
-            var adobeDCView = new AdobeDC.View({clientId: "ce8ca4e0f2654969a3bb15a1154519db", divId: "adobe-dc-view"});
-            adobeDCView.previewFile(
-        {
-            content:   {location: {url: "../src/1/Content mapping.pdf"}},
-            metaData: {fileName: "Bodea Brochure.pdf"}
-        });
+            let adobeDCView1 = new AdobeDC.View({clientId: "ce8ca4e0f2654969a3bb15a1154519db", divId: "adobe-dc-view-1"});
+            let adobeDCView2 = new AdobeDC.View({clientId: "ce8ca4e0f2654969a3bb15a1154519db", divId: "adobe-dc-view-2"});
+            
+            adobeDCView1.previewFile(
+            {
+                content:   {location: {url: "../src/1/Content mapping.pdf"}},
+                metaData: {fileName: "content mapping.pdf"}
+            }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: false, 
+			showFullScreen: false, showLeftHandPanel: false, showAnnotationTools: false});
+            
+            adobeDCView2.previewFile(
+            {
+                content:   {location: {url: "../src/1/kasper florio-compressed.pdf"}},
+                metaData: {fileName: "Kasper Florio - Atypical Swiss | Visual Analysis.pdf"}
+            }, {embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: false, 
+			showFullScreen: false, showLeftHandPanel: false, showAnnotationTools: false});
+        
         });
     </script>
+    -->
 
     <script src="project.js"></script>
 </body>
