@@ -8,6 +8,14 @@
   <meta name="author" content="Bui Nguyen Bao Anh">
   <meta name="description" content="Trang web ca nhan cua Bui Nguyen Bao Anh/ Vang Hoa">
   <title>Vàng Hoa</title>
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
   <link href="style.css" rel="stylesheet">
 
@@ -15,6 +23,11 @@
 </head>
 
 <body>
+  <script>
+    const scrlbrwd = getScrollbarWidth();
+    const offsetifr = navsz*2 + scrlbrwd + 1;
+  </script>
+
   <nav>
     <div class="seemore" style="grid-column: 1; grid-row: 1;">
 
@@ -79,7 +92,7 @@
           welcome to my portfolio
         </section>
         <section id="iframe">
-          <iframe hidecheck="1" src="project_pages/project_1.html" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">
+          <iframe hidecheck="1" src="project_pages/1/project_1.html" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">
             
           </iframe>
           <iframe class="hide" hidecheck="0" src="" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">

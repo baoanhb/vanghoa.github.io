@@ -117,7 +117,8 @@ function nav_navigate(item) {
     wlcmscr.classList.add('close');
 
     let projfr_id = projfr.querySelectorAll('iframe');
-    projfr_id[1].setAttribute('src', `project_pages/project_${item.getAttribute('id')}.html`);
+    projfr_id[1].setAttribute('src', `project_pages/${item.getAttribute('id')}/project_${item.getAttribute('id')}.html`);
+    projfr_id[0].contentWindow.document.querySelector('#wrapper').classList.add('wrapper');
 
     projfr_id.forEach((item,index) => {
         item.setAttribute('hidecheck', `${index}`); 
@@ -129,14 +130,13 @@ function nav_navigate_event() {
     let projfr_id = projfr.querySelector('iframe');
 
     projfr.appendChild(projfr_id);
-    projfr_id.setAttribute('src', 'about:blank');
+    projfr_id.setAttribute('src', '');
 }
 //
 function ifr_widthfit(frame) {
     if (!+frame.getAttribute('hidecheck')) {return;}
 
-    cl(frame);
-    frame.contentWindow.document.body.style.width = `${innerWidth - navsz*2 - getScrollbarWidth() - 1}px`;
+    frame.contentWindow.document.body.style.width = `${innerWidth - offsetifr}px`;
 }
 //
 function homescreen() {

@@ -8,8 +8,23 @@
 }
 
 :root {
-	--minsz: 70vw;
+	--minsz: 80vw;
 	--maxsz: 1600px;
+	--minsz169: 80vw;
+	--navscrlbar: 40px;
+}
+
+/* Portrait */
+@media screen and (orientation:portrait) {
+	:root {
+		--minsz: 80vw;
+	}
+}
+/* Landscape */
+@media screen and (orientation:landscape) {
+	:root {
+		--minsz: 80vh;
+	}
 }
 
 body {
@@ -18,26 +33,37 @@ body {
 	text-align: center;
 }
 
-img, .item {
+.wrapper {
+	width: calc(100vw - var(--navscrlbar));
+}
+
+img, .item, #column_2 {
 	margin: 30px auto;
 	display: block;
-	width: var(--minsz);
+	width: var(--minsz169);
 	max-width: var(--maxsz);
 	height: auto;
 	object-fit: contain;
 }
 
-.pdf {
-	height: calc(calc(var(--minsz) / 1) * 1.4142);
-	max-height: calc(calc(var(--maxsz) / 1) * 1.4142);
-}
-
-.vimeosqr {
+.sqr {
+	width: var(--minsz);
 	height: var(--minsz);
 	max-height: var(--maxsz);
 }
 
-.vimeo169 {
-	height: calc(calc(var(--minsz) / 16) * 9);
+.s169 {
+	height: calc(calc(var(--minsz169) / 16) * 9);
 	max-height: calc(calc(var(--maxsz) / 16) * 9);
+}
+
+#column_2 {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 30px;
+}
+
+.colchild {
+	width: 100%;
+	margin: 0;
 }
