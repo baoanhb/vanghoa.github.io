@@ -25,7 +25,7 @@
 <body>
   <script>
     const scrlbrwd = getScrollbarWidth();
-    const offsetifr = navsz*2 + scrlbrwd + 1;
+    const offsetifr = navsz*2 + scrlbrwd + 1 + +hbhave.slice(0,-2) * 2;
   </script>
 
   <nav>
@@ -39,57 +39,415 @@
 
     </div>
     <ul id="nav">
-      <li onclick="nav_navigate(this)" id="1">
-        Kasper Florio - Atypical Swiss | Visual Analysis
+      <!-- -->
+      <li onclick="nav_navigate(this)" id="1" class="current">
+        <div class="text">
+          <h2>Kasper Florio - Atypical Swiss | Visual Analysis</h2>
+          <p class="date">11/2020 - 12/2020 
+            <span class="field">Art direction</span> 
+            <span class="field">Editorial design</span> 
+            <span class="field">Book design</span> 
+            <span class="field">Book binding</span>
+          </p>
+          <p>An editorial on Swiss grid design, specifically on the work of the graphic design duo-Kasper Florio</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/1.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="2">
-        Remeasure the Liturgy – 2022 Liturgical Calendar
+        <div class="text">
+          <h2>Remeasure the Liturgy – 2022 Liturgical Calendar</h2>
+          <p class="date">3/2021 - 4/2021 
+            <span class="field">Calendar design</span> 
+            <span class="field">Editorial design</span>
+          </p>
+          <p>A calendar designed specifically for Roman Catholic followers to document the cycle of Liturgical seasons as well as other Christian celebration and events</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/2.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="3">
-        Vietnamme Magazine
+        <div class="text">
+          <h2>Vietnamme Magazine</h2>
+          <p class="date">11/2020 - 1/2021  
+            <span class="field">Website development</span>
+            <span class="field">Digital illustration</span>
+            <span class="field">Graphic design</span>
+            <span class="field">UI/UX design</span> 
+          </p>
+          <p>Brand identity and website development for a Vietnamese cultural online magazine</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/3.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="4">
-        Tabao Tammy superhero
+        <div class="text">
+          <h2>Tabao Tammy superhero</h2>
+          <p class="date">1/2021 - 3/2021 
+            <span class="field">Visual identity design</span> 
+            <span class="field">Typeface design</span> 
+            <span class="field">Digital illustration</span> 
+            <span class="field">Character design</span>
+          </p>
+          <p>Visual identity for a fictional superhero including character design, fan poster, emblem and typeface</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/4.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="5">
-        Vietnamme Creative Campagin | MẮC GÌ?
+        <div class="text">
+          <h2>Vietnamme Creative Campagin | MẮC GÌ?</h2>
+          <p class="date">8/2021 
+            <span class="field">Communication design</span> 
+            <span class="field">Motion graphic</span>
+          </p>
+          <p>Visual direction for a communication campaign on the problem of Heteronormativity in Vietnam</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/5.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="6">
-        3D markup language
+        <div class="text">
+          <h2>3D markup language</h2>
+          <p class="date">8/2021 - 10/2021 
+            <span class="field">Speculative</span> 
+            <span class="field">Website development</span>
+            <span class="field">3D design</span>
+          </p>
+          <p>Development of a fictional markup language systems, like HTML or XML but for organising, transporting and constructing elements in the physical world </p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/6.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="7">
-        Duolingo: Non-fungible efforts
+        <div class="text">
+          <h2>Duolingo: Non-fungible efforts</h2>
+          <p class="date">12/2021 - 3/2022 
+            <span class="field">Art direction</span> 
+            <span class="field">Communication design</span> 
+            <span class="field">Motion graphic</span>
+            <span class="field">Pixel illustration</span>
+          </p>
+          <p>An entry for New Blood D&AD: Development of an NFT collection for Duolingo-a famous language-learning app</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/7.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="8">
-        Khoi Minh website
+        <div class="text">
+          <h2>Khoi Minh website</h2>
+          <p class="date">5/2022 - 6/2022
+            <span class="field">Website development</span> 
+            <span class="field">UI/UX design</span> 
+          </p>
+          <p>Website development for a branded provider of mechanical engineering & industrial equipments</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/8.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="9">
-        Sesẻ
+        <div class="text">
+          <h2>Sesẻ</h2>
+          <p class="date">10/2021 - 4/2022
+            <span class="field">Smartphone app development</span> 
+            <span class="field">UI/UX design</span> 
+            <span class="field">Motion graphic</span>
+            <span class="field">Character illustration</span> 
+          </p>
+          <p>An entry for Google Development Solution Challenge: UI/UX design and visual development for a smartphone-based app to buy and sell used goods</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/9.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="10">
-        Miscellaneous projects
+        <div class="text">
+          <h2>Misc projects</h2>
+          <p class="date">1/2020 - present
+            <span class="field">Communication design</span> 
+            <span class="field">Poster design</span> 
+          </p>
+          <p>Various small-scale projects, personal and full-time works</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/10.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="11">
-        Love is Hard, HIV Prevention is Easy website
+        <div class="text">
+          <h2>Love is Hard, HIV Prevention is Easy website</h2>
+          <p class="date">9/2021 - 11/2021
+            <span class="field">Website development</span> 
+            <span class="field">UI/UX design</span> 
+          </p>
+          <p>UI/UX design for a public health campaign website to raise awareness about HIV prevention, reduce new HIV infections, and eliminate HIV stigma in Vietnam.</p>
+        </div>
+        <div class="hovercontent">
+          <img class="thumb" data-src="thumbnail/11.jpg">
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="12" class="soon">
-        Coming soon
+        <div class="text">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="hovercontent">
+        
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="13" class="soon">
-        Coming soon
+        <div class="text">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="hovercontent">
+        
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="14" class="soon">
-        Coming soon
+        <div class="text">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="hovercontent">
+        
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="15" class="soon">
-        Coming soon
+        <div class="text">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="hovercontent">
+        
+        </div>
       </li>
+      <!-- -->
       <li onclick="nav_navigate(this)" id="16" class="soon">
-        Coming soon
+        <div class="text">
+          <h2>Coming soon</h2>
+        </div>
+        <div class="hovercontent">
+        
+        </div>
       </li>
+      <!-- -->
       <li id="main">
         <section id="welcome">
-          welcome to my portfolio
+          <h1>Bui Nguyen Bao Anh</h1>
+
+          <p>
+            Jr. Graphic Designer<br>
+            D.O.B: 12/05/2001
+          </p>
+          <br><h2>Contacts↓</h2>
+
+          <address>
+            <a href="https://www.instagram.com/" target="_blank">instagram.com/bao.anh.b</a> <br>
+            
+            <a href="mailto:baoanh1buinguyen@gmail.com">baoanh1buinguyen@gmail.com</a><br>
+            (+84) 77 938 4331 (Vietnam only)
+          </address>
+
+          <br><h2>Education</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>08/2019 <br> 
+                  →05/2023 (expected)
+                </td>
+                <td>
+                  <h3>LASALLE COLLEGE OF THE ARTS</h3>
+                  <i>Singapore</i> <br> 
+                  Diploma in Design for Communication and Experiences<br>
+                </td>
+              </tr>
+              <tr>
+                <td>09/2016 <br>
+                  →05/2019
+                </td>
+                <td>
+                  <h3>HIGHSCHOOL FOR THE GIFTED—VNUHCM</h3>
+                  <i>Vietnam</i> <br>
+                  High School Diploma<br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br><h2>Work Experiences</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>07/2021 <br> 
+                  →12/2022
+                </td>
+                <td>
+                  <h3>THE LAB SAIGON</h3>
+                  <i>Junior Graphic Designer</i> <br>
+                  – Communication & Visual Designer for the Saigon-based creative agency<br>
+                </td>
+              </tr>
+              <tr>
+                <td>05/2019
+                </td>
+                <td>
+                  <h3>INTEL PRODUCTS VIETNAM</h3>
+                  <i>Independent Freelance Illustrator</i> <br>
+                  – Stage Background Illustrator for the company’s year-end event.<br>
+                </td>
+              </tr>
+              <tr>
+                <td>2017 <br> 
+                  →Now
+                </td>
+                <td>
+                  <h3>SMALL MEDIUM ENTERPRISES</h3>
+                  <i>Freelancer in Graphic Design</i> <br>
+                  – Responsible for the visual images, graphics, illustrations and concepts for clients’ needs.<br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br><h2>Skills</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <h3>– Proficient with the following Digital Softwares:</h3>
+                  Adobe Creative Suite and Figma.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h3>– Familiar with the following Digital Softwares:</h3>
+                  Cinema4D, Glyphs and Blender. 
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h3>– Technical Skills:</h3>
+                  Illustration, Publication Production, UI Design,  HTML/CSS & Javascript knowledge.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br><h2>Activities</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>05/2021 <br> 
+                  →08/2021
+                </td>
+                <td>
+                  <h3>Project Vietnamme—a non-profit organisation dedicated to the relationship of young Vietnamese and the Arts.</h3>
+                  – Graphic Design Consultation.
+                </td>
+              </tr>
+              <tr>
+                <td>04/2021
+                </td>
+                <td>
+                  <h3>‘Socks’ Zine by Joanne Pang for Singapore Art Book Fair</h3>
+                  – Illustration Contributing.
+                </td>
+              </tr>
+              <tr>
+                <td>10/2020 <br> 
+                  →01/2021
+                </td>
+                <td>
+                  <h3>Vietnamme Magazine—magazine.vietnamme.me, an online magazine dedicated to the contemporary arts in Vietnam.</h3>
+                  – Website Development, Graphic Design.
+                </td>
+              </tr>
+              <tr>
+                <td>10/2017 <br> 
+                  →01/2018
+                </td>
+                <td>
+                  <h3>Human Library Vietnam—a non-profit organisation dedicated to raising awareness to societal issues.</h3>
+                  – Graphic Design, Illustration.
+                </td>
+              </tr>
+              <tr>
+                <td>08/2017 <br> 
+                  →08/2018
+                </td>
+                <td>
+                  <h3>Project Sugar—a non-profit student-run organisation dedicated to underprivileged children</h3>
+                  – Graphic Design, Illustration, Art Direction.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br><h2>Accolades</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>2022
+                </td>
+                <td>
+                  <h3>D&AD NEW BLOOD PENCIL</h3>
+                  – Awarded 2022 Pencil (pencil level to be announced this July) by D&AD New Blood.
+                </td>
+              </tr>
+              <tr>
+                <td>2021
+                </td>
+                <td>
+                  <h3>RED DOT JUNIOR AWARD</h3>
+                  – Awarded “Red Dot Junior Award” under Red Dot Award: Brands & Communication Design by Red Dot Award in 2021.
+                </td>
+              </tr>
+              <tr>
+                <td>2021
+                </td>
+                <td>
+                  <h3>CERTIFICATE OF TYPOGRAPHIC EXCELLENCE</h3>
+                  – Awarded “Certificate of Typographic Excellence” in TDC67 by Type Directors Club and will be included in the Annual of the Type Directors Club, The World’s Best Typography.
+                </td>
+              </tr>
+              <tr>
+                <td>2020
+                </td>
+                <td>
+                  <h3>LASALLE SCHOLARSHIP 2020-2021</h3>
+                  – Awarded LASALLE Scholarship 2020–2021 to cover my tuition fee for my great performance at LASALLE College of the Arts.
+                </td>
+              </tr>
+              <tr>
+                <td>2019
+                </td>
+                <td>
+                  <h3>LASALLE TUITION GRANT</h3>
+                  – Awarded 60% merit-based tuition grant for my tuition fee in the diploma at LASALLE College of the Arts.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
         </section>
         <section id="iframe">
           <iframe hidecheck="1" src="project_pages/1/project_1.html" title="see my project here" onload="ifr_widthfit(this)" loading="lazy">
@@ -100,18 +458,39 @@
           </iframe>
         </section>
       </li>
+      <!-- -->
+      <li id="top_hbh" class="hbh">
+
+      </li>
+      <!-- -->
+      <li id="left_hbh" class="hbh">
+
+      </li>
+      <!-- -->
+      <li id="right_hbh" class="hbh">
+
+      </li>
+      <!-- -->
+      <li id="bot_hbh" class="hbh">
+
+      </li>
+      <!-- -->
       <li class="btn" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2;">
-        
+        &#127968;
       </li>
-      <li class="btn" onclick="seemore()" style="grid-column: var(--colmaxreal1) / var(--colmaxreal2); grid-row: 1 / 2;">
-        
+      <!-- -->
+      <li class="btn" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
+        &#9881;&#65039;
       </li>
-      <li class="btn" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal1) / var(--colmaxreal2);">
-        ←
+      <!-- -->
+      <li class="btn" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
+        &#8592;
       </li>
-      <li class="btn" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal1) / var(--colmaxreal2); grid-row: var(--colmaxreal1) / var(--colmaxreal2);">
-        →
+      <!-- -->
+      <li class="btn" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
+        &#8594;
       </li>
+      <!-- -->
     </ul>
   </nav>
 

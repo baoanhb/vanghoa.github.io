@@ -1,18 +1,30 @@
 "use strict";
 
 // constant //
-const minsz = 7;
+const minsz = 9;
 const time_interval = 200;
 
-const proproot = getComputedStyle(document.querySelector(':root'));
+const root = document.querySelector(':root');
+
+const proproot = getComputedStyle(root);
 const navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
+const navszhover = +proproot.getPropertyValue('--navszhover').slice(0, -2);
+const paddingli = +proproot.getPropertyValue('--paddingli').slice(0, -2);
 const colmax = +proproot.getPropertyValue('--colmax') + 2;
 const rowmax = +proproot.getPropertyValue('--rowmax') + 2;
+//
+const rootstyle = root.style;
+const hbhmin = proproot.getPropertyValue('--hbhwidth_min');
+let hbhmax = proproot.getPropertyValue('--hbhwidth_max');
+const hbhave = proproot.getPropertyValue('--hbhwidth_ave');
+//
 const soitem = new Array(4);
+const ofstscrlrow = (navszhover - paddingli * 2) / 2;
 
 // variable //
 let delaypromise = Promise.resolve();
 let crrntnavlist = 0;
+let crrntitemid = '1';
 
 // local function //
 function navlist_navigate(next) {
@@ -44,11 +56,26 @@ function nav_construct(id) {
         delaypromise = delaypromise.then(function () {
             let positem = posarray[index];
             item.removeAttribute("style");
-            item.classList.remove('col', 'row');
+            item.classList.remove('col', 'row', 'left', 'right');
+
             item.style.gridColumn = positem.col;
             item.style.gridRow = positem.row;
             item.style[`${positem.colcheck ? 'alignSelf' : 'justifySelf'}`] = positem.initcheck ? 'start' : 'end';
             item.classList.add(`${positem.colcheck ? 'col' : 'row'}`);
+            item.classList.add(`${positem.sidecheck}`);
+            
+            if (positem.colcheck & hovercheck[id]) {
+                item.addEventListener("mouseenter", positem.initcheck ? hovertop_in : hoverbot_in);
+                item.addEventListener("mouseleave", hover_out);
+            } else if (hovercheck[id]) {
+                item.addEventListener("mouseenter", positem.initcheck ? hoverleft_in : hoverright_in);
+                item.addEventListener("mouseleave", hover_out);
+            }
+
+            if (index == navitem[id].length - 1) {
+                hovercheck[id] = false;
+            }
+
             return new Promise(function (resolve) {
               setTimeout(resolve, time_interval);
             });
@@ -75,7 +102,7 @@ function posarr_generate(index) {
     let posbot = pos_generate(soitem[1], true, false);  
     let posleft = pos_generate(soitem[2], false, true); 
     let posright = pos_generate(soitem[3], false, false);
-    return arr_sffl(postop.concat(posleft, posright, posbot));
+    return postop.concat(posleft, posright, posbot);
 }
 //
 function pos_generate(soitemmoicanh, colcheck, initcheck) {
@@ -103,10 +130,19 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
 
     rtarr.forEach((pos, index) => {
         if (index == rtarr.length - 1) {return;}
+        let pos_ = rtarr[index];
+        let pos_next = rtarr[index+1];
+        let left = pos_.col == 2;
+        let right = pos_next.col == colmax;
+
         if (colcheck) {
-            rtarr[index].col = `${pos.col} / ${rtarr[index+1].col}`; return;
+            pos_.sidecheck =  (left && right) ? 'center_stretch' : (left ? 'left' : (right ? 'right' : 'individual'));
+            
+            pos_.col = `${pos.col} / ${pos_next.col}`; 
+            return;
         }
-        rtarr[index].row = `${pos.row} / ${rtarr[index+1].row}`;
+        pos_.sidecheck = (pos_.col == 1) ? 'left' : 'right';
+        pos_.row = `${pos.row} / ${pos_next.row}`;
     })
 
     rtarr.pop();
@@ -115,9 +151,18 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
 //
 function nav_navigate(item) {
     wlcmscr.classList.add('close');
+    item.classList.add('current');
+    let itemid = item.getAttribute('id');
 
+    if (crrntitemid == itemid) {
+        projfr.firstElementChild.contentWindow.scrollTo(0,0);
+        return;
+    }
+    navitemsampl[+crrntitemid - 1].classList.remove('current');
+
+    crrntitemid = itemid;
     let projfr_id = projfr.querySelectorAll('iframe');
-    projfr_id[1].setAttribute('src', `project_pages/${item.getAttribute('id')}/project_${item.getAttribute('id')}.html`);
+    projfr_id[1].setAttribute('src', `project_pages/${itemid}/project_${itemid}.html`);
     projfr_id[0].contentWindow.document.querySelector('#wrapper').classList.add('wrapper');
 
     projfr_id.forEach((item,index) => {
@@ -148,6 +193,33 @@ function seemore() {
     for (let item of seemorenav) {
         item.classList.toggle('show');
     }
+}
+
+function hovertop_in() {
+    rootstyle.setProperty('--hbhwidth_bot',hbhmin);
+    rootstyle.setProperty('--hbhwidth_top',hbhmax);
+}
+
+function hoverleft_in() {
+    rootstyle.setProperty('--hbhwidth_right',hbhmin);
+    rootstyle.setProperty('--hbhwidth_left',hbhmax);
+}
+
+function hoverright_in() {
+    rootstyle.setProperty('--hbhwidth_left',hbhmin);
+    rootstyle.setProperty('--hbhwidth_right',hbhmax);
+}
+
+function hoverbot_in() {
+    rootstyle.setProperty('--hbhwidth_top',hbhmin);
+    rootstyle.setProperty('--hbhwidth_bot',hbhmax);
+}
+
+function hover_out() {
+    rootstyle.setProperty('--hbhwidth_top',hbhave);
+    rootstyle.setProperty('--hbhwidth_bot',hbhave);
+    rootstyle.setProperty('--hbhwidth_left',hbhave);
+    rootstyle.setProperty('--hbhwidth_right',hbhave);
 }
 
 // global/reused function //
@@ -191,3 +263,6 @@ function getScrollbarWidth() {
     return scrollbarWidth;
 }
 
+function csscomputed_prop(itm, prop) {
+    return +getComputedStyle(itm).getPropertyValue(`${prop}`).slice(0, -2);
+}

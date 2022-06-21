@@ -33,11 +33,16 @@ body {
 	text-align: center;
 }
 
+h1 {
+	font-size: 30px;
+	font-weight: 100;
+}
+
 .wrapper {
 	width: calc(100vw - var(--navscrlbar));
 }
 
-img, .item, #column_2 {
+img, .item, .column {
 	margin: 30px auto;
 	display: block;
 	width: var(--minsz169);
@@ -57,10 +62,17 @@ img, .item, #column_2 {
 	max-height: calc(calc(var(--maxsz) / 16) * 9);
 }
 
-#column_2 {
+.twocol, .threecol {
 	display: grid;
-	grid-template-columns: 50% 50%;
 	gap: 30px;
+}
+
+.twocol {
+	grid-template-columns: 1fr 1fr;
+}
+
+.threecol {
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .colchild {

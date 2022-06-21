@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         imageObserver.observe(image);
       });
 
-      console.log('intersection');
     } else {  
       var lazyloadThrottleTimeout;
       lazyloadImages = document.querySelectorAll(".lazy");
