@@ -1,5 +1,6 @@
 "use strict";
-
+let touchable = hasTouch();
+hoverdelete();
 // constant //
 const minsz = 9;
 const time_interval = 200;
@@ -20,6 +21,8 @@ const hbhave = proproot.getPropertyValue('--hbhwidth_ave');
 //
 const soitem = new Array(4);
 const ofstscrlrow = (navszhover - paddingli * 2) / 2;
+const soitemperscreen = 6;
+//
 
 // variable //
 let delaypromise = Promise.resolve();
@@ -27,7 +30,7 @@ let crrntnavlist = 0;
 let crrntitemid = '1';
 
 // local function //
-function navlist_navigate(next) {
+function navlist_navigate(next, btn) {
     let navid = next ? ++crrntnavlist : --crrntnavlist;
     if (navid < 0) {navid = navitem.length - 1;}
     if (navid > navitem.length - 1) {navid = 0;}
@@ -37,18 +40,11 @@ function navlist_navigate(next) {
 function nav_construct(id) {
     crrntnavlist = id;
 
-    navitem.forEach((item, index) => {
-        if (index == id) {
-            item.forEach((itemm) => {
-                itemm.style.display = 'auto';
-            })
-            return;
-        }
-
-        item.forEach((itemm) => {
+    for (let item of navitem) {
+        for (let itemm of item) {
             itemm.style.display = 'none';
-        })
-    })
+        }
+    }
 
     let posarray = posarr_generate(id); cl(posarray);
 
@@ -56,20 +52,25 @@ function nav_construct(id) {
         delaypromise = delaypromise.then(function () {
             let positem = posarray[index];
             item.removeAttribute("style");
-            item.classList.remove('col', 'row', 'left', 'right');
-
+            item.classList.remove('col', 'row', 'left', 'right', 'top', 'bot');
+            item.style.display = 'auto';
             item.style.gridColumn = positem.col;
             item.style.gridRow = positem.row;
-            item.style[`${positem.colcheck ? 'alignSelf' : 'justifySelf'}`] = positem.initcheck ? 'start' : 'end';
+            item.style[`${positem.colcheck ? 'alignSelf' : 'justifySelf'}`] = positem.initcheck ? 'end' : 'start';
             item.classList.add(`${positem.colcheck ? 'col' : 'row'}`);
             item.classList.add(`${positem.sidecheck}`);
+            if (positem.colcheck) {
+                item.classList.add(`${positem.initcheck ? 'top' : 'bot'}`);
+            }
             
-            if (positem.colcheck & hovercheck[id]) {
-                item.addEventListener("mouseenter", positem.initcheck ? hovertop_in : hoverbot_in);
-                item.addEventListener("mouseleave", hover_out);
-            } else if (hovercheck[id]) {
-                item.addEventListener("mouseenter", positem.initcheck ? hoverleft_in : hoverright_in);
-                item.addEventListener("mouseleave", hover_out);
+            if (hovercheck[id] && !touchable) {
+                if (positem.colcheck) {
+                    item.addEventListener("mouseenter", positem.initcheck ? hovertop_in : hoverbot_in);
+                    if (item.querySelector('img')) {item.addEventListener('transitionend', colscroll);}
+                } else {
+                    item.addEventListener("mouseenter", positem.initcheck ? hoverleft_in : hoverright_in);
+                    if (item.querySelector('img')) {item.addEventListener("transitionend", positem.initcheck ? rowscrollleft : rowscrollright);}
+                }
             }
 
             if (index == navitem[id].length - 1) {
@@ -152,7 +153,7 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
 function nav_navigate(item) {
     wlcmscr.classList.add('close');
     item.classList.add('current');
-    let itemid = item.getAttribute('id');
+    let itemid = item.getAttribute('id').slice(1);
 
     if (crrntitemid == itemid) {
         projfr.firstElementChild.contentWindow.scrollTo(0,0);
@@ -162,10 +163,10 @@ function nav_navigate(item) {
 
     crrntitemid = itemid;
     let projfr_id = projfr.querySelectorAll('iframe');
-    projfr_id[1].setAttribute('src', `project_pages/${itemid}/project_${itemid}.html`);
+    projfr_id[1].setAttribute('src', `project_pages/${itemid}/project.html`);
     projfr_id[0].contentWindow.document.querySelector('#wrapper').classList.add('wrapper');
 
-    projfr_id.forEach((item,index) => {
+    projfr_id.forEach((item, index) => {
         item.setAttribute('hidecheck', `${index}`); 
         item.classList.toggle('hide');
     })
@@ -186,6 +187,13 @@ function ifr_widthfit(frame) {
 //
 function homescreen() {
     wlcmscr.classList.toggle('close');
+
+    if (!wlcmscr.classList.contains('close')) {
+        ulnav.classList.remove('show');
+        for (let item of seemorenav) {
+            item.classList.remove('show');
+        }
+    }
 }
 //
 function seemore() {
@@ -220,6 +228,95 @@ function hover_out() {
     rootstyle.setProperty('--hbhwidth_bot',hbhave);
     rootstyle.setProperty('--hbhwidth_left',hbhave);
     rootstyle.setProperty('--hbhwidth_right',hbhave);
+}
+// scroll mid img //
+
+function colscroll(e) {
+    let li = e.target;
+    let div = li.querySelector('div.hovercontent');
+    let img = li.querySelector('img');
+    div.scrollTo(0, csscomputed_prop(img, 'height') / 2 - (navszhover - 3*paddingli - csscomputed_prop(div.previousElementSibling, 'height')) / 2);
+}
+
+function rowscrollright(e) {
+    let li = e.target;
+    li.querySelector('div.hovercontent').scrollTo(csscomputed_prop(li.querySelector('img'), 'width') / 2 - ofstscrlrow, 0);
+}
+
+function rowscrollleft(e) {
+    let li = e.target;
+    li.querySelector('div.hovercontent').scrollTo(0 - (csscomputed_prop(li.querySelector('img'), 'width') / 2 - ofstscrlrow), 0);
+}
+
+//
+function Sortingfunc(axis, button) {
+    let navsrt1 = [];
+    let navsrt2 = [];  
+    navitem = [[], [], []];
+    hovercheck = [true, true, true];
+
+    for (let key in navitemobj) {
+        let elem = navitemobj[key].elem;
+        if (navitemobj[key][axis]) {
+            navsrt1.push(elem);
+        } else {navsrt2.push(elem);}
+        elem.classList.remove('highlightsort');
+        elem.removeEventListener("mouseenter", hovertop_in);
+        elem.removeEventListener("mouseenter", hoverbot_in);
+        elem.removeEventListener("mouseenter", hoverleft_in);
+        elem.removeEventListener("mouseenter", hoverright_in);
+        elem.removeEventListener('transitionend', colscroll);
+        elem.removeEventListener('transitionend', rowscrollright);
+        elem.removeEventListener('transitionend', rowscrollleft);
+    }
+
+    let navsrt = navsrt1.concat(navsrt2); 
+
+    for (let key in navsrt) {
+        navitem[Math.floor(key/soitemperscreen)].push(navsrt[key]);
+    }
+    nav_construct(0);
+
+    rootstyle.setProperty('--highlightcolor',button.style.backgroundColor);
+    rootstyle.setProperty('--highlightcolor_font',button.style.color);
+
+    delaypromise = delaypromise.then(function () {
+        for (let key in navsrt1) {
+            if (key == soitemperscreen) {break;}
+            navsrt1[key].addEventListener("animationend", removehighlight);
+            navsrt1[key].classList.add('highlightsort');
+        }
+        return new Promise(function (resolve) {
+            resolve();
+        });
+    });
+}
+
+function removehighlight(e) {
+    e.target.classList.remove('highlightsort');
+    e.target.removeEventListener("animationend", removehighlight);
+}
+
+function onresizesortbtn() {
+    let new_smallersd = innerWidth < innerHeight ? 1 : 3;
+    let ratio = innerWidth/innerHeight;
+    ratio = ratio < 1 ? 1/ratio : ratio;
+    let new_smallersd_min = (ratio > 2) ? 1 : ((ratio > 1.3) ? 2 : sortbtn.length/2);
+
+    if(new_smallersd == smallersd && new_smallersd_min == smallersd_min) {return;}
+    cl('ok');
+    smallersd = new_smallersd;
+    smallersd_min = new_smallersd_min;
+
+    let smsmall = document.querySelector(`.seemore:nth-of-type(${smallersd})`);
+    let smbig = document.querySelector(`.seemore:nth-of-type(${4 - smallersd})`);
+    sortbtn.forEach((item,key) => {
+        if ((key + 1) <= smallersd_min) {
+            smsmall.appendChild(item);
+        } else {
+            smbig.appendChild(item);
+        }
+    })                             
 }
 
 // global/reused function //
@@ -265,4 +362,29 @@ function getScrollbarWidth() {
 
 function csscomputed_prop(itm, prop) {
     return +getComputedStyle(itm).getPropertyValue(`${prop}`).slice(0, -2);
+}
+
+function hoverdelete() {
+      if (touchable) { // remove all the :hover stylesheets
+        try { // prevent exception on browsers not supporting DOM styleSheets properly
+          for (var si in document.styleSheets) {
+            var styleSheet = document.styleSheets[si];
+            if (!styleSheet.rules) continue;
+      
+            for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+              if (!styleSheet.rules[ri].selectorText) continue;
+      
+              if (styleSheet.rules[ri].selectorText.match(':hover')) {
+                styleSheet.deleteRule(ri);
+              }
+            }
+          }
+        } catch (ex) {}
+      }
+}
+
+function hasTouch() {
+    return 'ontouchstart' in document.documentElement
+           || navigator.maxTouchPoints > 0
+           || navigator.msMaxTouchPoints > 0;
 }
