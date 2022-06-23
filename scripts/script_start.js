@@ -1,5 +1,4 @@
 "use strict";
-let touchable = hasTouch();
 // constant //
 const minsz = 9;
 const time_interval = 200;
@@ -7,7 +6,7 @@ const time_interval = 200;
 const root = document.querySelector(':root');
 
 const proproot = getComputedStyle(root);
-const navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
+let navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
 const navszhover = +proproot.getPropertyValue('--navszhover').slice(0, -2);
 const paddingli = +proproot.getPropertyValue('--paddingli').slice(0, -2);
 const colmax = +proproot.getPropertyValue('--colmax') + 2;
@@ -51,13 +50,17 @@ function nav_construct(id) {
         delaypromise = delaypromise.then(function () {
             let positem = posarray[index];
             item.removeAttribute("style");
-            item.classList.remove('col', 'row', 'left', 'right', 'top', 'bot');
+            item.classList.remove('col', 'row', 'left', 'right', 'top', 'bot', 'horizontal', 'vertical', 'horizontal_ani', 'vertical_ani', 'forward', 'reverse');
             item.style.display = 'auto';
             item.style.gridColumn = positem.col;
             item.style.gridRow = positem.row;
             item.style[`${positem.colcheck ? 'alignSelf' : 'justifySelf'}`] = positem.initcheck ? 'end' : 'start';
-            item.classList.add(`${positem.colcheck ? 'col' : 'row'}`);
-            item.classList.add(`${positem.sidecheck}`);
+            item.classList.add( `${positem.colcheck ? 'col' : 'row'}`, 
+                                `${positem.colcheck ? 'horizontal' : 'vertical'}`, 
+                                `${positem.sidecheck}`,
+                                `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
+                                `${positem.colcheck ? (positem.initcheck ? 'forward' : 'reverse') : (positem.sidecheck == 'right' ? 'forward' : 'reverse' )}`
+                            );
             if (positem.colcheck) {
                 item.classList.add(`${positem.initcheck ? 'top' : 'bot'}`);
             }
@@ -102,7 +105,7 @@ function posarr_generate(index) {
     let posbot = pos_generate(soitem[1], true, false);  
     let posleft = pos_generate(soitem[2], false, true); 
     let posright = pos_generate(soitem[3], false, false);
-    return postop.concat(posleft, posright, posbot);
+    return postop.concat(posright, posbot.reverse(), posleft);
 }
 //
 function pos_generate(soitemmoicanh, colcheck, initcheck) {
@@ -150,6 +153,8 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
 }
 //
 function nav_navigate(item) {
+    if (ckbx.checked == true) {return;}
+
     wlcmscr.classList.add('close');
     item.classList.add('current');
     let itemid = item.getAttribute('id').slice(1);
@@ -188,10 +193,7 @@ function homescreen() {
     wlcmscr.classList.toggle('close');
 
     if (!wlcmscr.classList.contains('close')) {
-        ulnav.classList.remove('show');
-        for (let item of seemorenav) {
-            item.classList.remove('show');
-        }
+        removeseemore();
     }
 }
 //
@@ -199,6 +201,13 @@ function seemore() {
     ulnav.classList.toggle('show');
     for (let item of seemorenav) {
         item.classList.toggle('show');
+    }
+}
+
+function removeseemore() {
+    ulnav.classList.remove('show');
+    for (let item of seemorenav) {
+        item.classList.remove('show');
     }
 }
 
@@ -297,25 +306,47 @@ function removehighlight(e) {
 }
 
 function onresizesortbtn() {
-    let new_smallersd = innerWidth < innerHeight ? 1 : 3;
+    let new_smallersd = innerWidth < innerHeight ? 1 : 2;
     let ratio = innerWidth/innerHeight;
     ratio = ratio < 1 ? 1/ratio : ratio;
     let new_smallersd_min = (ratio > 2) ? 1 : ((ratio > 1.3) ? 2 : sortbtn.length/2);
 
     if(new_smallersd == smallersd && new_smallersd_min == smallersd_min) {return;}
-    cl('ok');
     smallersd = new_smallersd;
     smallersd_min = new_smallersd_min;
 
     let smsmall = document.querySelector(`.seemore:nth-of-type(${smallersd})`);
-    let smbig = document.querySelector(`.seemore:nth-of-type(${4 - smallersd})`);
+    let smbig = document.querySelector(`.seemore:nth-of-type(${3 - smallersd})`);
     sortbtn.forEach((item,key) => {
         if ((key + 1) <= smallersd_min) {
             smsmall.appendChild(item);
+            adddecor(item, smallersd == 1);
         } else {
             smbig.appendChild(item);
+            adddecor(item, (3 - smallersd) == 1);
         }
-    })                             
+    })
+    
+    function adddecor(item, sdcheck) {
+        item.className = '';
+        item.classList.add(sdcheck ? 'horizontal' : 'vertical')
+    }
+}
+
+function togglenav(ckbx) {
+    // If the checkbox is checked, display the output text
+    if (ckbx.checked == true){
+        rootstyle.setProperty('--navsz','0px');
+        rootstyle.setProperty('--pad_btn','0px');
+        removeseemore()
+        offsetifr = offsetifr - navsz*2;
+        ifr_widthfit(projfr.querySelector('iframe'));
+    } else {
+        rootstyle.setProperty('--navsz',`${navsz}px`);
+        rootstyle.setProperty('--pad_btn','5px');
+        offsetifr = offsetifr + navsz*2;
+        ifr_widthfit(projfr.querySelector('iframe'));
+    }
 }
 
 // global/reused function //

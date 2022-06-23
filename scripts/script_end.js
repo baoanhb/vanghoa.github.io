@@ -152,21 +152,23 @@ const navitemobj = [
 let navitem = [[], [], []];
 let hovercheck = [true, true, true];
 
+// initialise //
 for (let key in navitemobj) {
     let item = navitemsampl[key];
     navitemobj[key].elem = item;
     navitem[Math.floor(key/soitemperscreen)].push(item);
     if (!touchable) {item.addEventListener("mouseleave", hover_out);}
-    
 }
 
-const projfr = document.querySelector('section#iframe');
-const wlcmscr = document.querySelector('section#welcome');
 const ulnav = document.querySelector('ul#nav');
+const projfr = ulnav.querySelector('section#iframe');
+const wlcmscr = ulnav.querySelector('section#welcome');
+const homebtn = ulnav.querySelector('.btn[onclick="homescreen()"]');
+const seemorebtn = ulnav.querySelector('.btn[onclick="seemore()"]');
 const seemorenav = document.querySelectorAll('.seemore');
-const homebtn = document.querySelector('.btn[onclick="homescreen()"]');
-const seemorebtn = document.querySelector('.btn[onclick="seemore()"]');
 const sortbtn = document.querySelectorAll('.seemore button');
+const ckbx = ulnav.querySelector('label#tglnav input');
+
 let smallersd;
 let smallersd_min;
 
@@ -176,10 +178,21 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 onresizesortbtn();
 nav_construct(0);
 
+// on resize //
 window.onresize = _.debounce(function() {
+    // media change => get navbar
+    navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
+    // scrollbar width
+    scrlbrwd = getScrollbarWidth();
+    rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
+    // offsetiframe width
+    offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2 + 8;
     ifr_widthfit(projfr.querySelector('iframe'));
+    // stroke3d width
     hbhmax = proproot.getPropertyValue('--hbhwidth_max');
+    // sort button reorganise
     onresizesortbtn();
+    // ios vh fix
     viewportheight();
     nav_construct(crrntnavlist);
 }, 1000);

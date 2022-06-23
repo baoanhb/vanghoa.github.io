@@ -25,23 +25,23 @@
 
 <body>
   <script>
+    const touchable = hasTouch();
     hoveractivate();
     viewportheight();
-    const scrlbrwd = getScrollbarWidth();
-    const offsetifr = navsz*2 + scrlbrwd + 1 + +hbhave.slice(0,-2) * 2;
+    let scrlbrwd = getScrollbarWidth();
+    rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
+
+    let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2 + 16;
   </script>
 
   <nav>
-    <div class="seemore" style="grid-column: 1; grid-row: 1;">
+    <div class="seemore" style="grid-column: 1 / 3; grid-row: 1;">
       <button type="button" style="background-color: rgb(34, 139, 131); color: white;" onclick="Sortingfunc('time', this)"><span>Chronological</span></button>
-      <button type="button" style="background-color: blue; color: white;" onclick="Sortingfunc('dg_pro', this)"><span>Digital<br>Product</span></button>
-      <button type="button" style="background-color: DeepPink; color: white;" onclick="Sortingfunc('print', this)"><span>Print<br>Matter</span></button>
-    </div>
-    <div class="seemore" style="grid-column: 2; grid-row: 1;">
-
+      <button type="button" style="background-color: blue; color: white;" onclick="Sortingfunc('dg_pro', this)"><span>Digital Product</span></button>
+      <button type="button" style="background-color: DeepPink; color: white;" onclick="Sortingfunc('print', this)"><span>Print Matter</span></button>
     </div>
     <div class="seemore" style="grid-column: 2; grid-row: 2;">
-      <button type="button" style="background-color: Fuchsia; color: black;" onclick="Sortingfunc('mo_gra', this)"><span>Motion<br>graphic</span></button>
+      <button type="button" style="background-color: Fuchsia; color: white;" onclick="Sortingfunc('mo_gra', this)"><span>Motion graphic</span></button>
       <button type="button" style="background-color: Yellow; color: black;" onclick="Sortingfunc('illus', this)"><span>Illustration</span></button>
       <button type="button" style="background-color: OrangeRed; color: white;" onclick="Sortingfunc('spcl', this)"><span>Speculative</span></button>
     </div>
@@ -258,13 +258,12 @@
       </li>
       <!-- -->
       <li id="main">
+        <label id="tglnav">
+          <input type="checkbox" onclick="togglenav(this)">
+          <div>toggle navbar</div>
+        </label>
         <section id="welcome">
           <h1>Bui Nguyen Bao Anh</h1>
-
-          <p>
-            Jr. Graphic Designer<br>
-            D.O.B: 12/05/2001
-          </p>
           <br><h2>Contacts↓</h2>
 
           <address>
@@ -467,20 +466,20 @@
         </section>
       </li>
       <!-- -->
-      <li class="btn click" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2;">
-        <div>&#127968;</div>
+      <li class="btn" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2; background-color: white;">
+        <img src="icon/icon (2).jpg"></img>
       </li>
       <!-- -->
       <li class="btn" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
-        <div>&#9881;&#65039;</div>
+        <img src="icon/icon (1).jpg"></img>
       </li>
       <!-- -->
       <li class="btn" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
-        <div>&#11013;&#65039;</div>
+        <img src="icon/icon (3).jpg"></img>
       </li>
       <!-- -->
       <li class="btn" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
-        <div>&#10145;&#65039;</div>
+        <img src="icon/icon (4).jpg"></img>
       </li>
       <!-- -->
     </ul>
