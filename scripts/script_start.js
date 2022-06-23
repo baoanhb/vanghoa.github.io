@@ -1,6 +1,5 @@
 "use strict";
 let touchable = hasTouch();
-hoverdelete();
 // constant //
 const minsz = 9;
 const time_interval = 200;
@@ -364,22 +363,9 @@ function csscomputed_prop(itm, prop) {
     return +getComputedStyle(itm).getPropertyValue(`${prop}`).slice(0, -2);
 }
 
-function hoverdelete() {
-      if (touchable) { // remove all the :hover stylesheets
-        try { // prevent exception on browsers not supporting DOM styleSheets properly
-          for (var si in document.styleSheets) {
-            var styleSheet = document.styleSheets[si];
-            if (!styleSheet.rules) continue;
-      
-            for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
-              if (!styleSheet.rules[ri].selectorText) continue;
-      
-              if (styleSheet.rules[ri].selectorText.match(':hover')) {
-                styleSheet.deleteRule(ri);
-              }
-            }
-          }
-        } catch (ex) {}
+function hoveractivate() {
+      if (!touchable) { 
+        document.body.classList.add('hasHover');
       }
 }
 
@@ -387,4 +373,9 @@ function hasTouch() {
     return 'ontouchstart' in document.documentElement
            || navigator.maxTouchPoints > 0
            || navigator.msMaxTouchPoints > 0;
+}
+
+function viewportheight() {
+    let vh = window.innerHeight * 0.01;
+    rootstyle.setProperty('--vh', `${vh}px`);
 }

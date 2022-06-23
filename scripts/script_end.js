@@ -176,11 +176,13 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 onresizesortbtn()
 nav_construct(0);
 
-window.onresize = function() {
+window.onresize = _.debounce(function() {
     ifr_widthfit(projfr.querySelector('iframe'));
     hbhmax = proproot.getPropertyValue('--hbhwidth_max');
-    onresizesortbtn()
-}
+    onresizesortbtn();
+    viewportheight();
+    nav_construct(crrntnavlist);
+}, 1000);
 
 // img lazy load //
 if (!touchable) {
