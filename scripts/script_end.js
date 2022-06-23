@@ -173,7 +173,7 @@ let smallersd_min;
 projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_event);
 
 // navbar construction // 
-onresizesortbtn()
+onresizesortbtn();
 nav_construct(0);
 
 window.onresize = _.debounce(function() {
