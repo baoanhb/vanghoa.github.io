@@ -337,7 +337,7 @@ body.hasHover #main {
 #main label#tglnav {
 	position: absolute;
 	bottom: 0;
-	right: var(--scrlbrwd);
+	right: 0px;
 	z-index: 3;
 	margin: 5px;
 	cursor: pointer;

@@ -1,7 +1,7 @@
 "use strict";
 // constant //
 const minsz = 9;
-const time_interval = 200;
+const time_interval = 250;
 
 const root = document.querySelector(':root');
 
@@ -58,7 +58,7 @@ function nav_construct(id) {
             item.classList.add( `${positem.colcheck ? 'col' : 'row'}`, 
                                 `${positem.colcheck ? 'horizontal' : 'vertical'}`, 
                                 `${positem.sidecheck}`,
-                                `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
+                               `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
                                 `${positem.colcheck ? (positem.initcheck ? 'forward' : 'reverse') : (positem.sidecheck == 'right' ? 'forward' : 'reverse' )}`
                             );
             if (positem.colcheck) {
@@ -105,7 +105,7 @@ function posarr_generate(index) {
     let posbot = pos_generate(soitem[1], true, false);  
     let posleft = pos_generate(soitem[2], false, true); 
     let posright = pos_generate(soitem[3], false, false);
-    return postop.concat(posright, posbot.reverse(), posleft);
+    return postop.concat(posright, posbot.reverse(), posleft.reverse());
 }
 //
 function pos_generate(soitemmoicanh, colcheck, initcheck) {
