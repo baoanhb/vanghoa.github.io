@@ -43,6 +43,7 @@
 	--time: rgb(34, 139, 131);
 	--dg_pro: Blue;
 	--print: Deeppink;
+	--borrad_ios: calc(var(--navsz) - 2px);
 }
 
 body {
@@ -197,19 +198,19 @@ body.hasHover li.row:hover {
 }
 
 li.left.row {
-	border-radius: var(--navsz) 0 0 var(--navsz);
+	border-radius: var(--borrad_ios) 0 0 var(--borrad_ios);
 }
 
 li.right.row {
-	border-radius: 0 var(--navsz) var(--navsz) 0;
+	border-radius: 0 var(--borrad_ios) var(--borrad_ios) 0;
 }
 
 li.top.col {
-	border-radius: var(--navsz) var(--navsz) 0 0;
+	border-radius: var(--borrad_ios) var(--borrad_ios) 0 0;
 }
 
 li.bot.col {
-	border-radius: 0 0 var(--navsz) var(--navsz);
+	border-radius: 0 0 var(--borrad_ios) var(--borrad_ios);
 }
 
 body.hasHover li.col:hover, body.hasHover li.row:hover {
