@@ -6,9 +6,10 @@ const time_interval = 250;
 const root = document.querySelector(':root');
 
 const proproot = getComputedStyle(root);
-let navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
+let navsz = +proproot.getPropertyValue('--navsz_sampl').slice(0, -2);
 const navszhover = +proproot.getPropertyValue('--navszhover').slice(0, -2);
 const paddingli = +proproot.getPropertyValue('--paddingli').slice(0, -2);
+const offsetborderstyle = +proproot.getPropertyValue('--offsetborderstyle').slice(0, -2);
 const colmax = +proproot.getPropertyValue('--colmax') + 2;
 const rowmax = +proproot.getPropertyValue('--rowmax') + 2;
 //
@@ -18,7 +19,7 @@ let hbhmax = proproot.getPropertyValue('--hbhwidth_max');
 const hbhave = proproot.getPropertyValue('--hbhwidth_ave');
 //
 const soitem = new Array(4);
-const ofstscrlrow = (navszhover - paddingli * 2) / 2;
+const ofstscrlrow = (navszhover - paddingli * 2 - offsetborderstyle * 2) / 2;
 const soitemperscreen = 6;
 //
 
@@ -38,40 +39,40 @@ function navlist_navigate(next, btn) {
 function nav_construct(id) {
     crrntnavlist = id;
 
-    for (let item of navitem) {
-        for (let itemm of item) {
-            itemm.style.display = 'none';
-        }
+    for (let item of navitemsampl) {
+        item.style.display = 'none';
     }
 
-    let posarray = posarr_generate(id); cl(posarray);
+    let posarray = posarr_generate(id);
 
     navitem[id].forEach((item, index) => {
         delaypromise = delaypromise.then(function () {
-            let positem = posarray[index];
+            const positem = posarray[index];
+            const colcheck = positem.colcheck;
+            const initcheck = positem.initcheck;
+            const sidecheck = positem.sidecheck;
+
             item.removeAttribute("style");
             item.classList.remove('col', 'row', 'left', 'right', 'top', 'bot', 'horizontal', 'vertical', 'horizontal_ani', 'vertical_ani', 'forward', 'reverse');
             item.style.display = 'auto';
             item.style.gridColumn = positem.col;
             item.style.gridRow = positem.row;
-            item.style[`${positem.colcheck ? 'alignSelf' : 'justifySelf'}`] = positem.initcheck ? 'end' : 'start';
-            item.classList.add( `${positem.colcheck ? 'col' : 'row'}`, 
-                                `${positem.colcheck ? 'horizontal' : 'vertical'}`, 
-                                `${positem.sidecheck}`,
-                                `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
-                                `${positem.colcheck ? (positem.initcheck ? 'forward' : 'reverse') : (positem.sidecheck == 'right' ? 'forward' : 'reverse' )}`
+            item.style[`${colcheck ? 'alignSelf' : 'justifySelf'}`] = initcheck ? 'end' : 'start';
+            item.classList.add( `${colcheck ? 'col' : 'row'}`, 
+                                `${colcheck ? 'horizontal' : 'vertical'}`,
+                                `${colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
+                                `${colcheck ? (initcheck ? 'forward' : 'reverse') : (sidecheck == 'right' ? 'forward' : 'reverse' )}`,
+                                `${colcheck ? (initcheck ? 'top' : 'bot') : 'row'}`, 
+                                `${sidecheck}`
                             );
-            if (positem.colcheck) {
-                item.classList.add(`${positem.initcheck ? 'top' : 'bot'}`);
-            }
             
             if (hovercheck[id] && !touchable) {
-                if (positem.colcheck) {
-                    item.addEventListener("mouseenter", positem.initcheck ? hovertop_in : hoverbot_in);
+                if (colcheck) {
+                    item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
                     if (item.querySelector('img')) {item.addEventListener('transitionend', colscroll);}
                 } else {
-                    item.addEventListener("mouseenter", positem.initcheck ? hoverleft_in : hoverright_in);
-                    if (item.querySelector('img')) {item.addEventListener("transitionend", positem.initcheck ? rowscrollleft : rowscrollright);}
+                    item.addEventListener("mouseenter", initcheck ? hoverleft_in : hoverright_in);
+                    if (item.querySelector('img')) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
                 }
             }
 
@@ -341,7 +342,7 @@ function togglenav(ckbx) {
         offsetifr = offsetifr - navsz*2;
         ifr_widthfit(projfr.querySelector('iframe'));
     } else {
-        rootstyle.setProperty('--navsz',`${navsz}px`);
+        rootstyle.setProperty('--navsz',`var(--navsz_sampl)`);
         rootstyle.setProperty('--pad_btn','5px');
         offsetifr = offsetifr + navsz*2;
         ifr_widthfit(projfr.querySelector('iframe'));

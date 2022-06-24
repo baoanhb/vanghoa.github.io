@@ -181,7 +181,7 @@ nav_construct(0);
 // on resize //
 window.onresize = _.debounce(function() {
     // media change => get navbar
-    navsz = +proproot.getPropertyValue('--navsz').slice(0, -2);
+    navsz = +proproot.getPropertyValue('--navsz_sampl').slice(0, -2);
     // scrollbar width
     scrlbrwd = getScrollbarWidth();
     rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);

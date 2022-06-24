@@ -1,3 +1,8 @@
+@font-face {
+	font-family: BaoAnhVjpPro;
+	src: url(3/BaoAnhVjpPro-Regular.otf);
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -8,28 +13,15 @@
 }
 
 :root {
-	--minsz: 80vw;
+	--minsz: calc(100vw - calc(var(--gapsz) * 2));
 	--maxsz: 1600px;
-	--minsz169: 80vw;
-	--navscrlbar: 40px;
-}
-
-/* Portrait */
-@media screen and (orientation:portrait) {
-	:root {
-		--minsz: 80vw;
-	}
-}
-/* Landscape */
-@media screen and (orientation:landscape) {
-	:root {
-		--minsz: 80vh;
-	}
+	--minsz169: calc(100vw - calc(var(--gapsz) * 2));
+	--gapsz: 150px;
 }
 
 body {
 	width: 100%;
-	padding: 20px;
+	padding-top: calc(var(--gapsz) / 3);
 	text-align: center;
 }
 
@@ -38,16 +30,17 @@ h1 {
 }
 
 .wrapper {
-	width: calc(100vw - var(--navscrlbar));
+	width: 100vw;
 }
 
-img, .item, .column {
-	margin: 30px auto;
+img, .item, .column, p {
+	margin: calc(var(--gapsz) / 3) auto;
 	display: block;
 	width: var(--minsz169);
 	max-width: var(--maxsz);
 	height: auto;
 	object-fit: contain;
+	text-align: justify;
 }
 
 .sqr {
@@ -63,7 +56,7 @@ img, .item, .column {
 
 .twocol, .threecol {
 	display: grid;
-	gap: 30px;
+	gap: calc(var(--gapsz) / 3);
 }
 
 .twocol {
@@ -77,4 +70,29 @@ img, .item, .column {
 .colchild {
 	width: 100%;
 	margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+	:root {
+		--gapsz: 80px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	:root {
+		--gapsz: 10px;
+	}
+}
+
+@media screen and (max-width: 500px), (max-height: 500px) {
+	* {
+		font-size: 12px;
+	}
+}
+
+/* Landscape */
+@media screen and (orientation:landscape) {
+	:root {
+		--minsz: calc(100vh - calc(var(--gapsz) / 3));
+	}
 }
