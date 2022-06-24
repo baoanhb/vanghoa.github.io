@@ -31,30 +31,33 @@
     let scrlbrwd = getScrollbarWidth();
     rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
 
-    let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2 + 16;
+    let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
   </script>
 
   <nav>
     <div class="seemore" style="grid-column: 1 / 3; grid-row: 1;">
-      <button type="button" style="background-color: rgb(34, 139, 131); color: white;" onclick="Sortingfunc('time', this)"><span>Chronological</span></button>
-      <button type="button" style="background-color: blue; color: white;" onclick="Sortingfunc('dg_pro', this)"><span>Digital Product</span></button>
-      <button type="button" style="background-color: DeepPink; color: white;" onclick="Sortingfunc('print', this)"><span>Print Matter</span></button>
+      <button type="button" style="background-color: var(--time);" onclick="Sortingfunc('time')"><span>Chronological</span></button>
+      <button type="button" style="background-color: var(--dg_pro);" onclick="Sortingfunc('dg_pro')"><span>Digital Product</span></button>
+      <button type="button" style="background-color: var(--print);" onclick="Sortingfunc('print')"><span>Print Matter</span></button>
     </div>
     <div class="seemore" style="grid-column: 2; grid-row: 2;">
-      <button type="button" style="background-color: Fuchsia; color: white;" onclick="Sortingfunc('mo_gra', this)"><span>Motion graphic</span></button>
-      <button type="button" style="background-color: Yellow; color: black;" onclick="Sortingfunc('illus', this)"><span>Illustration</span></button>
-      <button type="button" style="background-color: OrangeRed; color: white;" onclick="Sortingfunc('spcl', this)"><span>Speculative</span></button>
+      <button type="button" style="background-color: var(--mo_gra);" onclick="Sortingfunc('mo_gra')"><span>Motion graphic</span></button>
+      <button type="button" style="background-color: var(--illus);" onclick="Sortingfunc('illus')"><span>Illustration</span></button>
+      <button type="button" style="background-color: var(--spcl);" onclick="Sortingfunc('spcl')"><span>Speculative</span></button>
     </div>
     <ul id="nav">
       <!-- -->
       <li onclick="nav_navigate(this)" id="_1" class="current">
         <div class="text">
-          <h2>Kasper Florio - Atypical Swiss | Visual Analysis</h2>
-          <p class="date">11/2020 - 12/2020 
+          <h2>
+            <span>Kasper Florio - Atypical Swiss | Visual Analysis</span>   
+            <span>11/2020 - 12/2020</span>
+          </h2>
+          <p class="date"> 
             <span class="field">Art direction</span> 
-            <span class="field">Editorial design</span> 
-            <span class="field">Book design</span> 
-            <span class="field">Book binding</span>
+            <span class="field print">Editorial design</span> 
+            <span class="field print">Book design</span> 
+            <span class="field print">Book binding</span>
           </p>
           <p>An editorial on Swiss grid design, specifically on the work of the graphic design duo-Kasper Florio</p>
         </div>
@@ -65,12 +68,15 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_2">
         <div class="text">
-          <h2>Vietnamme Magazine</h2>
-          <p class="date">11/2020 - 1/2021  
-            <span class="field">Website development</span>
-            <span class="field">Digital illustration</span>
+          <h2>
+            <span>Vietnamme Magazine</span> 
+            <span>11/2020 - 1/2021</span>
+          </h2>
+          <p class="date">  
+            <span class="field dg_pro">Website development</span>
+            <span class="field illus">Digital illustration</span>
             <span class="field">Graphic design</span>
-            <span class="field">UI/UX design</span> 
+            <span class="field dg_pro">UI/UX design</span> 
           </p>
           <p>Brand identity and website development for a Vietnamese cultural online magazine</p>
         </div>
@@ -81,12 +87,15 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_3">
         <div class="text">
-          <h2>Tabao Tammy superhero</h2>
-          <p class="date">1/2021 - 3/2021 
+          <h2>
+            <span>Tabao Tammy superhero</span> 
+            <span>1/2021 - 3/2021</span>
+          </h2>
+          <p class="date">
             <span class="field">Visual identity design</span> 
             <span class="field">Typeface design</span> 
-            <span class="field">Digital illustration</span> 
-            <span class="field">Character design</span>
+            <span class="field illus">Digital illustration</span> 
+            <span class="field illus">Character design</span>
           </p>
           <p>Visual identity for a fictional superhero including character design, fan poster, emblem and typeface</p>
         </div>
@@ -97,10 +106,13 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_4">
         <div class="text">
-          <h2>Remeasure the Liturgy – 2022 Liturgical Calendar</h2>
-          <p class="date">3/2021 - 4/2021 
-            <span class="field">Calendar design</span> 
-            <span class="field">Editorial design</span>
+          <h2>
+            <span>Remeasure the Liturgy – 2022 Liturgical Calendar</span> 
+            <span>3/2021 - 4/2021</span>
+          </h2>
+          <p class="date">
+            <span class="field print">Calendar design</span> 
+            <span class="field print">Editorial design</span>
           </p>
           <p>A calendar designed specifically for Roman Catholic followers to document the cycle of Liturgical seasons as well as other Christian celebration and events</p>
         </div>
@@ -111,10 +123,14 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_5">
         <div class="text">
-          <h2>Vietnamme Creative Campagin | MẮC GÌ?</h2>
-          <p class="date">8/2021 
+          <h2>
+            <span>Vietnamme Creative Campagin | MẮC GÌ?</span> 
+            <span>8/2021</span>
+          </h2>
+          <p class="date">
+            <span class="field spcl">Speculative</span> 
             <span class="field">Communication design</span> 
-            <span class="field">Motion graphic</span>
+            <span class="field mo_gra">Motion graphic</span>
           </p>
           <p>Visual direction for a communication campaign on the problem of Heteronormativity in Vietnam</p>
         </div>
@@ -125,10 +141,13 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_6">
         <div class="text">
-          <h2>3D markup language</h2>
-          <p class="date">8/2021 - 10/2021 
-            <span class="field">Speculative</span> 
-            <span class="field">Website development</span>
+          <h2>
+            <span>3D markup language</span> 
+            <span>8/2021 - 10/2021</span>
+          </h2>
+          <p class="date">
+            <span class="field spcl">Speculative</span> 
+            <span class="field dg_pro">Website development</span>
             <span class="field">3D design</span>
           </p>
           <p>Development of a fictional markup language systems, like HTML or XML but for organising, transporting and constructing elements in the physical world </p>
@@ -140,10 +159,13 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_7">
         <div class="text">
-          <h2>Love is Hard, HIV Prevention is Easy website</h2>
-          <p class="date">9/2021 - 11/2021
-            <span class="field">Website development</span> 
-            <span class="field">UI/UX design</span> 
+          <h2>
+            <span>Love is Hard, HIV Prevention is Easy website</span> 
+            <span>9/2021 - 11/2021</span>
+          </h2>
+          <p class="date">
+            <span class="field dg_pro">Website development</span> 
+            <span class="field dg_pro">UI/UX design</span> 
           </p>
           <p>UI/UX design for a public health campaign website to raise awareness about HIV prevention, reduce new HIV infections, and eliminate HIV stigma in Vietnam.</p>
         </div>
@@ -154,12 +176,15 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_8">
         <div class="text">
-          <h2>Sesẻ</h2>
-          <p class="date">10/2021 - 4/2022
-            <span class="field">Smartphone app development</span> 
-            <span class="field">UI/UX design</span> 
-            <span class="field">Motion graphic</span>
-            <span class="field">Character illustration</span> 
+          <h2>
+            <span>Sesẻ</span> 
+            <span>10/2021 - 4/2022</span>
+          </h2>
+          <p class="date">
+            <span class="field dg_pro">Smartphone app development</span> 
+            <span class="field dg_pro">UI/UX design</span> 
+            <span class="field mo_gra">Motion graphic</span>
+            <span class="field illus">Character illustration</span> 
           </p>
           <p>An entry for Google Development Solution Challenge: UI/UX design and visual development for a smartphone-based app to buy and sell used goods</p>
         </div>
@@ -170,12 +195,15 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_9">
         <div class="text">
-          <h2>Duolingo: Non-fungible efforts</h2>
-          <p class="date">12/2021 - 3/2022 
-            <span class="field">Art direction</span> 
-            <span class="field">Communication design</span> 
-            <span class="field">Motion graphic</span>
-            <span class="field">Pixel illustration</span>
+          <h2>
+            <span>Duolingo: Non-fungible efforts</span> 
+            <span>12/2021 - 3/2022 </span>
+          </h2>
+          <p class="date">
+            <span class="field">Communication design</span>
+            <span class="field dg_pro">NFT design</span>  
+            <span class="field mo_gra">Motion graphic</span>
+            <span class="field illus">Pixel illustration</span>
           </p>
           <p>An entry for New Blood D&AD: Development of an NFT collection for Duolingo-a famous language-learning app</p>
         </div>
@@ -186,10 +214,13 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_10">
         <div class="text">
-          <h2>Khoi Minh website</h2>
-          <p class="date">5/2022 - 6/2022
-            <span class="field">Website development</span> 
-            <span class="field">UI/UX design</span> 
+          <h2>
+            <span>Khoi Minh website</span> 
+            <span>5/2022 - 6/2022</span>
+          </h2>
+          <p class="date">
+            <span class="field dg_pro">Website development</span> 
+            <span class="field dg_pro">UI/UX design</span> 
           </p>
           <p>Website development for a branded provider of mechanical engineering & industrial equipments</p>
         </div>
@@ -200,10 +231,13 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_11">
         <div class="text">
-          <h2>Misc projects</h2>
-          <p class="date">1/2020 - present
+          <h2>
+            <span>Misc projects</span> 
+            <span>1/2020 - present</span>
+          </h2>
+          <p class="date">
             <span class="field">Communication design</span> 
-            <span class="field">Poster design</span> 
+            <span class="field illus">Poster design</span> 
           </p>
           <p>Various small-scale projects, personal and full-time works</p>
         </div>
@@ -214,7 +248,10 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_12" class="soon">
         <div class="text">
-          <h2>Coming soon</h2>
+          <h2>
+            <span>Coming</span> 
+            <span>soon</span>
+          </h2>
         </div>
         <div class="hovercontent">
         
@@ -223,7 +260,10 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_13" class="soon">
         <div class="text">
-          <h2>Coming soon</h2>
+          <h2>
+            <span>Coming</span> 
+            <span>soon</span>
+          </h2>
         </div>
         <div class="hovercontent">
         
@@ -232,7 +272,10 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_14" class="soon">
         <div class="text">
-          <h2>Coming soon</h2>
+          <h2>
+            <span>Coming</span> 
+            <span>soon</span>
+          </h2>
         </div>
         <div class="hovercontent">
         
@@ -241,7 +284,10 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_15" class="soon">
         <div class="text">
-          <h2>Coming soon</h2>
+          <h2>
+            <span>Coming</span> 
+            <span>soon</span>
+          </h2>
         </div>
         <div class="hovercontent">
         
@@ -250,7 +296,10 @@
       <!-- -->
       <li onclick="nav_navigate(this)" id="_16" class="soon">
         <div class="text">
-          <h2>Coming soon</h2>
+          <h2>
+            <span>Coming</span> 
+            <span>soon</span>
+          </h2>
         </div>
         <div class="hovercontent">
         
@@ -260,7 +309,7 @@
       <li id="main">
         <label id="tglnav">
           <input type="checkbox" onclick="togglenav(this)">
-          <div>toggle navbar</div>
+          <div class="horizontal">toggle navbar</div>
         </label>
         <section id="welcome">
           <h1>Bui Nguyen Bao Anh</h1>
@@ -466,19 +515,19 @@
         </section>
       </li>
       <!-- -->
-      <li class="btn" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2; background-color: white;">
+      <li class="btn vertical" onclick="homescreen()" style="grid-column: 1 / 2; grid-row: 1 / 2; background-color: white;">
         <img src="icon/icon (2).jpg"></img>
       </li>
       <!-- -->
-      <li class="btn" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
+      <li class="btn vertical" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
         <img src="icon/icon (1).jpg"></img>
       </li>
       <!-- -->
-      <li class="btn" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
+      <li class="btn vertical" onclick="navlist_navigate(false)" style="grid-column: 1 / 2; grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
         <img src="icon/icon (3).jpg"></img>
       </li>
       <!-- -->
-      <li class="btn" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
+      <li class="btn vertical" onclick="navlist_navigate(true)" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: var(--colmaxreal_2) / var(--colmaxreal_3);">
         <img src="icon/icon (4).jpg"></img>
       </li>
       <!-- -->

@@ -58,7 +58,7 @@ function nav_construct(id) {
             item.classList.add( `${positem.colcheck ? 'col' : 'row'}`, 
                                 `${positem.colcheck ? 'horizontal' : 'vertical'}`, 
                                 `${positem.sidecheck}`,
-                               `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
+                                `${positem.colcheck ? 'horizontal_ani' : 'vertical_ani'}`,
                                 `${positem.colcheck ? (positem.initcheck ? 'forward' : 'reverse') : (positem.sidecheck == 'right' ? 'forward' : 'reverse' )}`
                             );
             if (positem.colcheck) {
@@ -257,7 +257,7 @@ function rowscrollleft(e) {
 }
 
 //
-function Sortingfunc(axis, button) {
+function Sortingfunc(axis) {
     let navsrt1 = [];
     let navsrt2 = [];  
     navitem = [[], [], []];
@@ -285,8 +285,7 @@ function Sortingfunc(axis, button) {
     }
     nav_construct(0);
 
-    rootstyle.setProperty('--highlightcolor',button.style.backgroundColor);
-    rootstyle.setProperty('--highlightcolor_font',button.style.color);
+    rootstyle.setProperty('--highlightcolor',`var(--${axis})`);
 
     delaypromise = delaypromise.then(function () {
         for (let key in navsrt1) {
