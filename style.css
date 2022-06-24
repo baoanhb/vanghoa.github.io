@@ -43,7 +43,7 @@
 	--time: rgb(34, 139, 131);
 	--dg_pro: Blue;
 	--print: Deeppink;
-	--borrad_ios: calc(var(--navsz) - 2px);
+	--borrad_ios: calc(var(--navsz) - 5px);
 }
 
 body {
