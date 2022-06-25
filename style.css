@@ -48,6 +48,10 @@
 	font-family: Helvetica ,'Arial Narrow' , Arial, sans-serif;
 }
 
+h1, h2, h3, address, p {
+	font-size: inherit;
+}
+
 body {
 	overflow: hidden;
 }

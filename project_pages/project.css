@@ -12,6 +12,10 @@
 	color: white;
 }
 
+h1, h2, h3, address, p {
+	font-size: inherit;
+}
+
 :root {
 	--minsz: calc(100vw - calc(var(--gapsz) * 2));
 	--maxsz: 1600px;
@@ -23,10 +27,6 @@ body {
 	width: 100%;
 	padding-top: calc(var(--gapsz) / 3);
 	text-align: center;
-}
-
-h1 {
-	font-weight: 100;
 }
 
 .wrapper {
