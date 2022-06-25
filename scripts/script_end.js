@@ -168,6 +168,7 @@ const seemorebtn = ulnav.querySelector('.btn[onclick="seemore()"]');
 const seemorenav = document.querySelectorAll('.seemore');
 const sortbtn = document.querySelectorAll('.seemore button');
 const ckbx = ulnav.querySelector('label#tglnav input');
+const main = ulnav.querySelector('#main');
 
 let smallersd;
 let smallersd_min;

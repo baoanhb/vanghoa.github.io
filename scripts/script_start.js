@@ -286,18 +286,51 @@ function Sortingfunc(axis) {
     }
     nav_construct(0);
 
-    rootstyle.setProperty('--highlightcolor',`var(--${axis})`);
-
+    rootstyle.setProperty('--highlightcolor',`rgb(var(--${axis}))`);
+    
     delaypromise = delaypromise.then(function () {
         for (let key in navsrt1) {
             if (key == soitemperscreen) {break;}
             navsrt1[key].addEventListener("animationend", removehighlight);
             navsrt1[key].classList.add('highlightsort');
+            //
+            if (!touchable) {
+                let classlist = navsrt1[key].classList;
+                if (classlist.contains('col')) {
+                    rootstyle.setProperty( classlist.contains('top') ? '--top_color_be4' : '--bot_color_be4','255, 255, 255');
+                    rootstyle.setProperty( classlist.contains('top') ? '--top_color_aft' : '--bot_color_aft',`var(--${axis})`);
+                } else {
+                    rootstyle.setProperty( classlist.contains('left') ? '--left_color_be4' : '--right_color_be4','255, 255, 255');
+                    rootstyle.setProperty( classlist.contains('left') ? '--left_color_aft' : '--right_color_aft',`var(--${axis})`);
+                }
+            }
+            //
         }
+        seemorebtn.addEventListener("animationend", removehighlight);
+        seemorebtn.classList.add('highlightsort');
+//
+        if (!touchable) {
+            main.addEventListener("animationend", removehighlight_border)
+            main.classList.add('highlightsort_border');
+        }
+//
         return new Promise(function (resolve) {
             resolve();
         });
     });
+}
+
+function removehighlight_border(e) {
+    rootstyle.setProperty('--top_color_be4','var(--colortheme_rgb)');
+    rootstyle.setProperty('--top_color_aft','var(--colortheme_rgb)');
+    rootstyle.setProperty('--bot_color_be4','var(--colortheme_rgb)');
+    rootstyle.setProperty('--bot_color_aft','var(--colortheme_rgb)');
+    rootstyle.setProperty('--left_color_be4','var(--colortheme_rgb)');
+    rootstyle.setProperty('--left_color_aft','var(--colortheme_rgb)');
+    rootstyle.setProperty('--right_color_be4','var(--colortheme_rgb)');
+    rootstyle.setProperty('--right_color_aft','var(--colortheme_rgb)');
+    e.target.classList.remove('highlightsort_border');
+    e.target.removeEventListener("animationend", removehighlight_border);
 }
 
 function removehighlight(e) {
