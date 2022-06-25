@@ -24,7 +24,7 @@
 
 body {
 	width: 100%;
-	padding: calc(var(--gapsz) / 3) var(--gapsz) 0 var(--gapsz);
+	padding-top: calc(var(--gapsz) / 3);
 	text-align: center;
 }
 
@@ -56,6 +56,8 @@ p::after{
 h1 {
 	font-size: 2rem;
 	font-family: 'Times New Roman', Times, serif;
+	max-width: 700px;
+	margin: 0 auto;
 }
 
 .sqr {
