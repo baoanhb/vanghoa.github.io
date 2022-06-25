@@ -25,7 +25,7 @@
 	--boxsdstyle_inset: 0 0 0px 1px black inset,  
 						0 0 0px 3px white inset, 
 						0 0 0px 4px black inset;
-	--lifontsz: 12px;
+	--lifontsz: 15px;
 	--pad_btn: 10px;
 	--colortheme: rgb(61, 235, 221);
 	--scrlbrwd: 0px;
@@ -46,6 +46,8 @@
 	padding: 0;
 	font-size: var(--lifontsz);
 	font-family: Helvetica ,'Arial Narrow' , Arial, sans-serif;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
 }
 
 h1, h2, h3, address, p {
