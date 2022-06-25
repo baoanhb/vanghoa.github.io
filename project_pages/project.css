@@ -44,6 +44,7 @@ img, .item, .column, p {
 
 p {
 	max-width: 700px;
+	margin-bottom: -1em;
 } 
 
 p::after{
@@ -112,6 +113,10 @@ h1 {
 @media screen and (max-width: 500px) and (orientation:portrait) {
 	img, .item, .column, p {
 		margin: calc(var(--gapsz) * 2) auto;
+	}
+
+	p {
+		margin-bottom: -1em;
 	}
 
 	body {
