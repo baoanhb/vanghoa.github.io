@@ -82,17 +82,27 @@ img, .item, .column, p {
 	:root {
 		--gapsz: 10px;
 	}
-}
 
-@media screen and (max-width: 500px), (max-height: 500px) {
 	* {
 		font-size: 12px;
 	}
 }
 
-/* Landscape */
+@media screen and (max-height: 500px) {
+	* {
+		font-size: 12px;
+	}
+}
+
+/* orientation */
 @media screen and (orientation:landscape) {
 	:root {
 		--minsz: calc(100vh - calc(var(--gapsz) / 3));
+	}
+}
+
+@media screen and (orientation:portrait) {
+	:root {
+		--minsz: calc(100vw - calc(var(--gapsz) * 2));
 	}
 }
