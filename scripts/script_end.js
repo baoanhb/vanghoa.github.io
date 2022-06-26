@@ -11,6 +11,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //1 Vietnamme mag
         dg_pro : true,
@@ -20,6 +21,7 @@ const navitemobj = [
         illus : true,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //2 Tabao Tammy
         dg_pro : false,
@@ -29,6 +31,7 @@ const navitemobj = [
         illus : true,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //3 Liturgical calendar
         dg_pro : false,
@@ -38,6 +41,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //4 Mac gi?
         dg_pro : false,
@@ -47,6 +51,7 @@ const navitemobj = [
         illus : false,
         spcl : true,
         time : true,
+        soon : false,
     },
     { //5 3D markup
         dg_pro : true,
@@ -56,6 +61,7 @@ const navitemobj = [
         illus : false,
         spcl : true,
         time : true,
+        soon : false,
     },
     { //6 Love is hard
         dg_pro : true,
@@ -65,6 +71,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //7 Sese
         dg_pro : true,
@@ -74,6 +81,7 @@ const navitemobj = [
         illus : true,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //8 Duolingo
         dg_pro : true,
@@ -83,6 +91,7 @@ const navitemobj = [
         illus : true,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //9 Khoi Minh
         dg_pro : true,
@@ -92,6 +101,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //10 Misc projects
         dg_pro : false,
@@ -101,6 +111,7 @@ const navitemobj = [
         illus : true,
         spcl : false,
         time : true,
+        soon : false,
     },
     { //11
         dg_pro : false,
@@ -110,6 +121,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : true,
     },
     { //12
         dg_pro : false,
@@ -119,6 +131,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : true,
     },
     { //13
         dg_pro : false,
@@ -128,6 +141,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : true,
     },
     { //14
         dg_pro : false,
@@ -137,6 +151,7 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : true,
     },
     { //15
         dg_pro : false,
@@ -146,18 +161,23 @@ const navitemobj = [
         illus : false,
         spcl : false,
         time : true,
+        soon : true,
     },
 ]
 
 let navitem = [[], [], []];
 let hovercheck = [true, true, true];
+let availit_num = navitemobj.length;
 
 // initialise //
 for (let key in navitemobj) {
     let item = navitemsampl[key];
     navitemobj[key].elem = item;
     navitem[Math.floor(key/soitemperscreen)].push(item);
-    if (!touchable) {item.addEventListener("mouseleave", hover_out);}
+    if (!touchable) {
+        item.addEventListener("mouseleave", hover_out);
+        if (navitemobj[key].soon) {availit_num--};
+    }
 }
 
 const ulnav = document.querySelector('ul#nav');
@@ -169,6 +189,27 @@ const seemorenav = document.querySelectorAll('.seemore');
 const sortbtn = document.querySelectorAll('.seemore button');
 const ckbx = ulnav.querySelector('label#tglnav input');
 const main = ulnav.querySelector('#main');
+
+//
+const border_3d = {
+    top : ulnav.querySelector('#top_border'),
+    bot : ulnav.querySelector('#bot_border'),
+    left : ulnav.querySelector('#left_border'),
+    right : ulnav.querySelector('#right_border'),
+    removehighlight_border_top : function(e) {
+        color_border('top', e.target, false, 'N/A');
+    },
+    removehighlight_border_bot : function(e) {
+        color_border('bot', e.target, false, 'N/A');
+    },
+    removehighlight_border_left : function(e) {
+        color_border('left', e.target, false, 'N/A');
+    },
+    removehighlight_border_right : function(e) {
+        color_border('right', e.target, false, 'N/A');
+    },
+}
+//
 
 let smallersd;
 let smallersd_min;

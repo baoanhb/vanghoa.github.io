@@ -175,6 +175,10 @@ function nav_navigate(item) {
         item.setAttribute('hidecheck', `${index}`); 
         item.classList.toggle('hide');
     })
+
+    if (!touchable && itemid <= availit_num) {
+        rootstyle.setProperty('--border_img',`url('thumbnail/border/${itemid}.jpg')`);
+    }
 }
 
 function nav_navigate_event() {
@@ -297,40 +301,30 @@ function Sortingfunc(axis) {
             if (!touchable) {
                 let classlist = navsrt1[key].classList;
                 if (classlist.contains('col')) {
-                    rootstyle.setProperty( classlist.contains('top') ? '--top_color_be4' : '--bot_color_be4','255, 255, 255');
-                    rootstyle.setProperty( classlist.contains('top') ? '--top_color_aft' : '--bot_color_aft',`var(--${axis})`);
+                    let check = classlist.contains('top') ? 'top' : 'bot';
+                    color_border(check, border_3d[check], true, axis);
                 } else {
-                    rootstyle.setProperty( classlist.contains('left') ? '--left_color_be4' : '--right_color_be4','255, 255, 255');
-                    rootstyle.setProperty( classlist.contains('left') ? '--left_color_aft' : '--right_color_aft',`var(--${axis})`);
+                    let check = classlist.contains('left') ? 'left' : 'right';
+                    color_border(check, border_3d[check], true, axis);
                 }
             }
             //
         }
         seemorebtn.addEventListener("animationend", removehighlight);
         seemorebtn.classList.add('highlightsort');
-//
-        if (!touchable) {
-            main.addEventListener("animationend", removehighlight_border)
-            main.classList.add('highlightsort_border');
-        }
-//
+        
         return new Promise(function (resolve) {
             resolve();
         });
     });
 }
 
-function removehighlight_border(e) {
-    rootstyle.setProperty('--top_color_be4','var(--colortheme_rgb)');
-    rootstyle.setProperty('--top_color_aft','var(--colortheme_rgb)');
-    rootstyle.setProperty('--bot_color_be4','var(--colortheme_rgb)');
-    rootstyle.setProperty('--bot_color_aft','var(--colortheme_rgb)');
-    rootstyle.setProperty('--left_color_be4','var(--colortheme_rgb)');
-    rootstyle.setProperty('--left_color_aft','var(--colortheme_rgb)');
-    rootstyle.setProperty('--right_color_be4','var(--colortheme_rgb)');
-    rootstyle.setProperty('--right_color_aft','var(--colortheme_rgb)');
-    e.target.classList.remove('highlightsort_border');
-    e.target.removeEventListener("animationend", removehighlight_border);
+function color_border(check, target, init, axis) {
+    rootstyle.setProperty(`--${check}_color_be4`, init ? `255, 255, 255` : `var(--colortheme_rgb)`);
+    rootstyle.setProperty(`--${check}_color_aft`, `var(--${init ? axis : 'colortheme_rgb'})`);
+
+    target.classList[init ? 'add' : 'remove'](`highlightsort_border_${check}`);
+    target[`${init ? 'add' : 'remove'}EventListener`]("animationend", border_3d[`removehighlight_border_${check}`]);
 }
 
 function removehighlight(e) {
