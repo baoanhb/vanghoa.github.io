@@ -185,7 +185,7 @@ li[onclick="nav_navigate(this)"] {
 	overflow: hidden;
 }
 
-li.highlightsort {
+.highlightsort {
 	-webkit-animation: highlightsort 0.25s; 
 	-moz-animation:    highlightsort 0.25s; 
 	-o-animation:      highlightsort 0.25s;
@@ -388,14 +388,14 @@ li.soon {
 }
 
 /* nav item button */
-li.btn {
+.btn {
 	padding: 0;
 	-webkit-box-shadow: var(--boxsdstyle_inset);
 	box-shadow: var(--boxsdstyle_inset);
 	z-index: 1;
 }
 
-li.btn img {
+.btn img {
 	mix-blend-mode: multiply;
 	padding: var(--pad_btn);
 	width: var(--navsz);
@@ -404,8 +404,20 @@ li.btn img {
 	transition: width 0.5s, height 0.5s, padding 0.5s;
 }
 
-li.btn[onclick="seemore()"] {
+.btn[onclick="seemore()"] {
 	background-color: var(--highlightcolor);
+}
+
+div.btn {
+	padding: 10px;
+	cursor: pointer;
+	flex-basis: 25%;
+}
+
+div.btn img {
+	padding: 0px;
+	width: calc(var(--navsz_sampl) - 20px);
+	height: calc(var(--navsz_sampl) - 20px);
 }
 
 /* main part */
@@ -671,6 +683,11 @@ label#tglnav div {
 }
 
 /* resume */
+#instruction {
+	width: 100%;
+	display: flex;
+}
+
 tbody {
 	vertical-align: top;
 }

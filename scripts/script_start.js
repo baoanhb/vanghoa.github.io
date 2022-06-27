@@ -2,6 +2,7 @@
 // constant //
 const minsz = 9;
 const time_interval = 250;
+let count = 0;
 
 const root = document.querySelector(':root');
 
@@ -22,6 +23,8 @@ const soitem = new Array(4);
 const ofstscrlrow = (navszhover - paddingli * 2 - offsetborderstyle * 2) / 2;
 const soitemperscreen = 6;
 //
+const r_mouseenter = rmvE_('mouseenter');
+const r_transitionend = rmvE_('transitionend');
 
 // variable //
 let delaypromise = Promise.resolve();
@@ -30,6 +33,7 @@ let crrntitemid = '1';
 
 // local function //
 function navlist_navigate(next, btn) {
+    count++;
     let navid = next ? ++crrntnavlist : --crrntnavlist;
     if (navid < 0) {navid = navitem.length - 1;}
     if (navid > navitem.length - 1) {navid = 0;}
@@ -39,14 +43,35 @@ function navlist_navigate(next, btn) {
 function nav_construct(id) {
     crrntnavlist = id;
 
-    for (let item of navitemsampl) {
-        item.style.display = 'none';
+    for (let item of navitemobj) {
+        item.elem.style.display = 'none';
+    }
+    
+    if (!touchable) {
+        init_border('top');
+        init_border('bot');
+        init_border('left');
+        init_border('right');
+
+        function init_border(check) {
+            border_3d[check].removeAttribute("style");
+            border_3d[check].style.visibility = 'hidden';
+        }
     }
 
     let posarray = posarr_generate(id);
 
-    navitem[id].forEach((item, index) => {
-        delaypromise = delaypromise.then(function () {
+    let count_ = count;
+    
+    for (let index in navitem[id]) {
+        delaypromise = delaypromise.then(function() {
+            if (count != count_) {
+                return new Promise(function (resolve) {
+                    resolve();
+                });
+            }
+
+            const item = navitem[id][index];
             const positem = posarray[index];
             const colcheck = positem.colcheck;
             const initcheck = positem.initcheck;
@@ -65,27 +90,44 @@ function nav_construct(id) {
                                 `${colcheck ? (initcheck ? 'top' : 'bot') : 'row'}`, 
                                 `${sidecheck}`
                             );
-            
-            if (hovercheck[id] && !touchable) {
-                if (colcheck) {
-                    item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
-                    if (item.querySelector('img')) {item.addEventListener('transitionend', colscroll);}
-                } else {
-                    item.addEventListener("mouseenter", initcheck ? hoverleft_in : hoverright_in);
-                    if (item.querySelector('img')) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
+            if (!touchable) {
+                if (hovercheck[id]) {
+                    if (colcheck) {
+                        item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
+                        if (item.querySelector('img')) {item.addEventListener('transitionend', colscroll);}
+                    } else {
+                        item.addEventListener("mouseenter", initcheck ? hoverleft_in : hoverright_in);
+                        if (item.querySelector('img')) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
+                    }
                 }
-            }
-
-            if (index == navitem[id].length - 1) {
-                hovercheck[id] = false;
+    
+                if (index == navitem[id].length - 1) {
+                    hovercheck[id] = false;
+                }
+    
+                let class_ = item.className;
+                soon_border('top', 'col', 'Top', 'top');
+                soon_border('left', 'row', 'Left', 'lr');
+                soon_border('right', 'row', 'Right', 'lr');
+                soon_border('bot', 'col', 'Bottom', 'bot');
+    
+                function soon_border(check, check_, bor_name, alpha_name) {
+                    if (class_.includes(check) && class_.includes(check_)) {
+                        if (class_.includes('soon')) {
+                            border_3d[check].style[`border${bor_name}Color`] = `rgba(255, 255, 0, var(--${alpha_name}_alpha)`;
+                        }
+                        border_3d[check].style.visibility = 'visible';
+                    }
+                }
             }
 
             return new Promise(function (resolve) {
               setTimeout(resolve, time_interval);
             });
         });
-    })
-}
+    }
+}//
+
 //
 function posarr_generate(index) {
     let soitemmin = Math.floor(navitem[index].length/4);
@@ -164,7 +206,7 @@ function nav_navigate(item) {
         projfr.firstElementChild.contentWindow.scrollTo(0,0);
         return;
     }
-    navitemsampl[+crrntitemid - 1].classList.remove('current');
+    navitemobj[+crrntitemid - 1].elem.classList.remove('current');
 
     crrntitemid = itemid;
     let projfr_id = projfr.querySelectorAll('iframe');
@@ -263,24 +305,32 @@ function rowscrollleft(e) {
 
 //
 function Sortingfunc(axis) {
+    //time_interval = 0;
+    //promisecount[count] = false;
+    count++;
+    let count_ = count;
+    //
     let navsrt1 = [];
     let navsrt2 = [];  
     navitem = [[], [], []];
     hovercheck = [true, true, true];
 
+    seemorebtn.forEach(function(item) {
+        item.classList.remove('highlightsort');
+    })
+
     for (let key in navitemobj) {
         let elem = navitemobj[key].elem;
         if (navitemobj[key][axis]) {
             navsrt1.push(elem);
-        } else {navsrt2.push(elem);}
+        } else {
+            navsrt2.push(elem);
+        }
         elem.classList.remove('highlightsort');
-        elem.removeEventListener("mouseenter", hovertop_in);
-        elem.removeEventListener("mouseenter", hoverbot_in);
-        elem.removeEventListener("mouseenter", hoverleft_in);
-        elem.removeEventListener("mouseenter", hoverright_in);
-        elem.removeEventListener('transitionend', colscroll);
-        elem.removeEventListener('transitionend', rowscrollright);
-        elem.removeEventListener('transitionend', rowscrollleft);
+        if (!touchable) {
+            r_mouseenter([hovertop_in, hoverbot_in, hoverleft_in, hoverright_in], elem);
+            r_transitionend([colscroll, rowscrollright, rowscrollleft], elem);
+        }
     }
 
     let navsrt = navsrt1.concat(navsrt2); 
@@ -288,11 +338,18 @@ function Sortingfunc(axis) {
     for (let key in navsrt) {
         navitem[Math.floor(key/soitemperscreen)].push(navsrt[key]);
     }
+    //time_interval = 250;
     nav_construct(0);
 
-    rootstyle.setProperty('--highlightcolor',`rgb(var(--${axis}))`);
+    delaypromise = delaypromise.then(function() {
+        if (count != count_) {
+            return new Promise(function (resolve) {
+                resolve();
+            });
+        }
+
+        rootstyle.setProperty('--highlightcolor',`rgb(var(--${axis}))`);
     
-    delaypromise = delaypromise.then(function () {
         for (let key in navsrt1) {
             if (key == soitemperscreen) {break;}
             navsrt1[key].addEventListener("animationend", removehighlight);
@@ -310,13 +367,24 @@ function Sortingfunc(axis) {
             }
             //
         }
-        seemorebtn.addEventListener("animationend", removehighlight);
-        seemorebtn.classList.add('highlightsort');
+        seemorebtn.forEach(function(item) {
+            item.addEventListener("animationend", removehighlight);
+            item.classList.add('highlightsort');
+        });
         
         return new Promise(function (resolve) {
             resolve();
         });
     });
+}
+
+function rmvE_(event) {
+    function rmvE(func, elem) {
+        for (let func_ of func) {
+            elem.removeEventListener(event, func_);
+        }
+    }
+    return rmvE;
 }
 
 function color_border(check, target, init, axis) {
@@ -370,7 +438,7 @@ function togglenav(ckbx) {
         ifr_widthfit(projfr.querySelector('iframe'));
     } else {
         rootstyle.setProperty('--navsz',`var(--navsz_sampl)`);
-        rootstyle.setProperty('--pad_btn','5px');
+        rootstyle.setProperty('--pad_btn','10px');
         offsetifr = offsetifr + navsz*2;
         ifr_widthfit(projfr.querySelector('iframe'));
     }
