@@ -53,32 +53,32 @@
           <div class="horizontal">toggle navbar</div>
         </label>
         <section id="welcome">
-          <h1>Bui Nguyen Bao Anh</h1>
-          <br><h2>Web instruction↓</h2>
+          <h1>Bui Nguyen Bao Anh portfolio:</h1>
+          <br><h2 id="instruction_title">Web instruction↓</h2>
           <div id="instruction">
             <!-- -->
-            <div class="btn vertical" onclick="homescreen()" style="background-color: white;">
+            <div class="btn vertical" onclick="btn_ani(this, 'home', true, true)" style="background-color: white;">
               <img src="icon/icon (2).jpg" alt="home button">
               <p>
                 toggle this white-bg homescreen.
               </p>
             </div>
             <!-- -->
-            <div class="btn vertical" onclick="seemore()">
+            <div class="btn vertical" onclick="btn_ani(this, 'cmore', false, true)" style="background-color: var(--highlightcolor);">
               <img src="icon/icon (1).jpg" alt="sorting button">
-              <p>
+              <p style="color: white;">
                 toggle project sorting.
               </p>
             </div>
             <!-- -->
-            <div class="btn vertical" onclick="navlist_navigate(false)" style="background-color: yellow;">
+            <div class="btn vertical" onclick="btn_ani(this, 'back', true, false)" style="background-color: yellow;">
               <img src="icon/icon (3).jpg" alt="left button">
               <p>
                 navigate the project list backward.
               </p>
             </div>
             <!-- -->
-            <div class="btn vertical" onclick="navlist_navigate(true)" style="background-color: yellow;">
+            <div class="btn vertical" onclick="btn_ani(this, 'back', false, false)" style="background-color: yellow;">
               <img src="icon/icon (4).jpg" alt="right button">
               <p>
                 navigate the project list forward.
@@ -86,10 +86,12 @@
             </div>
             <!-- -->
           </div>
+          <br>
+          <h1>online cv:</h1>
           <br><h2>Contacts↓</h2>
 
           <address>
-            <a href="https://www.instagram.com/" target="_blank">instagram.com/bao.anh.b</a> <br>
+            <a href="https://www.instagram.com/bao.anh.b" target="_blank">instagram.com/bao.anh.b</a> <br>
             
             <a href="mailto:baoanh1buinguyen@gmail.com">baoanh1buinguyen@gmail.com</a><br>
             (+84) 77 938 4331 (Vietnam only)
@@ -305,17 +307,37 @@
       </li>
       <!-- -->
       <li id="top_border">
+        <div class="line_3d l_diag side_left"></div>
+        <div class="line_3d r_diag side_right"></div>
       </li>
       <!-- -->
       <li id="bot_border">
+        <div class="line_3d r_diag side_left"></div>
+        <div class="line_3d l_diag side_right"></div>
       </li>
       <!-- -->
       <li id="left_border">
+        <div class="line_3d l_diag side_top"></div>
+        <div class="line_3d r_diag side_bot"></div>
       </li>
       <!-- -->
       <li id="right_border">
+        <div class="line_3d r_diag side_top"></div>
+        <div class="line_3d l_diag side_bot"></div>
       </li>
       <!-- -->
+      <li id="top_left">  
+      </li>
+      
+      <li id="top_right">  
+      </li>
+      
+      <li id="bot_left">  
+      </li>
+      
+      <li id="bot_right">  
+      </li>
+
     </ul>
   </nav>
 

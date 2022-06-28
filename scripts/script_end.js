@@ -1,24 +1,26 @@
 "use strict";
+// binding
+const ulnav = $('ul#nav');
+const $ulnav = ulnav.querySelector.bind(ulnav);
 
-const ulnav = document.querySelector('ul#nav');
-const projfr = ulnav.querySelector('section#iframe');
-const wlcmscr = ulnav.querySelector('section#welcome');
-const homebtn = ulnav.querySelector('.btn[onclick="homescreen()"]');
+const projfr = $ulnav('section#iframe');
+const wlcmscr = $ulnav('section#welcome');
+const homebtn = $ulnav('.btn[onclick="homescreen()"]');
 const seemorebtn = ulnav.querySelectorAll('.btn[onclick="seemore()"]');
-const seemorenav = document.querySelectorAll('.seemore');
-const sortbtn = document.querySelectorAll('.seemore button');
-const ckbx = ulnav.querySelector('label#tglnav input');
-const main = ulnav.querySelector('#main');
+const seemorenav = $$('.seemore');
+const sortbtn = $$('.seemore button');
+const ckbx = $ulnav('label#tglnav input');
+const main = $ulnav('#main');
 let navitemobj = [];
 let navitem = [[], [], []];
 let hovercheck = [true, true, true];
 let availit_num;
 
 const border_3d = {
-    top : ulnav.querySelector('#top_border'),
-    bot : ulnav.querySelector('#bot_border'),
-    left : ulnav.querySelector('#left_border'),
-    right : ulnav.querySelector('#right_border'),
+    top : $ulnav('#top_border'),
+    bot : $ulnav('#bot_border'),
+    left : $ulnav('#left_border'),
+    right : $ulnav('#right_border'),
     removehighlight_border_top : function(e) {
         color_border('top', e.target, false, 'N/A');
     },
@@ -161,7 +163,7 @@ function fieldcheck(class_, item) {
 // on resize //
 window.onresize = _.debounce(function() {
     // media change => get navbar
-    navsz = +proproot.getPropertyValue('--navsz_sampl').slice(0, -2);
+    navsz = +getprop('--navsz_sampl').slice(0, -2);
     // scrollbar width
     scrlbrwd = getScrollbarWidth();
     rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
@@ -169,7 +171,7 @@ window.onresize = _.debounce(function() {
     offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
     ifr_widthfit(projfr.querySelector('iframe'));
     // stroke3d width
-    hbhmax = proproot.getPropertyValue('--hbhwidth_max');
+    hbhmax = getprop('--hbhwidth_max');
     // sort button reorganise
     onresizesortbtn();
     // ios vh fix

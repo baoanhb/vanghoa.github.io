@@ -1,27 +1,33 @@
 "use strict";
 // constant //
+let count = 0;
 const minsz = 9;
 const time_interval = 250;
-let count = 0;
+const soitemperscreen = 6;
 
+// binding
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 const root = document.querySelector(':root');
 
+// binding
 const proproot = getComputedStyle(root);
-let navsz = +proproot.getPropertyValue('--navsz_sampl').slice(0, -2);
-const navszhover = +proproot.getPropertyValue('--navszhover').slice(0, -2);
-const paddingli = +proproot.getPropertyValue('--paddingli').slice(0, -2);
-const offsetborderstyle = +proproot.getPropertyValue('--offsetborderstyle').slice(0, -2);
-const colmax = +proproot.getPropertyValue('--colmax') + 2;
-const rowmax = +proproot.getPropertyValue('--rowmax') + 2;
+const getprop = proproot.getPropertyValue.bind(proproot);
+
+let navsz = +getprop('--navsz_sampl').slice(0, -2);
+const navszhover = +getprop('--navszhover').slice(0, -2);
+const paddingli = +getprop('--paddingli').slice(0, -2);
+const offsetborderstyle = +getprop('--offsetborderstyle').slice(0, -2);
+const colmax = +getprop('--colmax') + 2;
+const rowmax = +getprop('--rowmax') + 2;
 //
 const rootstyle = root.style;
-const hbhmin = proproot.getPropertyValue('--hbhwidth_min');
-let hbhmax = proproot.getPropertyValue('--hbhwidth_max');
-const hbhave = proproot.getPropertyValue('--hbhwidth_ave');
+const hbhmin = getprop('--hbhwidth_min');
+let hbhmax = getprop('--hbhwidth_max');
+const hbhave = getprop('--hbhwidth_ave');
 //
 const soitem = new Array(4);
 const ofstscrlrow = (navszhover - paddingli * 2 - offsetborderstyle * 2) / 2;
-const soitemperscreen = 6;
 //
 const r_mouseenter = rmvE_('mouseenter');
 const r_transitionend = rmvE_('transitionend');
@@ -32,14 +38,6 @@ let crrntnavlist = 0;
 let crrntitemid = '1';
 
 // local function //
-function navlist_navigate(next, btn) {
-    count++;
-    let navid = next ? ++crrntnavlist : --crrntnavlist;
-    if (navid < 0) {navid = navitem.length - 1;}
-    if (navid > navitem.length - 1) {navid = 0;}
-    nav_construct(navid);
-}
-//
 function nav_construct(id) {
     crrntnavlist = id;
 
@@ -126,7 +124,7 @@ function nav_construct(id) {
             });
         });
     }
-}//
+}
 
 //
 function posarr_generate(index) {
@@ -194,6 +192,15 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
     rtarr.pop();
     return rtarr;
 }
+
+// function button //
+function navlist_navigate(next, btn) {
+    count++;
+    let navid = next ? ++crrntnavlist : --crrntnavlist;
+    if (navid < 0) {navid = navitem.length - 1;}
+    if (navid > navitem.length - 1) {navid = 0;}
+    nav_construct(navid);
+}
 //
 function nav_navigate(item) {
     if (ckbx.checked == true) {return;}
@@ -222,7 +229,7 @@ function nav_navigate(item) {
         rootstyle.setProperty('--border_img',`url('thumbnail/border/${itemid}.jpg')`);
     }
 }
-
+// 
 function nav_navigate_event() {
     let projfr_id = projfr.querySelector('iframe');
 
@@ -249,15 +256,61 @@ function seemore() {
     for (let item of seemorenav) {
         item.classList.toggle('show');
     }
+    
+    if (ckbx.checked == true) {
+        ckbx.checked = false;
+        togglenav(ckbx);
+    }
 }
-
+//
 function removeseemore() {
     ulnav.classList.remove('show');
     for (let item of seemorenav) {
         item.classList.remove('show');
     }
 }
+//
+function togglenav(ckbx) {
+    if (ckbx.checked == true){
+        rootstyle.setProperty('--navsz','0px');
+        rootstyle.setProperty('--pad_btn','0px');
+        removeseemore();
+        offsetifr = offsetifr - navsz*2;
+        ifr_widthfit(projfr.querySelector('iframe'));
+    } else {
+        rootstyle.setProperty('--navsz',`var(--navsz_sampl)`);
+        rootstyle.setProperty('--pad_btn','10px');
+        offsetifr = offsetifr + navsz*2;
+        ifr_widthfit(projfr.querySelector('iframe'));
+    }
+}
+//
+function btn_ani(that, class_ani, horcheck, vercheck) {
+    wlcmscr.style.overflow = 'visible';
+    let rec = that.getBoundingClientRect();
 
+    rootstyle.setProperty(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (horcheck ? 0 : navsz)}px`);
+    rootstyle.setProperty(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top - (vercheck ? 0 : navsz)}px`);
+    rootstyle.setProperty(`--h_${class_ani}`,`${rec.height}px`);
+    that.style.minHeight = '0';
+    that.style.zIndex = '2';
+    that.classList.add(`${class_ani}_ani`);
+    that.addEventListener("animationend", btn_ani_end);
+
+    function btn_ani_end(e) {
+        let item = e.target;
+        let par = item.parentElement;
+        wlcmscr.style.overflow = 'auto';
+        item.removeEventListener("animationend", btn_ani_end);
+        if (par.children.length < 2) {
+            par.previousElementSibling.textContent = 'You are set!';
+            par.remove();
+        }
+        item.remove();
+    }
+}
+
+// hover border 3D event function //
 function hovertop_in() {
     rootstyle.setProperty('--hbhwidth_bot',hbhmin);
     rootstyle.setProperty('--hbhwidth_top',hbhmax);
@@ -284,8 +337,8 @@ function hover_out() {
     rootstyle.setProperty('--hbhwidth_left',hbhave);
     rootstyle.setProperty('--hbhwidth_right',hbhave);
 }
-// scroll mid img //
 
+// scroll mid img //
 function colscroll(e) {
     let li = e.target;
     let div = li.querySelector('div.hovercontent');
@@ -303,13 +356,10 @@ function rowscrollleft(e) {
     li.querySelector('div.hovercontent').scrollTo(0 - (csscomputed_prop(li.querySelector('img'), 'width') / 2 - ofstscrlrow), 0);
 }
 
-//
+// sorting button toggle //
 function Sortingfunc(axis) {
-    //time_interval = 0;
-    //promisecount[count] = false;
     count++;
     let count_ = count;
-    //
     let navsrt1 = [];
     let navsrt2 = [];  
     navitem = [[], [], []];
@@ -338,7 +388,6 @@ function Sortingfunc(axis) {
     for (let key in navsrt) {
         navitem[Math.floor(key/soitemperscreen)].push(navsrt[key]);
     }
-    //time_interval = 250;
     nav_construct(0);
 
     delaypromise = delaypromise.then(function() {
@@ -378,15 +427,6 @@ function Sortingfunc(axis) {
     });
 }
 
-function rmvE_(event) {
-    function rmvE(func, elem) {
-        for (let func_ of func) {
-            elem.removeEventListener(event, func_);
-        }
-    }
-    return rmvE;
-}
-
 function color_border(check, target, init, axis) {
     rootstyle.setProperty(`--${check}_color_be4`, init ? `255, 255, 255` : `var(--colortheme_rgb)`);
     rootstyle.setProperty(`--${check}_color_aft`, `var(--${init ? axis : 'colortheme_rgb'})`);
@@ -410,8 +450,8 @@ function onresizesortbtn() {
     smallersd = new_smallersd;
     smallersd_min = new_smallersd_min;
 
-    let smsmall = document.querySelector(`.seemore:nth-of-type(${smallersd})`);
-    let smbig = document.querySelector(`.seemore:nth-of-type(${3 - smallersd})`);
+    let smsmall = $(`.seemore:nth-of-type(${smallersd})`);
+    let smbig = $(`.seemore:nth-of-type(${3 - smallersd})`);
     sortbtn.forEach((item,key) => {
         if ((key + 1) <= smallersd_min) {
             smsmall.appendChild(item);
@@ -425,22 +465,6 @@ function onresizesortbtn() {
     function adddecor(item, sdcheck) {
         item.className = '';
         item.classList.add(sdcheck ? 'horizontal' : 'vertical')
-    }
-}
-
-function togglenav(ckbx) {
-    // If the checkbox is checked, display the output text
-    if (ckbx.checked == true){
-        rootstyle.setProperty('--navsz','0px');
-        rootstyle.setProperty('--pad_btn','0px');
-        removeseemore()
-        offsetifr = offsetifr - navsz*2;
-        ifr_widthfit(projfr.querySelector('iframe'));
-    } else {
-        rootstyle.setProperty('--navsz',`var(--navsz_sampl)`);
-        rootstyle.setProperty('--pad_btn','10px');
-        offsetifr = offsetifr + navsz*2;
-        ifr_widthfit(projfr.querySelector('iframe'));
     }
 }
 
@@ -465,21 +489,17 @@ function arr_sffl(array) {
 }
   
 function getScrollbarWidth() {
-    // Creating invisible container
     const outer = document.createElement('div');
     outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll'; // forcing scrollbar to appear
-    outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+    outer.style.overflow = 'scroll'; 
+    outer.style.msOverflowStyle = 'scrollbar'; 
     document.body.appendChild(outer);
   
-    // Creating inner element and placing it in the container
     const inner = document.createElement('div');
     outer.appendChild(inner);
   
-    // Calculating difference between container's full width and the child width
     const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
   
-    // Removing temporary elements from the DOM
     outer.parentNode.removeChild(outer);
   
     return scrollbarWidth;
@@ -504,4 +524,13 @@ function hasTouch() {
 function viewportheight() {
     let vh = window.innerHeight * 0.01;
     rootstyle.setProperty('--vh', `${vh}px`);
+}
+
+function rmvE_(event) {
+    function rmvE(func, elem) {
+        for (let func_ of func) {
+            elem.removeEventListener(event, func_);
+        }
+    }
+    return rmvE;
 }
