@@ -8,11 +8,16 @@ const soitemperscreen = 6;
 // binding
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-const root = document.querySelector(':root');
+const $create = document.createElement.bind(document);
 
 // binding
+const root = document.querySelector(':root');
 const proproot = getComputedStyle(root);
 const getprop = proproot.getPropertyValue.bind(proproot);
+
+// binding
+const rootstyle = root.style;
+const setprop = rootstyle.setProperty.bind(rootstyle);
 
 let navsz = +getprop('--navsz_sampl').slice(0, -2);
 const navszhover = +getprop('--navszhover').slice(0, -2);
@@ -21,7 +26,6 @@ const offsetborderstyle = +getprop('--offsetborderstyle').slice(0, -2);
 const colmax = +getprop('--colmax') + 2;
 const rowmax = +getprop('--rowmax') + 2;
 //
-const rootstyle = root.style;
 const hbhmin = getprop('--hbhwidth_min');
 let hbhmax = getprop('--hbhwidth_max');
 const hbhave = getprop('--hbhwidth_ave');
@@ -89,26 +93,32 @@ function nav_construct(id) {
                                 `${sidecheck}`
                             );
             if (!touchable) {
+                let img = item.querySelector('img');
+                let class_ = item.className;
+                ////////
                 if (hovercheck[id]) {
                     if (colcheck) {
                         item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
-                        if (item.querySelector('img')) {item.addEventListener('transitionend', colscroll);}
+                        if (img) {item.addEventListener('transitionend', colscroll);}
                     } else {
                         item.addEventListener("mouseenter", initcheck ? hoverleft_in : hoverright_in);
-                        if (item.querySelector('img')) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
+                        if (img) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
                     }
                 }
-    
+                ////////
                 if (index == navitem[id].length - 1) {
                     hovercheck[id] = false;
                 }
-    
-                let class_ = item.className;
+                ////////
                 soon_border('top', 'col', 'Top', 'top');
                 soon_border('left', 'row', 'Left', 'lr');
                 soon_border('right', 'row', 'Right', 'lr');
                 soon_border('bot', 'col', 'Bottom', 'bot');
-    
+                ////////
+                if (img && !img.src) {
+                    img.src = img.dataset.src;
+                }
+                ////////
                 function soon_border(check, check_, bor_name, alpha_name) {
                     if (class_.includes(check) && class_.includes(check_)) {
                         if (class_.includes('soon')) {
@@ -226,7 +236,7 @@ function nav_navigate(item) {
     })
 
     if (!touchable && itemid <= availit_num) {
-        rootstyle.setProperty('--border_img',`url('thumbnail/border/${itemid}.jpg')`);
+        setprop('--border_img',`url('thumbnail/border/${itemid}.jpg')`);
     }
 }
 // 
@@ -272,14 +282,14 @@ function removeseemore() {
 //
 function togglenav(ckbx) {
     if (ckbx.checked == true){
-        rootstyle.setProperty('--navsz','0px');
-        rootstyle.setProperty('--pad_btn','0px');
+        setprop('--navsz','0px');
+        setprop('--pad_btn','0px');
         removeseemore();
         offsetifr = offsetifr - navsz*2;
         ifr_widthfit(projfr.querySelector('iframe'));
     } else {
-        rootstyle.setProperty('--navsz',`var(--navsz_sampl)`);
-        rootstyle.setProperty('--pad_btn','10px');
+        setprop('--navsz',`var(--navsz_sampl)`);
+        setprop('--pad_btn','10px');
         offsetifr = offsetifr + navsz*2;
         ifr_widthfit(projfr.querySelector('iframe'));
     }
@@ -289,9 +299,9 @@ function btn_ani(that, class_ani, horcheck, vercheck) {
     wlcmscr.style.overflow = 'visible';
     let rec = that.getBoundingClientRect();
 
-    rootstyle.setProperty(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (horcheck ? 0 : navsz)}px`);
-    rootstyle.setProperty(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top - (vercheck ? 0 : navsz)}px`);
-    rootstyle.setProperty(`--h_${class_ani}`,`${rec.height}px`);
+    setprop(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (horcheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top - (vercheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--h_${class_ani}`,`${rec.height}px`);
     that.style.minHeight = '0';
     that.style.zIndex = '2';
     that.classList.add(`${class_ani}_ani`);
@@ -300,42 +310,42 @@ function btn_ani(that, class_ani, horcheck, vercheck) {
     function btn_ani_end(e) {
         let item = e.target;
         let par = item.parentElement;
-        wlcmscr.style.overflow = 'auto';
         item.removeEventListener("animationend", btn_ani_end);
         if (par.children.length < 2) {
             par.previousElementSibling.textContent = 'You are set!';
             par.remove();
         }
         item.remove();
+        wlcmscr.style.overflow = 'auto';
     }
 }
 
 // hover border 3D event function //
 function hovertop_in() {
-    rootstyle.setProperty('--hbhwidth_bot',hbhmin);
-    rootstyle.setProperty('--hbhwidth_top',hbhmax);
+    setprop('--hbhwidth_bot',hbhmin);
+    setprop('--hbhwidth_top',hbhmax);
 }
 
 function hoverleft_in() {
-    rootstyle.setProperty('--hbhwidth_right',hbhmin);
-    rootstyle.setProperty('--hbhwidth_left',hbhmax);
+    setprop('--hbhwidth_right',hbhmin);
+    setprop('--hbhwidth_left',hbhmax);
 }
 
 function hoverright_in() {
-    rootstyle.setProperty('--hbhwidth_left',hbhmin);
-    rootstyle.setProperty('--hbhwidth_right',hbhmax);
+    setprop('--hbhwidth_left',hbhmin);
+    setprop('--hbhwidth_right',hbhmax);
 }
 
 function hoverbot_in() {
-    rootstyle.setProperty('--hbhwidth_top',hbhmin);
-    rootstyle.setProperty('--hbhwidth_bot',hbhmax);
+    setprop('--hbhwidth_top',hbhmin);
+    setprop('--hbhwidth_bot',hbhmax);
 }
 
 function hover_out() {
-    rootstyle.setProperty('--hbhwidth_top',hbhave);
-    rootstyle.setProperty('--hbhwidth_bot',hbhave);
-    rootstyle.setProperty('--hbhwidth_left',hbhave);
-    rootstyle.setProperty('--hbhwidth_right',hbhave);
+    setprop('--hbhwidth_top',hbhave);
+    setprop('--hbhwidth_bot',hbhave);
+    setprop('--hbhwidth_left',hbhave);
+    setprop('--hbhwidth_right',hbhave);
 }
 
 // scroll mid img //
@@ -397,7 +407,7 @@ function Sortingfunc(axis) {
             });
         }
 
-        rootstyle.setProperty('--highlightcolor',`rgb(var(--${axis}))`);
+        setprop('--highlightcolor',`rgb(var(--${axis}))`);
     
         for (let key in navsrt1) {
             if (key == soitemperscreen) {break;}
@@ -428,8 +438,8 @@ function Sortingfunc(axis) {
 }
 
 function color_border(check, target, init, axis) {
-    rootstyle.setProperty(`--${check}_color_be4`, init ? `255, 255, 255` : `var(--colortheme_rgb)`);
-    rootstyle.setProperty(`--${check}_color_aft`, `var(--${init ? axis : 'colortheme_rgb'})`);
+    setprop(`--${check}_color_be4`, init ? `255, 255, 255` : `var(--colortheme_rgb)`);
+    setprop(`--${check}_color_aft`, `var(--${init ? axis : 'colortheme_rgb'})`);
 
     target.classList[init ? 'add' : 'remove'](`highlightsort_border_${check}`);
     target[`${init ? 'add' : 'remove'}EventListener`]("animationend", border_3d[`removehighlight_border_${check}`]);
@@ -523,7 +533,7 @@ function hasTouch() {
 
 function viewportheight() {
     let vh = window.innerHeight * 0.01;
-    rootstyle.setProperty('--vh', `${vh}px`);
+    setprop('--vh', `${vh}px`);
 }
 
 function rmvE_(event) {

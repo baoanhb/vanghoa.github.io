@@ -834,6 +834,10 @@ td:first-child {
 	word-break: keep-all;
 }
 
+a {
+	color: rgb(var(--time));
+}
+
 @media screen and (max-width: 500px), (max-height: 500px) {
 	:root {
 		--hbhwidth_max: calc(var(--hbhwidth_ave) * 2);
@@ -852,31 +856,31 @@ td:first-child {
 }
 
 .home_ani {
-	-webkit-animation: home_ani 0.5s linear forwards; 
-	-moz-animation:    home_ani 0.5s linear forwards; 
-	-o-animation:      home_ani 0.5s linear forwards;
-	animation: home_ani 0.5s linear forwards;
+	-webkit-animation: home_ani 0.8s linear forwards; 
+	-moz-animation:    home_ani 0.8s linear forwards; 
+	-o-animation:      home_ani 0.8s linear forwards;
+	animation: home_ani 0.8s linear forwards;
 }
 
 .cmore_ani {
-	-webkit-animation: cmore_ani 0.5s linear forwards; 
-	-moz-animation:    cmore_ani 0.5s linear forwards; 
-	-o-animation:      cmore_ani 0.5s linear forwards;
-	animation: cmore_ani 0.5s linear forwards;
+	-webkit-animation: cmore_ani 0.8s linear forwards; 
+	-moz-animation:    cmore_ani 0.8s linear forwards; 
+	-o-animation:      cmore_ani 0.8s linear forwards;
+	animation: cmore_ani 0.8s linear forwards;
 }
 
 .for_ani {
-	-webkit-animation: for_ani 0.5s linear forwards; 
-	-moz-animation:    for_ani 0.5s linear forwards; 
-	-o-animation:      for_ani 0.5s linear forwards;
-	animation: for_ani 0.5s linear forwards;
+	-webkit-animation: for_ani 0.8s linear forwards; 
+	-moz-animation:    for_ani 0.8s linear forwards; 
+	-o-animation:      for_ani 0.8s linear forwards;
+	animation: for_ani 0.8s linear forwards;
 }
 
 .back_ani {
-	-webkit-animation: back_ani 0.5s linear forwards; 
-	-moz-animation:    back_ani 0.5s linear forwards; 
-	-o-animation:      back_ani 0.5s linear forwards;
-	animation: back_ani 0.5s linear forwards;
+	-webkit-animation: back_ani 0.8s linear forwards; 
+	-moz-animation:    back_ani 0.8s linear forwards; 
+	-o-animation:      back_ani 0.8s linear forwards;
+	animation: back_ani 0.8s linear forwards;
 }
 
 @keyframes home_ani {
@@ -887,7 +891,6 @@ td:first-child {
 		transform: translate(var(--lr_home), var(--tb_home) );
 		width: var(--navsz);
 		height: var(--navsz);
-		visibility: hidden;
 	}
 	100% {
 		transform: translate(var(--lr_home), var(--tb_home) );
@@ -905,7 +908,6 @@ td:first-child {
 		transform: translate(var(--lr_cmore), var(--tb_cmore) );
 		width: var(--navsz);
 		height: var(--navsz);
-		visibility: hidden;
 	}
 	100% {
 		transform: translate(var(--lr_cmore), var(--tb_cmore) );
@@ -923,7 +925,6 @@ td:first-child {
 		transform: translate(var(--lr_for), var(--tb_for) );
 		width: var(--navsz);
 		height: var(--navsz);
-		visibility: hidden;
 	}
 	100% {
 		transform: translate(var(--lr_for), var(--tb_for) );
@@ -941,7 +942,6 @@ td:first-child {
 		transform: translate(var(--lr_back), var(--tb_back) );
 		width: var(--navsz);
 		height: var(--navsz);
-		visibility: hidden;
 	}
 	100% {
 		transform: translate(var(--lr_back), var(--tb_back) );

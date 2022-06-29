@@ -68,17 +68,17 @@ function navli_html_generation(data) {
 
         // div text
         let divtxt = {
-            elem : document.createElement('div'),
+            elem : $create('div'),
             chld : [
                 { 
-                    elem : document.createElement('h2'),
+                    elem : $create('h2'),
                     chld : [
-                        document.createElement('span'),
-                        document.createElement('span')
+                        $create('span'),
+                        $create('span')
                     ],
                 },
-                document.createElement('p'),
-                document.createElement('p'),
+                $create('p'),
+                $create('p'),
             ]
         };
                                 // div text h2
@@ -91,7 +91,7 @@ function navli_html_generation(data) {
                                 // div text p date
                                 divtxt.chld[1].classList.add('date');
                                 for (let index in item.field) {
-                                    let span = document.createElement('span');
+                                    let span = $create('span');
                                     span.className = `field ${item.field[index].class}`;//-- json props
                                     
                                     fieldcheck(item.field[index].class, navitemobj[key]);
@@ -109,10 +109,10 @@ function navli_html_generation(data) {
                                 );
 
         // div hovercontent
-        let divhover = document.createElement('div');
+        let divhover = $create('div');
         divhover.classList.add('hovercontent');
                                 if (!item.soon) {//-- json props
-                                    let divhoverimg = document.createElement('img');
+                                    let divhoverimg = $create('img');
                                     divhoverimg.classList.add('thumb');
                                     divhoverimg.dataset.src = `thumbnail/${+key + 1}.jpg`;
                                     divhoverimg.alt = item.description;
@@ -122,7 +122,7 @@ function navli_html_generation(data) {
                                 }
 
         //li
-        let li = document.createElement('li');
+        let li = $create('li');
         if (item.soon) {li.classList.add('soon');}
         li.setAttribute('onclick', 'nav_navigate(this)');
         li.id = `_${+key + 1}`;
@@ -135,7 +135,6 @@ function navli_html_generation(data) {
         navitem[Math.floor(key/soitemperscreen)].push(li);
         if (!touchable) {
             li.addEventListener("mouseleave", hover_out);
-            li.addEventListener("mouseenter", lazyload);
             if (item.soon) {availit_num--};
         }
     }
@@ -166,7 +165,7 @@ window.onresize = _.debounce(function() {
     navsz = +getprop('--navsz_sampl').slice(0, -2);
     // scrollbar width
     scrlbrwd = getScrollbarWidth();
-    rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
+    setprop('--scrlbrwd', `${scrlbrwd}px`);
     // offsetiframe width
     offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
     ifr_widthfit(projfr.querySelector('iframe'));
@@ -178,14 +177,3 @@ window.onresize = _.debounce(function() {
     viewportheight();
     nav_construct(crrntnavlist);
 }, 1000);
-
-function lazyload(e) {
-    let li = e.target;
-    let img = li.querySelector('img');
-
-    if (!img) {return;}
-
-    img.src = img.dataset.src;
-
-    li.removeEventListener("mouseenter", lazyload);
-}

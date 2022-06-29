@@ -25,7 +25,9 @@
 body {
 	width: 100%;
 	padding-top: calc(var(--gapsz) / 3);
+	padding-bottom: var(--gapsz);
 	text-align: center;
+	background-color: yellow;
 }
 
 .wrapper {
@@ -47,10 +49,15 @@ p {
 	margin-bottom: -1em;
 } 
 
-p::after{
+p::after {
 	content: "";
 	display: inline-block;
 	width: 100%;
+}
+
+p.credit, p.credit * {
+	text-align: center;
+	word-spacing: 0.3em;
 }
 
 h1 {
@@ -123,6 +130,7 @@ h1 {
 
 	body {
 		padding-top: calc(var(--gapsz) * 2);
+		padding-bottom: calc(var(--gapsz) * 3);
 	}
 }
 
