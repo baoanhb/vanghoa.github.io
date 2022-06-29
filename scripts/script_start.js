@@ -29,6 +29,7 @@ const rowmax = +getprop('--rowmax') + 2;
 const hbhmin = getprop('--hbhwidth_min');
 let hbhmax = getprop('--hbhwidth_max');
 const hbhave = getprop('--hbhwidth_ave');
+let seemoresz = +getprop('--seemoresz').slice(0, -2);
 //
 const soitem = new Array(4);
 const ofstscrlrow = (navszhover - paddingli * 2 - offsetborderstyle * 2) / 2;
@@ -295,12 +296,13 @@ function togglenav(ckbx) {
     }
 }
 //
-function btn_ani(that, class_ani, horcheck, vercheck) {
+function btn_ani(that, class_ani, horcheck, vercheck, t_, r_) {
     wlcmscr.style.overflow = 'visible';
+    let showcheck = ulnav.classList.contains('show');
     let rec = that.getBoundingClientRect();
 
-    setprop(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (horcheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
-    setprop(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top - (vercheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (r_ && showcheck ? seemoresz : 0) - (horcheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top + (t_ && showcheck ? seemoresz : 0) - (vercheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
     setprop(`--h_${class_ani}`,`${rec.height}px`);
     that.style.minHeight = '0';
     that.style.zIndex = '2';
@@ -312,7 +314,7 @@ function btn_ani(that, class_ani, horcheck, vercheck) {
         let par = item.parentElement;
         item.removeEventListener("animationend", btn_ani_end);
         if (par.children.length < 2) {
-            par.previousElementSibling.textContent = 'You are set!';
+            par.previousElementSibling.textContent = 'ok! welcom to site';
             par.remove();
         }
         item.remove();

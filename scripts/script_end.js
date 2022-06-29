@@ -161,6 +161,7 @@ function fieldcheck(class_, item) {
 
 // on resize //
 window.onresize = _.debounce(function() {
+    seemoresz = +getprop('--seemoresz').slice(0, -2);
     // media change => get navbar
     navsz = +getprop('--navsz_sampl').slice(0, -2);
     // scrollbar width
