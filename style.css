@@ -885,16 +885,16 @@ a {
 
 @keyframes home_ani {
 	0% {
+		transform: translate(0,0);
 		height: var(--h_home);
 	}
 	80% {
-		transform: translate(var(--lr_home), var(--tb_home) );
+		transform: translate(var(--lr_home), var(--tb_home));
 		width: var(--navsz);
 		height: var(--navsz);
 	}
 	100% {
-		transform: translate(var(--lr_home), var(--tb_home) );
-		visibility: hidden;
+		transform: translate(var(--lr_home), var(--tb_home));
 		width: 0;
 		height: 0;
 	}
@@ -902,16 +902,16 @@ a {
 
 @keyframes cmore_ani {
 	0% {
+		transform: translate(0,0);
 		height: var(--h_cmore);
 	}
 	80% {
-		transform: translate(var(--lr_cmore), var(--tb_cmore) );
+		transform: translate(var(--lr_cmore), var(--tb_cmore));
 		width: var(--navsz);
 		height: var(--navsz);
 	}
 	100% {
-		transform: translate(var(--lr_cmore), var(--tb_cmore) );
-		visibility: hidden;
+		transform: translate(var(--lr_cmore), var(--tb_cmore));
 		width: 0;
 		height: 0;
 	}
@@ -919,16 +919,16 @@ a {
 
 @keyframes for_ani {
 	0% {
+		transform: translate(0,0);
 		height: var(--h_for);
 	}
 	80% {
-		transform: translate(var(--lr_for), var(--tb_for) );
+		transform: translate(var(--lr_for), var(--tb_for));
 		width: var(--navsz);
 		height: var(--navsz);
 	}
 	100% {
-		transform: translate(var(--lr_for), var(--tb_for) );
-		visibility: hidden;
+		transform: translate(var(--lr_for), var(--tb_for));
 		width: 0;
 		height: 0;
 	}
@@ -936,16 +936,16 @@ a {
 
 @keyframes back_ani {
 	0% {
+		transform: translate(0,0);
 		height: var(--h_back);
 	}
 	80% {
-		transform: translate(var(--lr_back), var(--tb_back) );
+		transform: translate(var(--lr_back), var(--tb_back));
 		width: var(--navsz);
 		height: var(--navsz);
 	}
 	100% {
-		transform: translate(var(--lr_back), var(--tb_back) );
-		visibility: hidden;
+		transform: translate(var(--lr_back), var(--tb_back));
 		width: 0;
 		height: 0;
 	}
