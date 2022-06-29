@@ -168,7 +168,7 @@ window.onresize = _.debounce(function() {
     scrlbrwd = getScrollbarWidth();
     setprop('--scrlbrwd', `${scrlbrwd}px`);
     // offsetiframe width
-    offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
+    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
     ifr_widthfit(projfr.querySelector('iframe'));
     // stroke3d width
     hbhmax = getprop('--hbhwidth_max');
