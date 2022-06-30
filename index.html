@@ -26,13 +26,16 @@
 
 <body>
   <script>
+    "use strict"
+
     const touchable = hasTouch();
     hoveractivate();
     viewportheight();
-    let scrlbrwd = getScrollbarWidth();
-    rootstyle.setProperty('--scrlbrwd', `${scrlbrwd}px`);
 
-    let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
+    let scrlbrwd = getScrollbarWidth();
+    setprop('--scrlbrwd', `${scrlbrwd}px`);
+
+    let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
   </script>
 
   <nav>
@@ -64,7 +67,7 @@
               </p>
             </div>
             <!-- -->
-            <div class="btn vertical" onclick="btn_ani(this, 'cmore', false, true, true, true)" style="background-color: var(--highlightcolor);">
+            <div class="btn vertical seemore_func" onclick="btn_ani(this, 'cmore', false, true, true, true)" style="background-color: var(--highlightcolor);">
               <img src="icon/icon (1).jpg" alt="sorting button">
               <p style="color: white;">
                 top right button to sort & filter my projects.
@@ -161,7 +164,7 @@
           </table>
           <!-- -->
           <br><h2>Skills↓</h2>
-          <table>
+          <table class="skills">
             <tbody>
               <tr>
                 <td>
@@ -188,20 +191,21 @@
           <table>
             <tbody>
               <tr>
+                <td>09/2021 <br> 
+                  →04/2022
+                </td>
+                <td>
+                  <h3>Google Developer Student Club - UIT</h3>
+                  – Development team.
+                </td>
+              </tr>
+              <tr>
                 <td>05/2021 <br> 
-                  →08/2021
+                  →10/2021
                 </td>
                 <td>
                   <h3>Project Vietnamme—a non-profit organisation dedicated to the relationship of young Vietnamese and the Arts.</h3>
                   – Graphic Design Consultation.
-                </td>
-              </tr>
-              <tr>
-                <td>04/2021
-                </td>
-                <td>
-                  <h3>‘Socks’ Zine by Joanne Pang for Singapore Art Book Fair</h3>
-                  – Illustration Contributing.
                 </td>
               </tr>
               <tr>
@@ -299,7 +303,7 @@
         <img src="icon/icon (2).jpg" alt="home button">
       </li>
       <!-- -->
-      <li class="btn vertical" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
+      <li class="btn vertical seemore_func" onclick="seemore()" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
         <img src="icon/icon (1).jpg" alt="sorting button">
       </li>
       <!-- -->

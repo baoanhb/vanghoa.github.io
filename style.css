@@ -7,14 +7,14 @@
 	--navsz: var(--navsz_sampl);
 	--navsz_sampl: 50px;
 	--navszhover: 200px;
-	--paddingli: 8px;
-	--seemoresz: 50px;
-	--hbhwidth_top: 30px;
-	--hbhwidth_left: 30px;
-	--hbhwidth_right: 30px;
-	--hbhwidth_bot: 30px;
 	--hbhwidth_ave: 30px;
-	--hbhwidth_min: 10px;
+	--paddingli: 8px;
+	--seemoresz: var(--navsz_sampl);
+	--hbhwidth_top: var(--hbhwidth_ave);
+	--hbhwidth_left: var(--hbhwidth_ave);
+	--hbhwidth_right: var(--hbhwidth_ave);
+	--hbhwidth_bot: var(--hbhwidth_ave);
+	--hbhwidth_min: calc(var(--hbhwidth_ave) / 3);
 	--hbhwidth_max: calc(var(--hbhwidth_ave) * 5);
 	--highlightcolor: rgb(var(--time));
 	--vh: 1vh;
@@ -106,7 +106,7 @@ nav {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: calc(var(--vh) * 100);
+	height: var(--vh100);
 	overflow: hidden;
 }
 
@@ -119,7 +119,7 @@ nav ul#nav {
 	grid-column: 1;
 	grid-row: 2;
 	width: 100vw;
-	height: calc(var(--vh) * 100); 
+	height: var(--vh100); 
 	transition: width 0.5s, height 0.5s;
 	overflow: hidden;
 	-webkit-box-shadow: var(--boxsdstyle_inset);
@@ -129,7 +129,7 @@ nav ul#nav {
 
 nav ul#nav.show {
 	width: calc(100vw - var(--seemoresz));
-	height: calc(calc(var(--vh) * 100) - var(--seemoresz));
+	height: calc(var(--vh100) - var(--seemoresz));
 }
 /* nav item seemore */
 .seemore {
@@ -359,8 +359,10 @@ li > div.hovercontent {
 	width: calc(100% - 10px);
 	height: 100%;
 	display: none;
-	background-color: white;
 	border-radius: 5px;
+	background-repeat: repeat;
+	background-color: white;
+	background-attachment: fixed;
 	-webkit-box-shadow: var(--boxsdstyle);
 	box-shadow: var(--boxsdstyle);
 	margin: 0 var(--offsetborderstyle) var(--offsetborderstyle) var(--offsetborderstyle);
@@ -370,26 +372,12 @@ body.hasHover li:hover > div.hovercontent {
 	display: block;
 }
 
-li.left > div.hovercontent {
-    direction: rtl;
-}
-
 li.col > div.hovercontent {
-	overflow-y: auto;
-	overflow-x: hidden;
+	background-size: auto calc(var(--navszhover) / 2.5);
 }
 
 li.row > div.hovercontent {
-	overflow-x: auto;
-	overflow-y: hidden;
-}
-
-li.col > div.hovercontent > img {
-	width: 100%;
-}
-
-li.row > div.hovercontent > img {
-	height: 100%;
+	background-size: calc(var(--navszhover) / 2.5) auto;
 }
 
 /* li current and soon */
@@ -427,7 +415,7 @@ div.btn {
 	cursor: pointer;
 	width: 50%;
 	overflow: hidden;
-	min-height: calc(30 * var(--vh));
+	min-height: calc(calc(var(--vh100) - calc(var(--navsz_sampl) * 2) - calc(var(--hbhwidth_ave) * 2)) * 0.4);
 }
 
 div.btn img {
@@ -832,8 +820,10 @@ tr:last-child > td {
 	padding-bottom: 0;
 }
 
-td:first-child {
+table:not(.skills) td:first-child {
 	word-break: keep-all;
+	text-align: right;
+	width: 80px;
 }
 
 a {
@@ -843,9 +833,10 @@ a {
 @media screen and (max-width: 500px), (max-height: 500px) {
 	:root {
 		--hbhwidth_max: calc(var(--hbhwidth_ave) * 2);
-		--navsz_sampl: 35px;
+		--navsz_sampl: 40px;
+		--navszhover: 100px;
+		--hbhwidth_ave: 20px;
 		--lifontsz: 12px;
-		--seemoresz: 40px;
 	}
 	
 	h1 {
@@ -854,6 +845,14 @@ a {
 
 	li > div.text > h2 > span:nth-child(1) {
 		font-size: 1em;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	:root {
+		--navsz_sampl: 60px;
+		--navszhover: 300px;
+		--hbhwidth_ave: 40px;
 	}
 }
 
@@ -968,7 +967,7 @@ div.vimeo {
 @media screen and (orientation:portrait) {
 	div.vimeo {
 		width: 100%;
-		height: calc(var(--vh) * 30);
+		height: calc(var(--vh) * 50);
 	}
 }
 

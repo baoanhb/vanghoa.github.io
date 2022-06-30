@@ -1,46 +1,43 @@
 "use strict";
-// constant //
-let count = 0;
+// custom settings //
 const minsz = 9;
 const time_interval = 250;
 const soitemperscreen = 6;
 
-// binding
+// binding method
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const $create = document.createElement.bind(document);
 
-// binding
+// binding method
 const root = document.querySelector(':root');
 const proproot = getComputedStyle(root);
 const getprop = proproot.getPropertyValue.bind(proproot);
 
-// binding
+// binding method
 const rootstyle = root.style;
 const setprop = rootstyle.setProperty.bind(rootstyle);
 
-let navsz = +getprop('--navsz_sampl').slice(0, -2);
-const navszhover = +getprop('--navszhover').slice(0, -2);
-const paddingli = +getprop('--paddingli').slice(0, -2);
-const offsetborderstyle = +getprop('--offsetborderstyle').slice(0, -2);
-const colmax = +getprop('--colmax') + 2;
-const rowmax = +getprop('--rowmax') + 2;
-//
-const hbhmin = getprop('--hbhwidth_min');
-let hbhmax = getprop('--hbhwidth_max');
-const hbhave = getprop('--hbhwidth_ave');
-let seemoresz = +getprop('--seemoresz').slice(0, -2);
-//
-const soitem = new Array(4);
-const ofstscrlrow = (navszhover - paddingli * 2 - offsetborderstyle * 2) / 2;
-//
+// closure function
 const r_mouseenter = rmvE_('mouseenter');
 const r_transitionend = rmvE_('transitionend');
 
-// variable //
+// css getprop
+let navsz = +getprop('--navsz_sampl').slice(0, -2);
+const colmax = +getprop('--colmax') + 2;
+
+// locked settings //
+const soitem = new Array(4);
 let delaypromise = Promise.resolve();
 let crrntnavlist = 0;
+let count = 0;
 let crrntitemid = '1';
+let navitemobj = [];
+let navitem = [[], [], []];
+let hovercheck = [true, true, true];
+let availit_num;
+let smallersd;
+let smallersd_min;
 
 // local function //
 function nav_construct(id) {
@@ -94,16 +91,14 @@ function nav_construct(id) {
                                 `${sidecheck}`
                             );
             if (!touchable) {
-                let img = item.querySelector('img');
+                let divhover = item.querySelector('div.hovercontent');
                 let class_ = item.className;
                 ////////
                 if (hovercheck[id]) {
                     if (colcheck) {
                         item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
-                        if (img) {item.addEventListener('transitionend', colscroll);}
                     } else {
                         item.addEventListener("mouseenter", initcheck ? hoverleft_in : hoverright_in);
-                        if (img) {item.addEventListener("transitionend", initcheck ? rowscrollleft : rowscrollright);}
                     }
                 }
                 ////////
@@ -116,8 +111,9 @@ function nav_construct(id) {
                 soon_border('right', 'row', 'Right', 'lr');
                 soon_border('bot', 'col', 'Bottom', 'bot');
                 ////////
-                if (img && !img.src) {
-                    img.src = img.dataset.src;
+                if (divhover.dataset.src) {
+                    divhover.style.backgroundImage = `url('thumbnail/${divhover.dataset.src}.jpg')`;
+                    divhover.removeAttribute("data-src");
                 }
                 ////////
                 function soon_border(check, check_, bor_name, alpha_name) {
@@ -165,19 +161,18 @@ function pos_generate(soitemmoicanh, colcheck, initcheck) {
 
     let newarr = [2];
     let numbefore = 2 + minsz;
-    const max = colcheck ? colmax : rowmax;
     for (let i = 2; i <= soitemmoicanh; i++) {
-        numbefore = rnd_int(numbefore, max - (soitemmoicanh - (i-1))*minsz);
+        numbefore = rnd_int(numbefore, colmax - (soitemmoicanh - (i-1))*minsz);
         newarr.push(numbefore);
         numbefore+=minsz;
     }
-    newarr.push(max);
+    newarr.push(colmax);
     
     let rtarr = [];
     newarr.forEach(pos => {
         rtarr.push({
             col : colcheck ? pos : (initcheck ? 1 : colmax),
-            row : colcheck ? (initcheck ? 1 : rowmax) : pos,
+            row : colcheck ? (initcheck ? 1 : colmax) : pos,
             colcheck : colcheck ? true : false,
             initcheck : initcheck ? true : false,
         });
@@ -301,8 +296,8 @@ function btn_ani(that, class_ani, horcheck, vercheck, t_, r_) {
     let showcheck = ulnav.classList.contains('show');
     let rec = that.getBoundingClientRect();
 
-    setprop(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (r_ && showcheck ? seemoresz : 0) - (horcheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
-    setprop(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top + (t_ && showcheck ? seemoresz : 0) - (vercheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--lr_${class_ani}`,`${(horcheck ? 0 : innerWidth) - rec.left - (r_ && showcheck ? navsz : 0) - (horcheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
+    setprop(`--tb_${class_ani}`,`${(vercheck ? 0 : innerHeight) - rec.top + (t_ && showcheck ? navsz : 0) - (vercheck ? 0 : +getprop('--navsz').slice(0, -2))}px`);
     setprop(`--h_${class_ani}`,`${rec.height}px`);
     that.style.minHeight = '0';
     that.style.zIndex = '2';
@@ -324,48 +319,30 @@ function btn_ani(that, class_ani, horcheck, vercheck, t_, r_) {
 
 // hover border 3D event function //
 function hovertop_in() {
-    setprop('--hbhwidth_bot',hbhmin);
-    setprop('--hbhwidth_top',hbhmax);
+    setprop('--hbhwidth_bot','var(--hbhwidth_min)');
+    setprop('--hbhwidth_top','var(--hbhwidth_max)');
 }
 
 function hoverleft_in() {
-    setprop('--hbhwidth_right',hbhmin);
-    setprop('--hbhwidth_left',hbhmax);
+    setprop('--hbhwidth_right','var(--hbhwidth_min)');
+    setprop('--hbhwidth_left','var(--hbhwidth_max)');
 }
 
 function hoverright_in() {
-    setprop('--hbhwidth_left',hbhmin);
-    setprop('--hbhwidth_right',hbhmax);
+    setprop('--hbhwidth_left','var(--hbhwidth_min)');
+    setprop('--hbhwidth_right','var(--hbhwidth_max)');
 }
 
 function hoverbot_in() {
-    setprop('--hbhwidth_top',hbhmin);
-    setprop('--hbhwidth_bot',hbhmax);
+    setprop('--hbhwidth_top','var(--hbhwidth_min)');
+    setprop('--hbhwidth_bot','var(--hbhwidth_max)');
 }
 
 function hover_out() {
-    setprop('--hbhwidth_top',hbhave);
-    setprop('--hbhwidth_bot',hbhave);
-    setprop('--hbhwidth_left',hbhave);
-    setprop('--hbhwidth_right',hbhave);
-}
-
-// scroll mid img //
-function colscroll(e) {
-    let li = e.target;
-    let div = li.querySelector('div.hovercontent');
-    let img = li.querySelector('img');
-    div.scrollTo(0, csscomputed_prop(img, 'height') / 2 - (navszhover - 3*paddingli - csscomputed_prop(div.previousElementSibling, 'height')) / 2);
-}
-
-function rowscrollright(e) {
-    let li = e.target;
-    li.querySelector('div.hovercontent').scrollTo(csscomputed_prop(li.querySelector('img'), 'width') / 2 - ofstscrlrow, 0);
-}
-
-function rowscrollleft(e) {
-    let li = e.target;
-    li.querySelector('div.hovercontent').scrollTo(0 - (csscomputed_prop(li.querySelector('img'), 'width') / 2 - ofstscrlrow), 0);
+    setprop('--hbhwidth_top','var(--hbhwidth_ave)');
+    setprop('--hbhwidth_bot','var(--hbhwidth_ave)');
+    setprop('--hbhwidth_left','var(--hbhwidth_ave)');
+    setprop('--hbhwidth_right','var(--hbhwidth_ave)');
 }
 
 // sorting button toggle //
@@ -391,7 +368,6 @@ function Sortingfunc(axis) {
         elem.classList.remove('highlightsort');
         if (!touchable) {
             r_mouseenter([hovertop_in, hoverbot_in, hoverleft_in, hoverright_in], elem);
-            r_transitionend([colscroll, rowscrollright, rowscrollleft], elem);
         }
     }
 
@@ -524,6 +500,8 @@ function csscomputed_prop(itm, prop) {
 function hoveractivate() {
       if (!touchable) { 
         document.body.classList.add('hasHover');
+      } else {
+        setprop('--hbhwidth_ave','0px');
       }
 }
 

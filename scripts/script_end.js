@@ -1,21 +1,19 @@
 "use strict";
-// binding
+// binding method
 const ulnav = $('ul#nav');
 const $ulnav = ulnav.querySelector.bind(ulnav);
 
+// query elements
 const projfr = $ulnav('section#iframe');
 const wlcmscr = $ulnav('section#welcome');
 const homebtn = $ulnav('.btn[onclick="homescreen()"]');
-const seemorebtn = ulnav.querySelectorAll('.btn[onclick="seemore()"]');
+const seemorebtn = ulnav.querySelectorAll('.seemore_func');
 const seemorenav = $$('.seemore');
 const sortbtn = $$('.seemore button');
 const ckbx = $ulnav('label#tglnav input');
 const main = $ulnav('#main');
-let navitemobj = [];
-let navitem = [[], [], []];
-let hovercheck = [true, true, true];
-let availit_num;
 
+//border 3d object
 const border_3d = {
     top : $ulnav('#top_border'),
     bot : $ulnav('#bot_border'),
@@ -34,9 +32,6 @@ const border_3d = {
         color_border('right', e.target, false, 'N/A');
     },
 }
-
-let smallersd;
-let smallersd_min;
 
 projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_event);
 
@@ -112,11 +107,7 @@ function navli_html_generation(data) {
         let divhover = $create('div');
         divhover.classList.add('hovercontent');
                                 if (!item.soon) {//-- json props
-                                    let divhoverimg = $create('img');
-                                    divhoverimg.classList.add('thumb');
-                                    divhoverimg.dataset.src = `thumbnail/${+key + 1}.jpg`;
-                                    divhoverimg.alt = item.description;
-                                    divhover.append(divhoverimg);
+                                    divhover.dataset.src = `${+key + 1}`;
                                 } else {
                                     navitemobj[key].soon = true;
                                 }
@@ -161,17 +152,14 @@ function fieldcheck(class_, item) {
 
 // on resize //
 window.onresize = _.debounce(function() {
-    seemoresz = +getprop('--seemoresz').slice(0, -2);
     // media change => get navbar
     navsz = +getprop('--navsz_sampl').slice(0, -2);
     // scrollbar width
     scrlbrwd = getScrollbarWidth();
     setprop('--scrlbrwd', `${scrlbrwd}px`);
-    // offsetiframe width
-    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + (!touchable ? +hbhave.slice(0,-2) : 0) * 2;
+    // offsetiframe width - change hbhwidth_ave on media css change
+    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
     ifr_widthfit(projfr.querySelector('iframe'));
-    // stroke3d width
-    hbhmax = getprop('--hbhwidth_max');
     // sort button reorganise
     onresizesortbtn();
     // ios vh fix
