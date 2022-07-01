@@ -92,7 +92,7 @@ function navli_html_generation(data) {
                                     fieldcheck(item.field[index].class, navitemobj[key]);
 
                                     span.textContent = item.field[index].name;//-- json props
-                                    divtxt.chld[1].appendChild(span);
+                                    divtxt.chld[1].append(span,' ');
                                 }
                                 // div text p description
                                 divtxt.chld[2].textContent = item.description;//-- json props
@@ -108,6 +108,7 @@ function navli_html_generation(data) {
         divhover.classList.add('hovercontent');
                                 if (!item.soon) {//-- json props
                                     divhover.dataset.src = `${+key + 1}`;
+                                    divhover.style.backgroundImage = `url('thumbnail/${+key + 1}.jpg')`;
                                 } else {
                                     navitemobj[key].soon = true;
                                 }

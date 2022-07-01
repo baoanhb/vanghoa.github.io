@@ -112,7 +112,7 @@ function nav_construct(id) {
                 soon_border('bot', 'col', 'Bottom', 'bot');
                 ////////
                 if (divhover.dataset.src) {
-                    divhover.style.backgroundImage = `url('thumbnail/${divhover.dataset.src}.jpg')`;
+                    setprop('--preloadcss',`${getprop('--preloadcss')} url('thumbnail/${divhover.dataset.src}.jpg')`)
                     divhover.removeAttribute("data-src");
                 }
                 ////////

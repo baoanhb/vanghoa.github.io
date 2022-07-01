@@ -228,7 +228,15 @@
         "date" : "soon",
         "field" : [
             {
-                "name" : "Soon",
+                "name" : "Intentionally",
+                "class" : ""
+            },
+            {
+                "name" : "left",
+                "class" : ""
+            },
+            {
+                "name" : "blank",
                 "class" : ""
             }
         ],
@@ -240,7 +248,15 @@
         "date" : "soon",
         "field" : [
             {
-                "name" : "Soon",
+                "name" : "Intentionally",
+                "class" : ""
+            },
+            {
+                "name" : "left",
+                "class" : ""
+            },
+            {
+                "name" : "blank",
                 "class" : ""
             }
         ],
@@ -252,7 +268,15 @@
         "date" : "soon",
         "field" : [
             {
-                "name" : "Soon",
+                "name" : "Intentionally",
+                "class" : ""
+            },
+            {
+                "name" : "left",
+                "class" : ""
+            },
+            {
+                "name" : "blank",
                 "class" : ""
             }
         ],
@@ -264,7 +288,15 @@
         "date" : "soon",
         "field" : [
             {
-                "name" : "Soon",
+                "name" : "Intentionally",
+                "class" : ""
+            },
+            {
+                "name" : "left",
+                "class" : ""
+            },
+            {
+                "name" : "blank",
                 "class" : ""
             }
         ],
@@ -276,7 +308,15 @@
         "date" : "soon",
         "field" : [
             {
-                "name" : "Soon",
+                "name" : "Intentionally",
+                "class" : ""
+            },
+            {
+                "name" : "left",
+                "class" : ""
+            },
+            {
+                "name" : "blank",
                 "class" : ""
             }
         ],

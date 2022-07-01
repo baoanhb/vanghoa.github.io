@@ -69,6 +69,8 @@
 	--lr_back: 0px;
 	--tb_back: 0px;
 	--h_back: 0px;
+	/* preload css */
+	--preloadcss: ;
 }
 
 * {
@@ -1075,3 +1077,10 @@ div.vimeo {
 	-o-animation:      vertical_ani 0.2s reverse;
 	animation: vertical_ani 0.2s reverse;
 }
+
+/* preload css background */
+
+body::after{
+	position:absolute; width:0; height:0; overflow:hidden; z-index:-1; 
+	content: var(--preloadcss);   
+ }
