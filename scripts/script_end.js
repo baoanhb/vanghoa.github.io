@@ -135,6 +135,14 @@ function navli_html_generation(data) {
     // navbar construction // 
     onresizesortbtn();
     nav_construct(0);
+
+    delaypromise = delaypromise.then(function() { 
+        viewportheight();
+        alert(`ready height: ${screen.height} + ${innerHeight}`);
+        return new Promise(function (resolve) {
+            resolve();
+        });
+    })
 }
 
 function fieldcheck(class_, item) {
