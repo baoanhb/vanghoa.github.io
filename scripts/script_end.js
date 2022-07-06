@@ -1,7 +1,47 @@
 "use strict";
+// custom settings //
+const minsz = 9;
+const time_interval = 250;
+const soitemperscreen = 6;
+
+// binding method
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+const $create = document.createElement.bind(document);
+
 // binding method
 const ulnav = $('ul#nav');
 const $ulnav = ulnav.querySelector.bind(ulnav);
+
+// binding method
+const root = document.querySelector(':root');
+const proproot = getComputedStyle(root);
+const getprop = proproot.getPropertyValue.bind(proproot);
+
+// binding method
+const rootstyle = root.style;
+const setprop = rootstyle.setProperty.bind(rootstyle);
+
+// closure function
+const r_mouseenter = rmvE_('mouseenter');
+const r_transitionend = rmvE_('transitionend');
+
+// css getprop
+let navsz = +getprop('--navsz_sampl').slice(0, -2);
+const colmax = +getprop('--colmax') + 2;
+
+// locked settings //
+const soitem = new Array(4);
+let delaypromise = Promise.resolve();
+let crrntnavlist = 0;
+let count = 0;
+let crrntitemid = '1';
+let navitemobj = [];
+let navitem = [[], [], []];
+let hovercheck = [true, true, true];
+let availit_num;
+let smallersd;
+let smallersd_min;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -33,9 +73,15 @@ const border_3d = {
     },
 }
 
+// initialise //
+viewportheight();
+const touchable = hasTouch(); hoveractivate();
+let scrlbrwd = getScrollbarWidth(); setprop('--scrlbrwd', `${scrlbrwd}px`);
+let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
+
 projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_event);
 
-// main script //
+// nav fetch //
 fetch('item.json')
                 .then(res => res.json())
                 .then(data => {

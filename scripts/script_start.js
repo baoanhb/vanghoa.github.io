@@ -1,43 +1,4 @@
 "use strict";
-// custom settings //
-const minsz = 9;
-const time_interval = 250;
-const soitemperscreen = 6;
-
-// binding method
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-const $create = document.createElement.bind(document);
-
-// binding method
-const root = document.querySelector(':root');
-const proproot = getComputedStyle(root);
-const getprop = proproot.getPropertyValue.bind(proproot);
-
-// binding method
-const rootstyle = root.style;
-const setprop = rootstyle.setProperty.bind(rootstyle);
-
-// closure function
-const r_mouseenter = rmvE_('mouseenter');
-const r_transitionend = rmvE_('transitionend');
-
-// css getprop
-let navsz = +getprop('--navsz_sampl').slice(0, -2);
-const colmax = +getprop('--colmax') + 2;
-
-// locked settings //
-const soitem = new Array(4);
-let delaypromise = Promise.resolve();
-let crrntnavlist = 0;
-let count = 0;
-let crrntitemid = '1';
-let navitemobj = [];
-let navitem = [[], [], []];
-let hovercheck = [true, true, true];
-let availit_num;
-let smallersd;
-let smallersd_min;
 
 // local function //
 function nav_construct(id) {
@@ -512,8 +473,7 @@ function hasTouch() {
 }
 
 function viewportheight() {
-    let vh = innerHeight * 0.01;
-    setprop('--vh', `${vh}px`);
+    setprop('--vh', `${innerHeight * 0.01}px`);
 }
 
 function rmvE_(event) {
