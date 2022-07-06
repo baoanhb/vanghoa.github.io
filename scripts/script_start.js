@@ -457,7 +457,7 @@ function onresizesortbtn() {
 }
 
 // global/reused function //
-function cl(x){
+function cl(...x){
     console.log(x);
 }
 
@@ -512,7 +512,7 @@ function hasTouch() {
 }
 
 function viewportheight() {
-    let vh = window.innerHeight * 0.01;
+    let vh = ((screen.height > innerHeight) ? innerHeight : screen.height) * 0.01;
     setprop('--vh', `${vh}px`);
 }
 
