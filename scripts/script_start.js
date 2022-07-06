@@ -512,7 +512,7 @@ function hasTouch() {
 }
 
 function viewportheight() {
-    let vh = ((screen.height > innerHeight) ? innerHeight : screen.height) * 0.01;
+    let vh = innerHeight * 0.01;
     setprop('--vh', `${vh}px`);
 }
 

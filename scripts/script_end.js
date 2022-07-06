@@ -138,7 +138,7 @@ function navli_html_generation(data) {
 
     delaypromise = delaypromise.then(function() { 
         viewportheight();
-        alert(`ready height: ${screen.height} + ${innerHeight}`);
+        //alert(`ready height: ${screen.height} + ${innerHeight}`);
         return new Promise(function (resolve) {
             resolve();
         });
