@@ -21,6 +21,7 @@
 	--minsz169: calc(100vw - calc(var(--gapsz) * 2));
 	--gapsz: 150px;
 	--margin: calc(var(--gapsz) / 3) auto;
+	--margin_top: calc(var(--gapsz) / 10);
 	/* field color */
 	--mo_gra: 255, 0, 255;
 	--illus: 0, 204, 102;
@@ -56,6 +57,7 @@ img, .item, .column, p, h1 {
 
 .field_p {
 	text-align: center;
+	margin-top: var(--margin_top)
 }
 
 .field_p span {
@@ -181,15 +183,16 @@ h1 {
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 430px) {
 	:root {
 		--gapsz: 18px;
 	}
 }
 
-@media screen and (max-width: 500px) and (orientation:portrait) {
+@media screen and (max-width: 430px) and (orientation:portrait) {
 	:root {
 		--margin: calc(var(--gapsz) * 2) auto;
+		--margin_top: calc(var(--gapsz) / 3);
 	}
 
 	p {
@@ -202,7 +205,7 @@ h1 {
 	}
 }
 
-@media screen and (max-width: 500px), (max-height: 500px) {
+@media screen and (max-width: 430px), (max-height: 430px) {
 	* {
 		font-size: 12px;
 	}
