@@ -20,6 +20,7 @@
 	--maxsz: 1600px;
 	--minsz169: calc(100vw - calc(var(--gapsz) * 2));
 	--gapsz: 150px;
+	--margin: calc(var(--gapsz) / 3) auto;
 }
 
 body {
@@ -34,8 +35,8 @@ body {
 	width: 100vw;
 }
 
-img, .item, .column, p {
-	margin: calc(var(--gapsz) / 3) auto;
+img, .item, .column, p, h1 {
+	margin: var(--margin);
 	display: block;
 	width: var(--minsz169);
 	max-width: var(--maxsz);
@@ -43,6 +44,22 @@ img, .item, .column, p {
 	object-fit: contain;
 	text-align: justify;
 }
+
+/* figure */
+figure {
+	margin: var(--margin);
+}
+
+figure img {
+	margin: 0 auto;
+}
+
+figcaption {
+	font-style: italic;
+	font-size: 0.8rem;
+	margin-bottom: 2%;
+}
+/**/
 
 p {
 	max-width: 700px;
@@ -65,6 +82,7 @@ h1 {
 	font-family: 'Times New Roman', Times, serif;
 	max-width: 700px;
 	margin: 0 auto;
+	text-align: center;
 }
 
 .sqr {
@@ -120,8 +138,8 @@ h1 {
 }
 
 @media screen and (max-width: 500px) and (orientation:portrait) {
-	img, .item, .column, p {
-		margin: calc(var(--gapsz) * 2) auto;
+	:root {
+		--margin: calc(var(--gapsz) * 2) auto;
 	}
 
 	p {

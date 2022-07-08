@@ -182,7 +182,7 @@ nav ul#nav.show {
 }
 
 /* nav item part */
-li {
+nav > ul > li {
 	list-style-type: none;
 	background-color: var(--colortheme);
 	transition: width 0.5s, height 0.5s;
@@ -420,14 +420,20 @@ div.btn {
 	min-height: calc(calc(var(--vh100) - calc(var(--navsz_sampl) * 2) - calc(var(--hbhwidth_ave) * 2)) * 0.4);
 }
 
+div.btn > * {
+	margin: -8px 10px 10px 10px;
+}
+
+div.btn li {
+	list-style-type: circle;
+	list-style-position: inside;
+}
+
 div.btn img {
 	padding: 10px;
 	width: var(--navsz_sampl);
 	height: var(--navsz_sampl);
-}
-
-div.btn p {
-	margin: -8px 10px 10px 10px;
+	margin: 0;
 }
 
 /* main part */

@@ -218,6 +218,10 @@
             {
                 "name" : "Poster design",
                 "class" : "illus"
+            },
+            {
+                "name" : "NFT design",
+                "class" : "dg_pro"
             }
         ],
         "description" : "Various small-scale projects, personal and full-time works",
