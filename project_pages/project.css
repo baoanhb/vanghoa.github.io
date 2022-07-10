@@ -39,6 +39,11 @@ body {
 	background-color: yellow;
 }
 
+hr {
+	border-width: 0 0 1px 0;
+	border-color: white;
+}
+
 .wrapper {
 	width: 100vw;
 }
@@ -51,6 +56,11 @@ img, .item, .column, p, h1 {
 	height: auto;
 	object-fit: contain;
 	text-align: justify;
+}
+
+img, .item {
+	border: solid 1px white;
+	background-color: black;
 }
 
 /* field div */

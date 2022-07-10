@@ -42,6 +42,7 @@ let hovercheck = [true, true, true];
 let availit_num;
 let smallersd;
 let smallersd_min;
+let fetch_data;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -85,7 +86,7 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 fetch('item.json')
                 .then(res => res.json())
                 .then(data => {
-                  console.log(data);
+                  fetch_data = data;
                   navli_html_generation(data);
                 })
                 .catch(err => console.error(err));
