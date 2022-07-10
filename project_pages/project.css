@@ -102,7 +102,7 @@ figure {
 	margin: var(--margin);
 }
 
-figure img {
+figure img, figure .item, figure .column {
 	margin: 0 auto;
 }
 
