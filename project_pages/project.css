@@ -60,6 +60,9 @@ img, .item, .column, p, h1 {
 
 img, .item {
 	border: solid 1px white;
+}
+
+.item {
 	background-color: black;
 }
 

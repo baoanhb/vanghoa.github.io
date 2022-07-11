@@ -53,6 +53,7 @@ const seemorenav = $$('.seemore');
 const sortbtn = $$('.seemore button');
 const ckbx = $ulnav('label#tglnav input');
 const main = $ulnav('#main');
+const sneak = $ulnav('#sneak_peek');
 
 //border 3d object
 const border_3d = {
@@ -93,6 +94,7 @@ fetch('item.json')
 
 function navli_html_generation(data) {
     const fragment = document.createDocumentFragment();
+    const fragment_sneak = document.createDocumentFragment();
     availit_num = data.length;
 
     for (let key in data) {
@@ -165,6 +167,7 @@ function navli_html_generation(data) {
         if (item.soon) {li.classList.add('soon');}
         li.setAttribute('onclick', 'nav_navigate(this)');
         li.id = `_${+key + 1}`;
+        li.title = `click to see this project: ${item.name}`;
         li.append(divtxt.elem, divhover);
         fragment.appendChild(li);
 
@@ -176,8 +179,25 @@ function navli_html_generation(data) {
             li.addEventListener("mouseleave", hover_out);
             if (item.soon) {availit_num--};
         }
+
+        //sneak
+        if (!item.soon) {
+            let li_ = $create('li');
+                li_.title = li.title;
+            let div = $create('div');
+                div.setAttribute('onclick', `nav_navigate(navitemobj[${key}].elem)`);
+            let h2 = $create('h2');
+                h2.textContent = `${+key + 1}/ ${item.name}`;
+            let img = $create('img');
+                img.src = `thumbnail/home/${+key + 1}.jpg`;
+                img.alt = item.name;
+            div.append(img, h2);
+            li_.appendChild(div);
+            fragment_sneak.appendChild(li_);
+        }
     }
     ulnav.appendChild(fragment);
+    sneak.appendChild(fragment_sneak);
 
     // navbar construction // 
     onresizesortbtn();
