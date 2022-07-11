@@ -128,12 +128,13 @@ function navli_html_generation(data) {
                                 // div text h2
                                 divtxt.chld[0].chld[0].textContent = item.name;//-- json props
                                 divtxt.chld[0].chld[1].textContent = item.date;//-- json props
+                                    divtxt.chld[0].chld[1].classList.add('date');
                                 divtxt.chld[0].elem.append( divtxt.chld[0].chld[0],
                                                             ' ',
                                                             divtxt.chld[0].chld[1]
                                 )
-                                // div text p date
-                                divtxt.chld[1].classList.add('date');
+                                // div text p field
+                                divtxt.chld[1].classList.add('field');
                                 for (let index in item.field) {
                                     let span = $create('span');
                                     span.className = `field ${item.field[index].class}`;//-- json props
@@ -187,11 +188,16 @@ function navli_html_generation(data) {
             let div = $create('div');
                 div.setAttribute('onclick', `nav_navigate(navitemobj[${key}].elem)`);
             let h2 = $create('h2');
-                h2.textContent = `${+key + 1}/ ${item.name}`;
+            let name = $create('span');
+                name.textContent = `${+key + 1}/ ${item.name}`;
+            let date = $create('span');
+                date.textContent = item.date;
+                date.classList.add('date');
             let img = $create('img');
                 img.src = `thumbnail/home/${+key + 1}.jpg`;
                 img.alt = item.name;
-            div.append(img, h2);
+            h2.append(name,' ',date);
+            div.append(h2, img);
             li_.appendChild(div);
             fragment_sneak.appendChild(li_);
         }

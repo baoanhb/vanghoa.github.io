@@ -305,7 +305,7 @@ li > div.text > :not(:first-child) {
 	font-size: 12px;
 }
 
-li > div.text > h2 > span:nth-child(2) {
+.date {
 	font-weight: 100;
 	font-size: 12px;
 	white-space: nowrap;
@@ -315,8 +315,8 @@ body.hasHover li:hover > div.text > * {
 	display: block;
 }
 
-/* div text date */
-li > div.text > .date {
+/* div text field */
+li > div.text > p.field {
 	margin-bottom: 10px;
 }
 

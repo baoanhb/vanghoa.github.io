@@ -170,8 +170,6 @@ function navlist_navigate(next, btn) {
 }
 //
 function nav_navigate(item) {
-    if (ckbx.checked == true) {return;}
-
     wlcmscr.classList.add('close');
     item.classList.add('current');
     let itemid = item.getAttribute('id').slice(1);
