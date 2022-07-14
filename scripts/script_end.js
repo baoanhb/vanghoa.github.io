@@ -240,11 +240,10 @@ window.onresize = _.debounce(function() {
     scrlbrwd = getScrollbarWidth();
     setprop('--scrlbrwd', `${scrlbrwd}px`);
     // offsetiframe width - change hbhwidth_ave on media css change
-    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
+    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + ((!touchable && (ckbx.checked == false)) ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
     ifr_widthfit(projfr.querySelector('iframe'));
-    // sort button reorganise
-    onresizesortbtn();
     // ios vh fix
     viewportheight();
-    nav_construct(crrntnavlist);
+    // sort button reorganise + generate nav bar
+    onresizesortbtn();
 }, 1000);

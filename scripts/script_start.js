@@ -56,6 +56,7 @@ function nav_construct(id) {
                 let class_ = item.className;
                 ////////
                 if (hovercheck[id]) {
+                    r_mouseenter([hovertop_in, hoverbot_in, hoverleft_in, hoverright_in], item);
                     if (colcheck) {
                         item.addEventListener("mouseenter", initcheck ? hovertop_in : hoverbot_in);
                     } else {
@@ -241,11 +242,29 @@ function togglenav(ckbx) {
         setprop('--pad_btn','0px');
         removeseemore();
         offsetifr = offsetifr - navsz*2;
+
+        if (!touchable) {
+            setprop('--hbhwidth_top','0px');
+            setprop('--hbhwidth_bot','0px');
+            setprop('--hbhwidth_left','0px');
+            setprop('--hbhwidth_right','0px');
+            offsetifr -= +getprop('--hbhwidth_ave').slice(0,-2)*2;
+        }
+
         ifr_widthfit(projfr.querySelector('iframe'));
     } else {
         setprop('--navsz',`var(--navsz_sampl)`);
         setprop('--pad_btn','10px');
         offsetifr = offsetifr + navsz*2;
+
+        if (!touchable) {
+            setprop('--hbhwidth_top','var(--hbhwidth_ave)');
+            setprop('--hbhwidth_bot','var(--hbhwidth_ave)');
+            setprop('--hbhwidth_left','var(--hbhwidth_ave)');
+            setprop('--hbhwidth_right','var(--hbhwidth_ave)');
+            offsetifr += +getprop('--hbhwidth_ave').slice(0,-2)*2;
+        }
+
         ifr_widthfit(projfr.querySelector('iframe'));
     }
 }
@@ -278,26 +297,31 @@ function btn_ani(that, class_ani, horcheck, vercheck, t_, r_) {
 
 // hover border 3D event function //
 function hovertop_in() {
+    if (ckbx.checked == true) {return;}
     setprop('--hbhwidth_bot','var(--hbhwidth_min)');
     setprop('--hbhwidth_top','var(--hbhwidth_max)');
 }
 
 function hoverleft_in() {
+    if (ckbx.checked == true) {return;}
     setprop('--hbhwidth_right','var(--hbhwidth_min)');
     setprop('--hbhwidth_left','var(--hbhwidth_max)');
 }
 
 function hoverright_in() {
+    if (ckbx.checked == true) {return;}
     setprop('--hbhwidth_left','var(--hbhwidth_min)');
     setprop('--hbhwidth_right','var(--hbhwidth_max)');
 }
 
 function hoverbot_in() {
+    if (ckbx.checked == true) {return;}
     setprop('--hbhwidth_top','var(--hbhwidth_min)');
     setprop('--hbhwidth_bot','var(--hbhwidth_max)');
 }
 
 function hover_out() {
+    if (ckbx.checked == true) {return;}
     setprop('--hbhwidth_top','var(--hbhwidth_ave)');
     setprop('--hbhwidth_bot','var(--hbhwidth_ave)');
     setprop('--hbhwidth_left','var(--hbhwidth_ave)');
@@ -325,9 +349,11 @@ function Sortingfunc(axis) {
             navsrt2.push(elem);
         }
         elem.classList.remove('highlightsort');
+        /*
         if (!touchable) {
             r_mouseenter([hovertop_in, hoverbot_in, hoverleft_in, hoverright_in], elem);
         }
+        */
     }
 
     let navsrt = navsrt1.concat(navsrt2); 
@@ -393,22 +419,36 @@ function onresizesortbtn() {
     ratio = ratio < 1 ? 1/ratio : ratio;
     let new_smallersd_min = (ratio > 2) ? 1 : ((ratio > 1.3) ? 2 : sortbtn.length/2);
 
-    if(new_smallersd == smallersd && new_smallersd_min == smallersd_min) {return;}
-    smallersd = new_smallersd;
-    smallersd_min = new_smallersd_min;
+    if(new_smallersd != smallersd) {
+        //smallersd = new_smallersd;
+        hovercheck = [true, true, true];
+        nav_construct(crrntnavlist);
+    }
 
-    let smsmall = $(`.seemore:nth-of-type(${smallersd})`);
-    let smbig = $(`.seemore:nth-of-type(${3 - smallersd})`);
-    sortbtn.forEach((item,key) => {
-        if ((key + 1) <= smallersd_min) {
-            smsmall.appendChild(item);
-            adddecor(item, smallersd == 1);
-        } else {
-            smbig.appendChild(item);
-            adddecor(item, (3 - smallersd) == 1);
-        }
-    })
-    
+    if(new_smallersd_min != smallersd_min || new_smallersd != smallersd) {
+        //smallersd_min = new_smallersd_min;
+
+        let smsmall = $(`.seemore:nth-of-type(${new_smallersd})`);
+        let smbig = $(`.seemore:nth-of-type(${3 - new_smallersd})`);
+        sortbtn.forEach((item,key) => {
+            if ((key + 1) <= new_smallersd_min) {
+                smsmall.appendChild(item);
+                adddecor(item, new_smallersd == 1);
+            } else {
+                smbig.appendChild(item);
+                adddecor(item, (3 - new_smallersd) == 1);
+            }
+        })    
+    }
+
+    if(new_smallersd != smallersd) {
+        smallersd = new_smallersd;
+    }
+
+    if(new_smallersd_min != smallersd_min) {
+        smallersd_min = new_smallersd_min;
+    }
+
     function adddecor(item, sdcheck) {
         item.className = '';
         item.classList.add(sdcheck ? 'horizontal' : 'vertical')

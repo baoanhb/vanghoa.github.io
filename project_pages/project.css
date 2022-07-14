@@ -124,12 +124,16 @@ figcaption {
 	font-size: 0.8rem;
 	margin-bottom: 2%;
 }
-/**/
+/* p */
 
 p {
 	max-width: 700px;
 	margin-bottom: -1em;
 } 
+
+p:not(:first-child) + p {
+	margin-top: 0;
+}
 
 p::after {
 	content: "";
@@ -141,6 +145,8 @@ p.credit, p.credit * {
 	text-align: center;
 	word-spacing: 0.3em;
 }
+
+/* others */
 
 h1 {
 	font-size: 2rem;
@@ -163,15 +169,16 @@ h1 {
 
 .twocol, .threecol {
 	display: grid;
-	gap: calc(var(--gapsz) / 3);
 }
 
 .twocol {
 	grid-template-columns: 1fr 1fr;
+	gap: calc(var(--gapsz) / 4);
 }
 
 .threecol {
 	grid-template-columns: 1fr 1fr 1fr;
+	gap: calc(var(--gapsz) / 10);
 }
 
 .colchild {
@@ -193,6 +200,7 @@ h1 {
 
 	.threecol {
 		grid-template-columns: 1fr 1fr;
+		gap: calc(var(--gapsz) / 4);
 	}
 }
 
