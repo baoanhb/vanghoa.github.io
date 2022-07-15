@@ -3,6 +3,7 @@
 const minsz = 9;
 const time_interval = 250;
 const soitemperscreen = 6;
+const soitem_tong = 16;
 
 // binding method
 const $ = document.querySelector.bind(document);
@@ -43,6 +44,7 @@ let availit_num;
 let smallersd;
 let smallersd_min;
 let fetch_data;
+let soitem_soon;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -55,7 +57,7 @@ const ckbx = $ulnav('label#tglnav input');
 const main = $ulnav('#main');
 const sneak = $ulnav('#sneak_peek');
 
-//border 3d object
+// border 3d object
 const border_3d = {
     top : $ulnav('#top_border'),
     bot : $ulnav('#bot_border'),
@@ -73,7 +75,29 @@ const border_3d = {
     removehighlight_border_right : function(e) {
         color_border('right', e.target, false, 'N/A');
     },
-}
+};
+
+// soon object
+const soon_obj = {
+    "name" : "Coming",
+    "date" : "soon",
+    "field" : [
+        {
+            "name" : "Intentionally",
+            "class" : ""
+        },
+        {
+            "name" : "left",
+            "class" : ""
+        },
+        {
+            "name" : "blank",
+            "class" : ""
+        }
+    ],
+    "description" : "",
+    "soon" : true
+};
 
 // initialise //
 viewportheight();
@@ -87,8 +111,13 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 fetch('item.json')
                 .then(res => res.json())
                 .then(data => {
-                  fetch_data = data;
-                  navli_html_generation(data);
+                    fetch_data = data;
+                    soitem_soon = soitem_tong - fetch_data.length;
+                    for (let i = 1; i <= soitem_soon; i++) {
+                        fetch_data.push(soon_obj);
+                    }
+                    
+                    navli_html_generation(fetch_data);
                 })
                 .catch(err => console.error(err));
 
@@ -172,21 +201,21 @@ function navli_html_generation(data) {
         li.append(divtxt.elem, divhover);
         fragment.appendChild(li);
 
-        // li initialise
-        if (key == 0) {li.classList.add('current');} // initial current nav
-        navitemobj[key].elem = li;
-        navitem[Math.floor(key/soitemperscreen)].push(li);
-        if (!touchable) {
-            li.addEventListener("mouseleave", hover_out);
-            if (item.soon) {availit_num--};
-        }
+                                // li initialise
+                                if (key == 0) {li.classList.add('current');} // initial current nav
+                                navitemobj[key].elem = li;
+                                navitem[Math.floor(key/soitemperscreen)].push(li);
+                                if (!touchable) {
+                                    li.addEventListener("mouseleave", hover_out);
+                                    if (item.soon) {availit_num--};
+                                }
 
         //sneak
         if (!item.soon) {
             let li_ = $create('li');
-                li_.title = li.title;
             let div = $create('div');
                 div.setAttribute('onclick', `nav_navigate(navitemobj[${key}].elem)`);
+                div.title = li.title;
             let h2 = $create('h2');
             let name = $create('span');
                 name.textContent = `${+key + 1}/ ${item.name}`;

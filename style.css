@@ -441,11 +441,15 @@ div.btn img {
 
 /* main part */
 #main {
-	z-index: 3;
+	z-index: 1;
 	padding: 0;
 	grid-column: 3 / var(--colmaxreal_1);
 	grid-row: 3 / var(--colmaxreal_1);
 	cursor: auto;
+}
+
+body.hasHover #main {
+	z-index: 3;
 }
 
 /* main part border 3D style */
@@ -806,10 +810,12 @@ label#tglnav div {
 	height:100%;
 	width:100%;
 	transition: width 1s;
+	box-shadow: var(--boxsdstyle);
 }
 
 #main section#iframe iframe.hide{
 	width: 0;
+	box-shadow: none;
 }
 
 /* resume */

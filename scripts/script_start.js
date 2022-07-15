@@ -364,13 +364,12 @@ function Sortingfunc(axis) {
     nav_construct(0);
 
     delaypromise = delaypromise.then(function() {
+        setprop('--highlightcolor',`rgb(var(--${axis}))`);
         if (count != count_) {
             return new Promise(function (resolve) {
                 resolve();
             });
         }
-
-        setprop('--highlightcolor',`rgb(var(--${axis}))`);
     
         for (let key in navsrt1) {
             if (key == soitemperscreen) {break;}
