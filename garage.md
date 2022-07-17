@@ -7,3 +7,5 @@ foreach ($file in Get-ChildItem) { cwebp -q 100 $file -o otoke.webp }
 magick mogrify -resize 1700x> -quality 100 -path out *.jpg
 
 magick mogrify -format jpg *.jpeg   
+
+imagemin * --plugin.mozjpeg.progressive=true --plugin.mozjpeg.max=50 --plugin.mozjpeg.stripAll=true --plugin.mozjpeg.size=50 *.jpg --out-dir=./out

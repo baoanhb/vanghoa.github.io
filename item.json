@@ -72,6 +72,22 @@
         "soon" : false
     },
     {
+        "name" : "Text display technology on LED screen in Singapore MRT",
+        "date" : "3/2021",
+        "field" : [
+            {
+                "name" : "Communication design",
+                "class" : ""
+            },
+            {
+                "name" : "Typeface research",
+                "class" : "spcl"
+            }
+        ],
+        "description" : "A school study of localized text display technology on LED screen as well as the font rasterization method developed throughout the history of SMRT trains in SG",
+        "soon" : false
+    },
+    {
         "name" : "Remeasure the Liturgy – 2022 Liturgical Calendar",
         "date" : "3/2021 - 4/2021",
         "field" : [
@@ -144,6 +160,26 @@
         "soon" : false
     },
     {
+        "name" : "ZOMBIE ZOO X PIKOTARO MV",
+        "date" : "12/2021",
+        "field" : [
+            {
+                "name" : "Communication design",
+                "class" : ""
+            },
+            {
+                "name" : "Storyboarding",
+                "class" : ""
+            },
+            {
+                "name" : "Pixel art",
+                "class" : "illus"
+            }
+        ],
+        "description" : "A collaboration between the Pen Pineapple Apple Pen legend Pikotaro and 9-year-old NFT art prodigy Zombie Zoo",
+        "soon" : false
+    },
+    {
         "name" : "Sesẻ mobile app",
         "date" : "10/2021 - 4/2022",
         "field" : [
@@ -205,26 +241,6 @@
             }
         ],
         "description" : "Website development for a branded provider of mechanical engineering & industrial equipments",
-        "soon" : false
-    },
-    {
-        "name" : "Misc projects",
-        "date" : "1/2020 - present",
-        "field" : [
-            {
-                "name" : "Communication design",
-                "class" : ""
-            },
-            {
-                "name" : "Poster design",
-                "class" : "illus"
-            },
-            {
-                "name" : "NFT design",
-                "class" : "dg_pro"
-            }
-        ],
-        "description" : "Various small-scale projects, personal and full-time works",
         "soon" : false
     }
 ]

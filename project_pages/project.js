@@ -53,49 +53,76 @@ document.addEventListener("DOMContentLoaded", function() {
 const $create = document.createElement.bind(document);
 
 // page index
-const index_pg = +window.location.pathname.split('/')[2] - 1;
+let h1 = document.querySelector('h1');
+let index_pg = window.location.pathname.split('/')[2];
+let index_last;
+let index_misc;
+let index_first;
 const item_soon = {
-                    "name" : "Coming",
-                    "date" : "soon",
-                    "field" : [
-                        {
-                            "name" : "Intentionally",
-                            "class" : ""
-                        },
-                        {
-                            "name" : "left",
-                            "class" : ""
-                        },
-                        {
-                            "name" : "blank",
-                            "class" : ""
-                        }
-                    ],
-                    "description" : "",
-                    "soon" : true
-                  };
+"name" : "Coming",
+"date" : "soon",
+"field" : [
+    {
+        "name" : "Intentionally",
+        "class" : ""
+    },
+    {
+        "name" : "left",
+        "class" : ""
+    },
+    {
+        "name" : "blank",
+        "class" : ""
+    }
+],
+"description" : "",
+"soon" : true
+};
+const item_misc = {
+    "name" : "Miscellaneous projects",
+    "date" : "1/2020 - present",
+    "field" : [
+        {
+            "name" : "Communication design",
+            "class" : ""
+        },
+        {
+            "name" : "Poster design",
+            "class" : "illus"
+        },
+        {
+            "name" : "NFT design",
+            "class" : "dg_pro"
+        }
+    ],
+    "description" : "Various small-scale projects, personal and full-time works",
+    "soon" : false
+};
 
 // nav fetch //
 fetch('../../item.json')
                 .then(res => res.json())
                 .then(data => {
-                  if (index_pg > data.length - 1) {
+                  index_last = data.length - 1;
+                  index_misc = index_last + 1;
+                  index_pg = (index_pg == 'misc') ? index_misc : (+index_pg - 1);
+                  index_first = 0;
+
+                  if (index_pg == index_misc) {
+                    field_date(item_misc);
+                    nav_construct(data);
+
+                  } else if (index_pg > index_misc) {
                     field_date(item_soon);
+
                   } else {
-                    item_field_gen(data);
+                    field_date(data[index_pg]);
+                    nav_construct(data);
                   }
                 })
                 .catch(err => console.error(err));
 
-function item_field_gen(data) {
-  let h1 = field_date(data[index_pg]);
-//  
-  let index_pg_ = {}; let item_= {};
-  index_pg_.bf = ((index_pg - 1) < 0) ? data.length - 1 : (index_pg - 1);
-  item_.bf = data[index_pg_.bf];
-  index_pg_.af = ((index_pg + 1) > (data.length - 1)) ? 0 : (index_pg + 1);
-  item_.af = data[index_pg_.af];
-
+function nav_construct(data) {
   let nav = $create('nav');
   h1.parentNode.insertBefore(nav, h1);
 
@@ -107,6 +134,31 @@ function item_field_gen(data) {
     nav.append(a_ct);
     return;
   }
+  // not iframe //
+  let index_pg_ = {}; let item_= {};
+
+  index_pg_.bf = ((index_pg - 1) < index_first) ? index_last : (index_pg - 1);
+  item_.bf = data[index_pg_.bf];
+
+   // check misc //
+          if (index_pg - 1 == index_first - 1) { // pass 1 
+            index_pg_.bf = 'misc';
+            item_.bf.name = item_misc.name;
+          } else {
+            index_pg_.bf++
+          }
+
+  index_pg_.af = ((index_pg + 1) > index_last) ? 0 : (index_pg + 1);
+  item_.af = data[index_pg_.af];
+
+   // check misc //
+          if (index_pg + 1 == index_misc) { // pass 1
+            index_pg_.af = 'misc';
+            item_.af.name = item_misc.name;
+          } else {
+            index_pg_.af++
+          }
+
 
   document.head.innerHTML += `<!-- favicon --> 
                               <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
@@ -119,14 +171,17 @@ function item_field_gen(data) {
                               <meta name="format-detection" content="telephone=no">
                               <!-- --> `;
 
-  nav.append(prev_next_prj('bf'), prev_next_prj('af'));
+  nav.append( prev_next_prj('bf', index_pg_.bf, item_.bf.name), 
+              prev_next_prj('af', index_pg_.af, item_.af.name)
+            );
 
-  function prev_next_prj(psfix) {
+  function prev_next_prj(psfix, index, name) {
     let a = $create('a');
     a.textContent = psfix == 'bf' ? '<-- Previous project' : 'Next project -->';
-    a.href = `/project_pages/${index_pg_[psfix] + 1}/project.html`;
+    a.href = `/project_pages/${index}/project.html`;
+
     let span = $create('span');
-    span.textContent = item_[psfix].name;
+    span.textContent = name;
     a.append($create('br'), span);
     return a;
   }
@@ -144,9 +199,7 @@ function field_date(item) {
   let date = $create('p'); date.className = 'field_p date_p';
       date.textContent = item.date;
 
-  let h1 = document.querySelector('h1');
-      h1.parentNode.insertBefore(divtxt, h1.nextSibling);
-      h1.parentNode.insertBefore(date, divtxt);
-  
-  return h1;
+  h1.textContent = item.name;
+  h1.parentNode.insertBefore(divtxt, h1.nextSibling);
+  h1.parentNode.insertBefore(date, divtxt);
 }

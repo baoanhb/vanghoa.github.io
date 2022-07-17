@@ -174,6 +174,7 @@ function nav_navigate(item) {
     wlcmscr.classList.add('close');
     item.classList.add('current');
     let itemid = item.getAttribute('id').slice(1);
+    let itemid_ = (+itemid == availit_num) ? 'misc' : itemid; //
 
     if (crrntitemid == itemid) {
         projfr.firstElementChild.contentWindow.scrollTo(0,0);
@@ -183,7 +184,7 @@ function nav_navigate(item) {
 
     crrntitemid = itemid;
     let projfr_id = projfr.querySelectorAll('iframe');
-    projfr_id[1].setAttribute('src', `project_pages/${itemid}/project.html`);
+    projfr_id[1].setAttribute('src', `project_pages/${itemid_}/project.html`);
     projfr_id[0].contentWindow.document.querySelector('#wrapper').classList.add('wrapper');
 
     projfr_id.forEach((item, index) => {
@@ -192,7 +193,7 @@ function nav_navigate(item) {
     })
 
     if (!touchable && itemid <= availit_num) {
-        setprop('--border_img',`url('thumbnail/border/${itemid}.jpg')`);
+        setprop('--border_img',`url('thumbnail/border/${itemid_}.jpg')`);
     }
 }
 // 

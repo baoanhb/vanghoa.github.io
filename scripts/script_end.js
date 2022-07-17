@@ -77,7 +77,7 @@ const border_3d = {
     },
 };
 
-// soon object
+// extra objects
 const soon_obj = {
     "name" : "Coming",
     "date" : "soon",
@@ -98,6 +98,26 @@ const soon_obj = {
     "description" : "",
     "soon" : true
 };
+const misc_obj = {
+    "name" : "Misc projects",
+    "date" : "1/2020 - present",
+    "field" : [
+        {
+            "name" : "Communication design",
+            "class" : ""
+        },
+        {
+            "name" : "Poster design",
+            "class" : "illus"
+        },
+        {
+            "name" : "NFT design",
+            "class" : "dg_pro"
+        }
+    ],
+    "description" : "Various small-scale projects, personal and full-time works",
+    "soon" : false
+};
 
 // initialise //
 viewportheight();
@@ -111,8 +131,11 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 fetch('item.json')
                 .then(res => res.json())
                 .then(data => {
+                    availit_num = data.length + 1;
                     fetch_data = data;
-                    soitem_soon = soitem_tong - fetch_data.length;
+
+                    fetch_data.push(misc_obj);
+                    soitem_soon = soitem_tong - availit_num;
                     for (let i = 1; i <= soitem_soon; i++) {
                         fetch_data.push(soon_obj);
                     }
@@ -124,10 +147,10 @@ fetch('item.json')
 function navli_html_generation(data) {
     const fragment = document.createDocumentFragment();
     const fragment_sneak = document.createDocumentFragment();
-    availit_num = data.length;
 
     for (let key in data) {
         let item = data[key];
+        let key_ = (+key + 1 == availit_num) ? 'misc' : (+key + 1);
         navitemobj[key] = {
             dg_pro: false,
             print: false,
@@ -186,8 +209,8 @@ function navli_html_generation(data) {
         let divhover = $create('div');
         divhover.classList.add('hovercontent');
                                 if (!item.soon) {//-- json props
-                                    divhover.dataset.src = `${+key + 1}`;
-                                    divhover.style.backgroundImage = `url('thumbnail/${+key + 1}.jpg')`;
+                                    divhover.dataset.src = `${key_}`;
+                                    divhover.style.backgroundImage = `url('thumbnail/${key_}.jpg')`;
                                 } else {
                                     navitemobj[key].soon = true;
                                 }
@@ -207,7 +230,6 @@ function navli_html_generation(data) {
                                 navitem[Math.floor(key/soitemperscreen)].push(li);
                                 if (!touchable) {
                                     li.addEventListener("mouseleave", hover_out);
-                                    if (item.soon) {availit_num--};
                                 }
 
         //sneak
@@ -223,7 +245,7 @@ function navli_html_generation(data) {
                 date.textContent = item.date;
                 date.classList.add('date');
             let img = $create('img');
-                img.src = `thumbnail/home/${+key + 1}.jpg`;
+                img.src = `thumbnail/home/${key_}.jpg`;
                 img.alt = item.name;
             h2.append(name,' ',date);
             div.append(h2, img);
