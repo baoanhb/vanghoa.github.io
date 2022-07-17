@@ -141,12 +141,12 @@ function field_date(item) {
                   divtxt.append(span,' ');
                 }
   
-  let span = $create('span');
-      span.textContent = item.date;
+  let date = $create('p'); date.className = 'field_p date_p';
+      date.textContent = item.date;
 
   let h1 = document.querySelector('h1');
-      h1.append($create('br'), span);
       h1.parentNode.insertBefore(divtxt, h1.nextSibling);
+      h1.parentNode.insertBefore(date, divtxt);
   
   return h1;
 }

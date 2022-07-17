@@ -21,7 +21,7 @@
 	--minsz169: calc(100vw - calc(var(--gapsz) * 2));
 	--gapsz: 150px;
 	--margin: calc(var(--gapsz) / 3) auto;
-	--margin_top: calc(var(--gapsz) / 10);
+	--margin_top: calc(var(--gapsz) / 20);
 	/* field color */
 	--mo_gra: 255, 0, 255;
 	--illus: 0, 204, 102;
@@ -70,6 +70,10 @@ img, .item {
 .field_p {
 	text-align: center;
 	margin-top: var(--margin_top)
+}
+
+.field_p.date_p {
+	font-weight: bold;
 }
 
 .field_p span {
@@ -130,7 +134,7 @@ p {
 	margin-bottom: -1em;
 } 
 
-p:not(:first-child) + p {
+#wrapper p:not(:first-child) + p {
 	margin-top: 0;
 }
 
@@ -151,8 +155,10 @@ nav {
 	width: 100%;
 	justify-content: center;
 	position: sticky;
-	top: 15px;
+	top: 0;
 	z-index: 2;
+	padding: 15px 0;
+	background-image: linear-gradient(rgba(61, 235, 221, 1), rgba(61, 235, 221, 0));
 }
 
 nav a {
