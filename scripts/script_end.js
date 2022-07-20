@@ -248,7 +248,7 @@ function navli_html_generation(data) {
                 img.src = `thumbnail/home/${key_}.jpg`;
                 img.alt = item.name;
             h2.append(name,' ',date);
-            div.append(h2, img);
+            div.append(img, h2);
             li_.appendChild(div);
             fragment_sneak.appendChild(li_);
         }
@@ -257,7 +257,7 @@ function navli_html_generation(data) {
     sneak.appendChild(fragment_sneak);
 
     // navbar construction // 
-    onresizesortbtn();
+    onresizesortbtn(false);
     nav_construct(0);
 
     delaypromise = delaypromise.then(function() { 
@@ -296,5 +296,5 @@ window.onresize = _.debounce(function() {
     // ios vh fix
     viewportheight();
     // sort button reorganise + generate nav bar
-    onresizesortbtn();
+    onresizesortbtn(true);
 }, 1000);

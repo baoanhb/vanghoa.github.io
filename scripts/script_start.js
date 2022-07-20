@@ -413,13 +413,13 @@ function removehighlight(e) {
     e.target.removeEventListener("animationend", removehighlight);
 }
 
-function onresizesortbtn() {
+function onresizesortbtn(nav_gen) {
     let new_smallersd = innerWidth < innerHeight ? 1 : 2;
     let ratio = innerWidth/innerHeight;
     ratio = ratio < 1 ? 1/ratio : ratio;
     let new_smallersd_min = (ratio > 2) ? 1 : ((ratio > 1.3) ? 2 : sortbtn.length/2);
 
-    if(new_smallersd != smallersd) {
+    if(new_smallersd != smallersd && nav_gen) {
         //smallersd = new_smallersd;
         hovercheck = [true, true, true];
         nav_construct(crrntnavlist);

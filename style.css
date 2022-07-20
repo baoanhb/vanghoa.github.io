@@ -71,6 +71,8 @@
 	--h_back: 0px;
 	/* preload css */
 	--preloadcss: ;
+	/* frame width */
+	--fr_height: calc(var(--vh100) - calc(calc(var(--hbhwidth_ave) + var(--navsz_sampl)) * 2) );
 }
 
 * {
@@ -825,6 +827,24 @@ label#tglnav div {
 	flex-wrap: wrap;
 }
 
+#landing_pg {
+	height: calc(0.8 * var(--fr_height));
+	background-image: url(garage/background.jpg);
+	background-size: contain;
+	padding: 20px 0;
+}
+
+#landing_pg > * {
+	background-color: white;
+	width: fit-content;
+	max-width: 700px;
+}
+
+#description span {
+	text-decoration: underline;
+	cursor: pointer;
+	word-break: break-all;
+}
 /* sneak */
 #sneak_peek {
 	width: 100%;
@@ -1016,7 +1036,7 @@ div.vimeo {
 /* orientation */
 @media screen and (orientation:landscape) {
 	div.vimeo {
-		height: calc(var(--vh) * 70);
+		height: var(--fr_height);
 		width: auto;
 	}
 }
@@ -1024,11 +1044,15 @@ div.vimeo {
 @media screen and (orientation:portrait) {
 	div.vimeo {
 		width: 100%;
-		height: calc(var(--vh) * 50);
+		height: calc(var(--fr_height) * 0.5);
 	}
 
 	div.btn > ul {
 		display: block;
+	}
+	
+	#landing_pg {
+		height: calc(0.4 * var(--fr_height));
 	}
 }
 
