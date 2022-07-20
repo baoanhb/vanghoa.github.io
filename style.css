@@ -1050,10 +1050,6 @@ div.vimeo {
 	div.btn > ul {
 		display: block;
 	}
-	
-	#landing_pg {
-		height: calc(0.4 * var(--fr_height));
-	}
 }
 
 @media (max-aspect-ratio: 3/5) {
