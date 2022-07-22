@@ -266,16 +266,26 @@ function navli_html_generation(data) {
     // navbar construction // 
     onresizesortbtn(false);
 
+    /*
     delaypromise = delaypromise.then(function() { 
-        viewportheight();
+        cl('ok');
         //alert(`ready height: ${screen.height} + ${innerHeight}`);
         return new Promise(function (resolve) {
             resolve();
         });
     })
+    */
+
+    btn_img.addEventListener('transitionend', init_vh);
 
     ckbx.checked = true;
     togglenav(ckbx);
+}
+
+function init_vh() {
+    r_transitionend([init_vh], btn_img);
+    viewportheight();
+    cl('ok');
 }
 
 function fieldcheck(class_, item) {
