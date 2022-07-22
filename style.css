@@ -39,6 +39,7 @@
 	--print: 255, 20, 147;
 	/* */
 	--borrad_ios: calc(var(--navsz) - var(--offsetborderstyle));
+	--borrad_ios_landing: calc(3em - var(--offsetborderstyle));
 	--offsetborderstyle: 5px;
 	/* border 3D animated color */
 	--bot_color_be4: var(--colortheme_rgb);
@@ -865,7 +866,7 @@ label#tglnav div {
 	font-weight: bold;
 	box-shadow: var(--boxsdstyle_inset);
 	cursor: pointer;
-	border-radius: 2.8em 2.8em 0 0;
+	border-radius: var(--borrad_ios_landing) var(--borrad_ios_landing) 0 0;
 }
 
 #landing_pg > h1 {
