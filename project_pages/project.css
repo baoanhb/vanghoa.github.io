@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,700&display=swap');
-
 @font-face {
 	font-family: BaoAnhVjpPro;
 	src: url(3/BaoAnhVjpPro-Regular.otf);
@@ -192,7 +190,7 @@ nav :is(a span, a:only-child) {
 /* h1 */
 h1 {
 	font-size: 2rem;
-	font-family: 'Crimson Pro', serif;
+	font-family: 'Alegreya', serif;
 	max-width: 700px;
 	text-align: center;
 	margin-bottom: 0;

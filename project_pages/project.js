@@ -199,6 +199,7 @@ function field_date(item) {
   let date = $create('p'); date.className = 'field_p date_p';
       date.textContent = item.date;
 
+  document.title = item.name;
   h1.textContent = item.name;
   h1.parentNode.insertBefore(divtxt, h1.nextSibling);
   h1.parentNode.insertBefore(date, divtxt);

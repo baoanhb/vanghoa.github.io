@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@700&display=swap');
-
 :root {
 	--colmax: 21;
 	--rowmax: 21;
@@ -96,7 +94,7 @@ h2 {
 }
 
 h2, h1 {
-	font-family: 'Crimson Pro', serif;
+	font-family: 'Alegreya', serif;
 }
 
 body {
