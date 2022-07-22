@@ -51,17 +51,29 @@
           <input type="checkbox" onclick="togglenav(this)">
           <div class="horizontal">toggle navbar</div>
         </label>
-        <section id="welcome">
+        <section id="welcome" style="overflow: hidden;">
           <div id="landing_pg">
-            <h1>Hi! Let me take you to ... <br> ... BUI NGUYEN BAO ANH'S SITE</h1> <br>
-            <p id="description">I am a multidisciplinary-student-all-in-one graphic designer available for internship! I have had experiences with 
-              <span style="color: rgb(var(--dg_pro));" onclick="Sortingfunc('dg_pro')" title="filtering @digital_product">@digital_product_design/development</span>, 
-              <span style="color: rgb(var(--mo_gra));" onclick="Sortingfunc('mo_gra')" title="filtering @motion_graphic">@motion_graphic</span>, 
-              <span style="color: rgb(var(--illus));" onclick="Sortingfunc('illus')" title="filtering @illustration">@illustration</span>, 
-              <span style="color: rgb(var(--print));" onclick="Sortingfunc('print')" title="filtering @print_matter">@print_production</span>, 
-              <span style="color: rgb(var(--spcl));" onclick="Sortingfunc('spcl')" title="filtering @speculative">@experimental</span> and
-              <span style="color: rgb(var(--time));" onclick="Sortingfunc('time')" title="filtering @communication">@communication_design</span>. Hope you have fun viewing my site &lt;3 Thank you for dropping by!
-            </p>
+            <h1>Hi! Let me take you to ... <br> ... BUI NGUYEN BAO ANH'S SITE</h1> 
+            <p id="description">Bao Anh is a multidisciplinary-student-all-in-one graphic designer available for internship! I have had experiences with 
+              <span style="color: rgb(var(--dg_pro));" onclick="activate_Sortingfunc('dg_pro')" title="filtering @digital_product">digital_product_design/development</span>, 
+              <span style="color: rgb(var(--mo_gra));" onclick="activate_Sortingfunc('mo_gra')" title="filtering @motion_graphic">motion_graphic</span>, 
+              <span style="color: rgb(var(--illus));" onclick="activate_Sortingfunc('illus')" title="filtering @illustration">illustration</span>, 
+              <span style="color: rgb(var(--print));" onclick="activate_Sortingfunc('print')" title="filtering @print_matter">print_production</span>, 
+              <span style="color: rgb(var(--spcl));" onclick="activate_Sortingfunc('spcl')" title="filtering @speculative">experimental</span> and
+              <span style="color: rgb(var(--time));" onclick="activate_Sortingfunc('time')" title="filtering @communication">communication_design</span>. Hope you have fun viewing my site &lt;3 Thank you for dropping by! <br> <br>
+              © Background image found in 'A Field Guide to Roadside Wildflowers At Full Speed' by <em>Chris Helzer</em>.
+            </p> 
+            <ul>
+              <li class="horizontal" onclick="mywork_btn()">
+                My works
+              </li>
+              <li class="horizontal" onclick="aboutme_btn()">
+                About me
+              </li>
+              <li class="horizontal" onclick="myresume_btn()">
+                My resume
+              </li>
+            </ul>
           </div>
           <!--
           <br><h2 id="instruction_title">See instruction↓</h2>
@@ -107,208 +119,210 @@
           </div>
            -->
           <br>
-          <h2 id="instruction_title">You can see my works below↓</h2>
+          <h2 id="sneak_title">You can see my works below↓</h2>
           <br>
           <!-- -->
-          <ul id="sneak_peek">
-            
-          </ul>
+          <ul id="sneak_peek"></ul>
+          <br>
           <!-- -->
-          <div class="vimeo"><iframe src="https://player.vimeo.com/video/725335360?h=ef92648557&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="both_1"></iframe></div>
-          
-          <br><h2>Contacts↓</h2>
-
-          <address>
-            <a href="https://www.instagram.com/bao.anh.b" target="_blank">instagram@bao.anh.b</a> <br>
-            <a href="https://www.facebook.com/xucxichhaha/" target="_blank">facebook@xucxichhaha</a> <br>
-            <a href="https://www.linkedin.com/in/bao-anh-bui-025149167/" target="_blank">linkedin@bao-anh-bui-025149167</a> <br>
-            <a href="mailto:baoanh1buinguyen@gmail.com">baoanh1buinguyen@gmail.com</a><br>
-            <a href="tel:+84779384331">(+84) 77 938 4331</a>
-          </address>
+          <div id="about">
+            <div class="vimeo"><iframe src="https://player.vimeo.com/video/725335360?h=ef92648557&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="both_1"></iframe></div>      
+          </div> 
           <!-- -->
-          <br><h2>Education↓</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>08/2019 <br> 
-                  →05/2023 <br>
-                  (expected) 
-                </td>
-                <td>
-                  <h3>LASALLE COLLEGE OF THE ARTS</h3>
-                  <i>Singapore</i> <br> 
-                  Diploma in Design for Communication and Experiences<br>
-                  <i>**For the AY 2021 - 2022, I take a gap year to return to my hometown, Vietnam. I will be coming back to Singapore this August 2022 to resume my study.**</i>
-                </td>
-              </tr>
-              <tr>
-                <td>09/2016 <br>
-                  →05/2019
-                </td>
-                <td>
-                  <h3>HIGHSCHOOL FOR THE GIFTED—VNUHCM</h3>
-                  <i>Vietnam</i> <br>
-                  High School Diploma<br>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- -->
-          <br><h2>Work Experiences↓</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>07/2021 <br> 
-                  →12/2021
-                </td>
-                <td>
-                  <h3>THE LAB SAIGON</h3>
-                  <i>Junior Graphic Designer</i> <br>
-                  – Communication & Visual Designer for the Saigon-based creative agency<br>
-                </td>
-              </tr>
-              <tr>
-                <td>05/2019
-                </td>
-                <td>
-                  <h3>INTEL PRODUCTS VIETNAM</h3>
-                  <i>Independent Freelance Illustrator</i> <br>
-                  – Stage Background Illustrator for the company’s year-end event.<br>
-                </td>
-              </tr>
-              <tr>
-                <td>2017 <br> 
-                  →Now
-                </td>
-                <td>
-                  <h3>SMALL MEDIUM ENTERPRISES</h3>
-                  <i>Freelancer in Graphic Design</i> <br>
-                  – Responsible for the visual images, graphics, illustrations and concepts for clients’ needs.<br>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- -->
-          <br><h2>Skills↓</h2>
-          <table class="skills">
-            <tbody>
-              <tr>
-                <td>
-                  <h3>– Proficient with the following Digital Softwares:</h3>
-                  Adobe Creative Suite and Figma.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h3>– Familiar with the following Digital Softwares:</h3>
-                  Cinema4D, Glyphs and Blender. 
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h3>– Technical Skills:</h3>
-                  Illustration, Publication Production, UI Design,  HTML/CSS & Javascript knowledge.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- -->
-          <br><h2>Activities↓</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>09/2021 <br> 
-                  →04/2022
-                </td>
-                <td>
-                  <h3>Google Developer Student Club - UIT</h3>
-                  – Development team.
-                </td>
-              </tr>
-              <tr>
-                <td>05/2021 <br> 
-                  →10/2021
-                </td>
-                <td>
-                  <h3>Project Vietnamme—a non-profit organisation dedicated to the relationship of young Vietnamese and the Arts.</h3>
-                  – Graphic Design Consultation.
-                </td>
-              </tr>
-              <tr>
-                <td>10/2020 <br> 
-                  →01/2021
-                </td>
-                <td>
-                  <h3>Vietnamme Magazine—magazine.vietnamme.me, an online magazine dedicated to the contemporary arts in Vietnam.</h3>
-                  – Website Development, Graphic Design.
-                </td>
-              </tr>
-              <tr>
-                <td>10/2017 <br> 
-                  →01/2018
-                </td>
-                <td>
-                  <h3>Human Library Vietnam—a non-profit organisation dedicated to raising awareness to societal issues.</h3>
-                  – Graphic Design, Illustration.
-                </td>
-              </tr>
-              <tr>
-                <td>08/2017 <br> 
-                  →08/2018
-                </td>
-                <td>
-                  <h3>Project Sugar—a non-profit student-run organisation dedicated to underprivileged children</h3>
-                  – Graphic Design, Illustration, Art Direction.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- -->
-          <br><h2>Accolades↓</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>2022
-                </td>
-                <td>
-                  <h3>D&AD NEW BLOOD YELLOW PENCIL</h3>
-                  – Awarded 2022 Yellow Pencil by D&AD New Blood for the entry Duolingo: Non-fungible Efforts.
-                </td>
-              </tr>
-              <tr>
-                <td>2021
-                </td>
-                <td>
-                  <h3>RED DOT JUNIOR AWARD</h3>
-                  – Awarded “Red Dot Junior Award” under Red Dot Award: Brands & Communication Design by Red Dot Award in 2021.
-                </td>
-              </tr>
-              <tr>
-                <td>2021
-                </td>
-                <td>
-                  <h3>CERTIFICATE OF TYPOGRAPHIC EXCELLENCE</h3>
-                  – Awarded “Certificate of Typographic Excellence” in TDC67 by Type Directors Club and will be included in the Annual of the Type Directors Club, The World’s Best Typography.
-                </td>
-              </tr>
-              <tr>
-                <td>2020
-                </td>
-                <td>
-                  <h3>LASALLE SCHOLARSHIP 2020-2021</h3>
-                  – Awarded LASALLE Scholarship 2020–2021 to cover my tuition fee for my great performance at LASALLE College of the Arts.
-                </td>
-              </tr>
-              <tr>
-                <td>2019
-                </td>
-                <td>
-                  <h3>LASALLE TUITION GRANT</h3>
-                  – Awarded 60% merit-based tuition grant for my tuition fee in the diploma at LASALLE College of the Arts.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="myresume" style="padding-top: var(--pad_welcome);">
+            <h2>Contacts↓</h2>
+            <address>
+              <a href="https://www.instagram.com/bao.anh.b" target="_blank">instagram@bao.anh.b</a> <br>
+              <a href="https://www.facebook.com/xucxichhaha/" target="_blank">facebook@xucxichhaha</a> <br>
+              <a href="https://www.linkedin.com/in/bao-anh-bui-025149167/" target="_blank">linkedin@bao-anh-bui-025149167</a> <br>
+              <a href="mailto:baoanh1buinguyen@gmail.com">baoanh1buinguyen@gmail.com</a><br>
+              <a href="tel:+84779384331">(+84) 77 938 4331</a>
+            </address>
+            <!-- -->
+            <br><h2>Education↓</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <td>08/2019 <br> 
+                    →05/2023 <br>
+                    (expected) 
+                  </td>
+                  <td>
+                    <h3>LASALLE COLLEGE OF THE ARTS</h3>
+                    <i>Singapore</i> <br> 
+                    Diploma in Design for Communication and Experiences<br>
+                    <i>**For the AY 2021 - 2022, I take a gap year to return to my hometown, Vietnam. I will be coming back to Singapore this August 2022 to resume my study.**</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>09/2016 <br>
+                    →05/2019
+                  </td>
+                  <td>
+                    <h3>HIGHSCHOOL FOR THE GIFTED—VNUHCM</h3>
+                    <i>Vietnam</i> <br>
+                    High School Diploma<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- -->
+            <br><h2>Work Experiences↓</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <td>07/2021 <br> 
+                    →12/2021
+                  </td>
+                  <td>
+                    <h3>THE LAB SAIGON</h3>
+                    <i>Junior Graphic Designer</i> <br>
+                    – Communication & Visual Designer for the Saigon-based creative agency<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>05/2019
+                  </td>
+                  <td>
+                    <h3>INTEL PRODUCTS VIETNAM</h3>
+                    <i>Independent Freelance Illustrator</i> <br>
+                    – Stage Background Illustrator for the company’s year-end event.<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2017 <br> 
+                    →Now
+                  </td>
+                  <td>
+                    <h3>SMALL MEDIUM ENTERPRISES</h3>
+                    <i>Freelancer in Graphic Design</i> <br>
+                    – Responsible for the visual images, graphics, illustrations and concepts for clients’ needs.<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- -->
+            <br><h2>Skills↓</h2>
+            <table class="skills">
+              <tbody>
+                <tr>
+                  <td>
+                    <h3>– Proficient with the following Digital Softwares:</h3>
+                    Adobe Creative Suite and Figma.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>– Familiar with the following Digital Softwares:</h3>
+                    Cinema4D, Glyphs and Blender. 
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>– Technical Skills:</h3>
+                    Illustration, Publication Production, UI Design,  HTML/CSS & Javascript knowledge.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- -->
+            <br><h2>Activities↓</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <td>09/2021 <br> 
+                    →04/2022
+                  </td>
+                  <td>
+                    <h3>Google Developer Student Club - UIT</h3>
+                    – Development team.
+                  </td>
+                </tr>
+                <tr>
+                  <td>05/2021 <br> 
+                    →10/2021
+                  </td>
+                  <td>
+                    <h3>Project Vietnamme—a non-profit organisation dedicated to the relationship of young Vietnamese and the Arts.</h3>
+                    – Graphic Design Consultation.
+                  </td>
+                </tr>
+                <tr>
+                  <td>10/2020 <br> 
+                    →01/2021
+                  </td>
+                  <td>
+                    <h3>Vietnamme Magazine—magazine.vietnamme.me, an online magazine dedicated to the contemporary arts in Vietnam.</h3>
+                    – Website Development, Graphic Design.
+                  </td>
+                </tr>
+                <tr>
+                  <td>10/2017 <br> 
+                    →01/2018
+                  </td>
+                  <td>
+                    <h3>Human Library Vietnam—a non-profit organisation dedicated to raising awareness to societal issues.</h3>
+                    – Graphic Design, Illustration.
+                  </td>
+                </tr>
+                <tr>
+                  <td>08/2017 <br> 
+                    →08/2018
+                  </td>
+                  <td>
+                    <h3>Project Sugar—a non-profit student-run organisation dedicated to underprivileged children</h3>
+                    – Graphic Design, Illustration, Art Direction.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- -->
+            <br><h2>Accolades↓</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <td>2022
+                  </td>
+                  <td>
+                    <h3>D&AD NEW BLOOD YELLOW PENCIL</h3>
+                    – Awarded 2022 Yellow Pencil by D&AD New Blood for the entry Duolingo: Non-fungible Efforts.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2021
+                  </td>
+                  <td>
+                    <h3>RED DOT JUNIOR AWARD</h3>
+                    – Awarded “Red Dot Junior Award” under Red Dot Award: Brands & Communication Design by Red Dot Award in 2021.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2021
+                  </td>
+                  <td>
+                    <h3>CERTIFICATE OF TYPOGRAPHIC EXCELLENCE</h3>
+                    – Awarded “Certificate of Typographic Excellence” in TDC67 by Type Directors Club and will be included in the Annual of the Type Directors Club, The World’s Best Typography.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2020
+                  </td>
+                  <td>
+                    <h3>LASALLE SCHOLARSHIP 2020-2021</h3>
+                    – Awarded LASALLE Scholarship 2020–2021 to cover my tuition fee for my great performance at LASALLE College of the Arts.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2019
+                  </td>
+                  <td>
+                    <h3>LASALLE TUITION GRANT</h3>
+                    – Awarded 60% merit-based tuition grant for my tuition fee in the diploma at LASALLE College of the Arts.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <!-- -->
           <br><h2>Thank you for viewing</h2>
           

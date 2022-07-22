@@ -45,6 +45,7 @@ let smallersd;
 let smallersd_min;
 let fetch_data;
 let soitem_soon;
+let not_firstload = false;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -54,8 +55,19 @@ const seemorebtn = ulnav.querySelectorAll('.seemore_func');
 const seemorenav = $$('.seemore');
 const sortbtn = $$('.seemore button');
 const ckbx = $ulnav('label#tglnav input');
+const tglnav = $ulnav('label#tglnav');
 const main = $ulnav('#main');
 const sneak = $ulnav('#sneak_peek');
+const landing = $ulnav('#landing_pg');
+const about = $ulnav('#about');
+const sneak_title = $ulnav('#sneak_title');
+const resume = $ulnav('#myresume');
+const btn_img = $ulnav('.btn img');
+const description = $ulnav('#description');
+
+//fragment
+const fragment = document.createDocumentFragment();
+const fragment_sneak = document.createDocumentFragment();
 
 // border 3d object
 const border_3d = {
@@ -145,9 +157,6 @@ fetch('item.json')
                 .catch(err => console.error(err));
 
 function navli_html_generation(data) {
-    const fragment = document.createDocumentFragment();
-    const fragment_sneak = document.createDocumentFragment();
-
     for (let key in data) {
         let item = data[key];
         let key_ = (+key + 1 == availit_num) ? 'misc' : (+key + 1);
@@ -253,12 +262,9 @@ function navli_html_generation(data) {
             fragment_sneak.appendChild(li_);
         }
     }
-    ulnav.appendChild(fragment);
-    sneak.appendChild(fragment_sneak);
 
     // navbar construction // 
     onresizesortbtn(false);
-    nav_construct(0);
 
     delaypromise = delaypromise.then(function() { 
         viewportheight();
@@ -267,6 +273,9 @@ function navli_html_generation(data) {
             resolve();
         });
     })
+
+    ckbx.checked = true;
+    togglenav(ckbx);
 }
 
 function fieldcheck(class_, item) {

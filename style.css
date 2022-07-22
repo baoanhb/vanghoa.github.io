@@ -828,10 +828,15 @@ label#tglnav div {
 }
 
 #landing_pg {
-	height: calc(0.8 * var(--fr_height));
+	height: calc(var(--vh100) - calc(var(--pad_welcome) * 2));
+	min-height: 200px;
 	background-image: url(garage/background.jpg);
-	background-size: contain;
-	padding: 20px 0;
+	background-size: 100% 100%;
+	padding-top: 20px;
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+	transition: height 0.5s;
 }
 
 #landing_pg > * {
@@ -840,11 +845,63 @@ label#tglnav div {
 	max-width: 700px;
 }
 
+#landing_pg > ul {
+	background-color: transparent;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	width: 100%;
+	max-width: none;
+	flex-grow: 2;
+}
+
+#landing_pg > ul > * {
+	width: 100%;
+	height: 3em;
+	line-height: 3em;
+	text-align: center;
+	background-color: yellow;
+	font-weight: bold;
+	box-shadow: var(--boxsdstyle_inset);
+	cursor: pointer;
+}
+
+#landing_pg > h1 {
+	padding: 0 0.2em;
+}
+
+#about {
+	display: none;
+}
+
+#sneak_title, #tglnav, #myresume {
+	display: none;
+}
+
+/* description */
+#description {
+	padding: 0.4em 0.5em;
+	line-height: 1.3em;
+	align-self: center;
+}
+
 #description span {
+	font-weight: bold;
+}
+
+#description:not(.activate) span {
+	color: black !important;
+}
+
+#description.activate span {
 	text-decoration: underline;
 	cursor: pointer;
-	word-break: break-all;
 }
+
+#description.activate span::before {
+	content: '@';
+}
+
 /* sneak */
 #sneak_peek {
 	width: 100%;
@@ -1060,6 +1117,10 @@ div.vimeo {
 
 	#sneak_peek li div{
 		width: 100%;
+	}
+
+	#landing_pg > ul {
+		flex-direction: column;
 	}
 }
 

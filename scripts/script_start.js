@@ -1,6 +1,51 @@
 "use strict";
 
 // local function //
+
+// initial nav func //
+function mywork_btn() {
+    ckbx.checked = false;
+    togglenav(ckbx);
+
+    if (not_firstload) {return;}
+    not_firstload = true;
+
+    sneak_title.style.display = 'block';
+    wlcmscr.style.overflow = 'auto';
+    tglnav.style.display = 'block';
+    description.classList.add('activate');
+
+    landing.style.height = 'calc(var(--fr_height) - calc(var(--pad_welcome) * 2))';
+    
+    sneak.appendChild(fragment_sneak);
+    ulnav.appendChild(fragment);
+    nav_construct(0);
+
+    btn_img.addEventListener('transitionend', scroll_mywork);
+}
+
+                    function scroll_mywork() {
+                        r_transitionend([scroll_mywork], btn_img);
+                        smoothScrolling(wlcmscr, sneak, 3000, true, true, 500);
+                    }
+
+                    function activate_Sortingfunc(param) {
+                        if (!description.classList.contains('activate')) return;;
+                        Sortingfunc(param);
+                    }
+
+function aboutme_btn() {
+    wlcmscr.style.overflow = 'auto';
+    about.style.display = 'block';
+    smoothScrolling(wlcmscr, about, 1000, false, false, 0);
+}
+
+function myresume_btn() {
+    wlcmscr.style.overflow = 'auto';
+    resume.style.display = 'block';
+    smoothScrolling(wlcmscr, resume, 1000, false, false, 0);
+}
+
 function nav_construct(id) {
     crrntnavlist = id;
 
@@ -522,3 +567,44 @@ function rmvE_(event) {
     }
     return rmvE;
 }
+
+function smoothScrolling(parent, elem, duration, bot_check, reverse_check, duration__) { 
+
+    let startingY = parent.scrollTop;
+    let elementY = (bot_check ? (elem.getBoundingClientRect().bottom - parent.getBoundingClientRect().height) : elem.getBoundingClientRect().top) - parent.getBoundingClientRect().top + startingY;
+    let diff = elementY - startingY;
+    let start;
+    let start__;
+  
+    window.requestAnimationFrame(function step(timestamp) {
+        // time_count //
+        if (!start) start = timestamp;
+        let time = timestamp - start;
+
+        if (!start__) { 
+            time_count(time, duration, time);
+        }
+
+        if (time > duration && reverse_check) {
+            if (!start__) start__ = timestamp;
+            let time__ = timestamp - start__;
+
+            time_count(time__, duration__, (duration__ - time__));
+        }
+        
+        // function //
+        function easing(t) { 
+            return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; 
+        };
+
+        function time_count(time, duration, percent_param1) {
+            let percent = Math.min(percent_param1 / duration, 1);
+            percent = easing(percent);
+            parent.scrollTo(0, startingY + diff * percent);
+            
+            if (time < duration) {
+                window.requestAnimationFrame(step);
+            }
+        }
+    })
+  }
