@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@700&display=swap');
+
 :root {
 	--colmax: 21;
 	--rowmax: 21;
@@ -94,7 +96,7 @@ h2 {
 }
 
 h2, h1 {
-	font-family: 'Times New Roman', Times, serif;
+	font-family: 'Crimson Pro', serif;
 }
 
 body {
@@ -836,6 +838,7 @@ label#tglnav div {
 	display: flex;
 	gap: 20px;
 	flex-direction: column;
+	align-items: center;
 	transition: height 0.5s;
 }
 
@@ -864,10 +867,13 @@ label#tglnav div {
 	font-weight: bold;
 	box-shadow: var(--boxsdstyle_inset);
 	cursor: pointer;
+	border-radius: 2.8em 2.8em 0 0;
 }
 
 #landing_pg > h1 {
-	padding: 0 0.2em;
+	padding: 0.2em 0.2em;
+	text-align: center;
+	line-height: 0.95em;
 }
 
 #about {
@@ -882,7 +888,6 @@ label#tglnav div {
 #description {
 	padding: 0.4em 0.5em;
 	line-height: 1.3em;
-	align-self: center;
 }
 
 #description span {
