@@ -100,6 +100,11 @@ h2, h1 {
 	font-family: 'Alegreya', serif;
 }
 
+h2 span:first-child {
+	font-family: inherit;
+	font-size: inherit;
+}
+
 body {
 	overflow: hidden;
 }
