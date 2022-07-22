@@ -192,8 +192,8 @@ nav :is(a span, a:only-child) {
 /* h1 */
 h1 {
 	font-size: 2rem;
-	font-family: 'Alegreya';
-	-webkit-appearance: none;
+	line-height: 1em;
+	font-family: 'Alegreya', serif;
 	max-width: 700px;
 	text-align: center;
 	margin-bottom: 0;

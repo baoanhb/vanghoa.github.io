@@ -41,7 +41,6 @@
 	--print: 255, 20, 147;
 	/* */
 	--borrad_ios: calc(var(--navsz) - var(--offsetborderstyle));
-	--borrad_ios_landing: calc(3em - var(--offsetborderstyle));
 	--offsetborderstyle: 5px;
 	/* border 3D animated color */
 	--bot_color_be4: var(--colortheme_rgb);
@@ -93,7 +92,8 @@ h1 {
 }
 
 h2 {
-	font-size: 1.1em;
+	font-size: 1.1rem;
+	line-height: 1.1em;
 }
 
 h2, h1 {
@@ -230,11 +230,6 @@ li[onclick="nav_navigate(this)"] {
 		background-color: var(--highlightcolor);
 		color: white;
 	}
-}
-
-/* li text h2 */
-li div.text h2 {
-	font-size: var(--lifontsz);
 }
 
 /* li col and row */
@@ -868,7 +863,6 @@ label#tglnav div {
 	font-weight: bold;
 	box-shadow: var(--boxsdstyle_inset);
 	cursor: pointer;
-	border-radius: var(--borrad_ios_landing) var(--borrad_ios_landing) 0 0;
 }
 
 #landing_pg > h1 {

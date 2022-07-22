@@ -1,6 +1,6 @@
 "use strict";
 // custom settings //
-const minsz = 9;
+const minsz = 10;
 const time_interval = 250;
 const soitemperscreen = 6;
 const soitem_tong = 16;
