@@ -257,7 +257,6 @@ body.hasHover li.col:hover {
 li.row {
 	width: var(--navsz);
 	writing-mode: vertical-rl;
-	text-underline-position: left;
 	padding: calc(var(--navsz) * 3 / 5) 0 calc(var(--navsz) * 3 / 5);
 }
 
@@ -395,8 +394,15 @@ li.row > div.hovercontent {
 /* li current and soon */
 li.current > div.text > h2 > span:nth-child(1) {
 	text-decoration: underline;
-	text-underline-offset: 0px;
 	text-decoration-thickness: 4px;
+}
+
+li.row.current > div.text > h2 > span:nth-child(1) {
+	text-underline-offset: 0.05em;
+}
+
+body.hasHover li.row.current > div.text > h2 > span:nth-child(1) {
+	text-underline-offset: 0px;
 }
 
 li.soon {
@@ -1110,6 +1116,7 @@ a {
 
 div.vimeo {
 	position: relative;
+	margin-bottom: var(--pad_welcome);
 }
 
 /* orientation */
