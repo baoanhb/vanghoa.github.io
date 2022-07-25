@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap');
 
 :root {
 	--colmax: 21;
@@ -11,6 +12,7 @@
 	--navszhover: 200px;
 	--hbhwidth_ave: 30px;
 	--paddingli: 8px;
+	--pad_btn: 10px;
 	--seemoresz: var(--navsz_sampl);
 	--hbhwidth_top: var(--hbhwidth_ave);
 	--hbhwidth_left: var(--hbhwidth_ave);
@@ -27,11 +29,15 @@
 	--boxsdstyle_inset: 0 0 0px 1px black inset,  
 						0 0 0px 3px white inset, 
 						0 0 0px 4px black inset;
+	--scrlbrwd: 0px;
+	/* font setting */
 	--lifontsz: 15px;
-	--pad_btn: 10px;
+	--lifontsz_mid: 13.5px;
+	--lifontsz_small: 12px;
+	--whght_bold: 600;
+	/* color theme */
 	--colortheme: rgb(61, 235, 221);
 	--colortheme_rgb: 61, 235, 221;
-	--scrlbrwd: 0px;
 	/* sorting color */
 	--mo_gra: 255, 0, 255;
 	--illus: 0, 204, 102;
@@ -82,7 +88,7 @@
 	margin: 0;
 	padding: 0;
 	font-size: var(--lifontsz);
-	font-family: Helvetica ,'Arial Narrow' , Arial, sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	-webkit-text-size-adjust: none;
 	text-size-adjust: none;
 }
@@ -251,6 +257,7 @@ body.hasHover li.col:hover {
 li.row {
 	width: var(--navsz);
 	writing-mode: vertical-rl;
+	text-underline-position: left;
 	padding: calc(var(--navsz) * 3 / 5) 0 calc(var(--navsz) * 3 / 5);
 }
 
@@ -307,12 +314,12 @@ body.hasHover li.right:hover > div.text {
 
 li > div.text > :not(:first-child) {
 	display: none;
-	font-size: 12px;
+	font-size: var(--lifontsz_small);
 }
 
 .date {
 	font-weight: 100;
-	font-size: 12px;
+	font-size: var(--lifontsz_small);
 	white-space: nowrap;
 }
 
@@ -332,7 +339,7 @@ span.field {
 	color: white;
 	border-radius: 50%;
 	padding: 3px 10px;
-	font-size: 12px;
+	font-size: var(--lifontsz_small);
 }
 
 span.field.mo_gra {
@@ -388,6 +395,7 @@ li.row > div.hovercontent {
 /* li current and soon */
 li.current > div.text > h2 > span:nth-child(1) {
 	text-decoration: underline;
+	text-underline-offset: 0px;
 	text-decoration-thickness: 4px;
 }
 
@@ -778,7 +786,7 @@ label#tglnav div {
 	padding: 10px 15px 10px;
 	background-color: var(--colortheme);
 	border-radius: 50px;
-	font-weight: bold;
+	font-weight: var(--whght_bold);
 	font-size: var(--lifontsz);
 	-webkit-box-shadow: var(--boxsdstyle_inset);
 	box-shadow: var(--boxsdstyle_inset);
@@ -841,6 +849,7 @@ label#tglnav div {
 	flex-direction: column;
 	align-items: center;
 	transition: height 0.5s;
+	margin-bottom: var(--pad_welcome);
 }
 
 #landing_pg > * {
@@ -861,13 +870,15 @@ label#tglnav div {
 
 #landing_pg > ul > * {
 	width: 100%;
-	height: 3em;
-	line-height: 3em;
+	height: var(--navsz_sampl);
 	text-align: center;
 	background-color: yellow;
-	font-weight: bold;
+	font-weight: var(--whght_bold);
 	box-shadow: var(--boxsdstyle_inset);
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #landing_pg > h1 {
@@ -891,7 +902,8 @@ label#tglnav div {
 }
 
 #description span {
-	font-weight: bold;
+	font-weight: var(--whght_bold);
+	font-size: inherit;
 }
 
 #description:not(.activate) span {
@@ -910,11 +922,12 @@ label#tglnav div {
 /* sneak */
 #sneak_peek {
 	width: 100%;
+	margin-bottom: var(--pad_welcome);
 }
 
 #sneak_peek li {
 	display: flex;
-	margin-bottom: 10px;
+	margin-top: var(--pad_welcome);
 }
 
 #sneak_peek li:nth-child(4n + 1) {
@@ -992,7 +1005,10 @@ a {
 		--navsz_sampl: 60px;
 		--navszhover: 300px;
 		--hbhwidth_ave: 40px;
-		--lifontsz: 17px;
+	}
+
+	h2 {
+		font-size: 1.25rem;
 	}
 }
 
