@@ -285,7 +285,6 @@ li.bot.col {
 body.hasHover li.col:hover, body.hasHover li.row:hover {
 	flex-direction: column;
 	justify-content: stretch;
-	gap: var(--paddingli);
 	border-radius: 0;
 }
 /* div text */
@@ -299,6 +298,7 @@ li > div.text {
 
 body.hasHover li:hover > div.text {
 	flex-direction: column;
+	margin-bottom: var(--paddingli);
 }
 
 body.hasHover li.left:hover > div.text {
@@ -370,6 +370,7 @@ li > div.hovercontent {
 	width: calc(100% - 10px);
 	height: 100%;
 	display: none;
+	flex: 1 1;
 	border-radius: 5px;
 	background-repeat: repeat;
 	background-color: white;
@@ -673,48 +674,52 @@ body.hasHover #bot_right {
 
 /* stroke 3D */
 body.hasHover #top_border .line_3d {
-	top: calc(0px - calc(calc(var(--hbhwidth_top) * 1.2) / 2));
+	top: calc(0px - calc(var(--hbhwidth_top) * 1.2));
 	height: calc(var(--hbhwidth_top) + var(--navsz));
 	transition: height 0.5s, top 0.5s, width 0.5s;
 }
 
 body.hasHover #bot_border .line_3d {
-	bottom: calc(0px - calc(calc(var(--hbhwidth_bot) * 1.2) / 2));
+	bottom: calc(0px - calc(var(--hbhwidth_bot) * 1.2));
 	height: calc(var(--hbhwidth_bot) + var(--navsz));
 	transition: height 0.5s, bottom 0.5s, width 0.5s;
 }
 
 body.hasHover #left_border .line_3d {
-	left: calc(0px - calc(calc(var(--hbhwidth_left) * 1.2) / 2));
+	left: calc(0px - calc(var(--hbhwidth_left) * 1.2));
 	width: calc(var(--hbhwidth_left) + var(--navsz));
 	transition: height 0.5s, left 0.5s, width 0.5s;
 }
 
 body.hasHover #right_border .line_3d {
-	right: calc(0px - calc(calc(var(--hbhwidth_right) * 1.2) / 2));
+	right: calc(0px - calc(var(--hbhwidth_right) * 1.2));
 	width: calc(var(--hbhwidth_right) + var(--navsz));
 	transition: height 0.5s, right 0.5s, width 0.5s;
 }
 
 body.hasHover .line_3d {
-	position: relative;
+	position: absolute;
 	cursor: auto;
 }
 
 body.hasHover .line_3d.side_left {
 	width: calc(var(--hbhwidth_left) * 0.7);
+	left: 30%;
 }
 
 body.hasHover .line_3d.side_right {
 	width: calc(var(--hbhwidth_right) * 0.7);
+	right: 30%;
 }
 
 body.hasHover .line_3d.side_top {
 	height: calc(var(--hbhwidth_top) * 0.7);
+	top: 30%;
 }
 
 body.hasHover .line_3d.side_bot {
 	height: calc(var(--hbhwidth_bot) * 0.7);
+	bottom: 30%;
 }
 
 /*
@@ -851,7 +856,6 @@ label#tglnav div {
 	background-size: 100% 100%;
 	padding-top: 20px;
 	display: flex;
-	gap: 20px;
 	flex-direction: column;
 	align-items: center;
 	transition: height 0.5s;
@@ -891,6 +895,7 @@ label#tglnav div {
 	padding: 0.2em 0.2em;
 	text-align: center;
 	line-height: 0.95em;
+	margin-bottom: 20px;
 }
 
 #about {
