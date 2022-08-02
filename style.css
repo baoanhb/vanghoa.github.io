@@ -368,7 +368,6 @@ span.field.print {
 /* div hovercontent */
 li > div.hovercontent {
 	width: calc(100% - 10px);
-	height: 100%;
 	display: none;
 	flex: 1 1;
 	border-radius: 5px;
