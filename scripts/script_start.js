@@ -21,12 +21,83 @@ function mywork_btn() {
     ulnav.appendChild(fragment);
     nav_construct(0);
 
-    btn_img.addEventListener('transitionend', scroll_mywork);
+    tutorial.go();
 }
 
+                    let tutorial = {
+                        go : function() {
+                            for (let elem of instruction) {
+                                elem.classList.add('go');
+                            }
+
+                            this['1']();
+                        },
+                        '1' : function() {
+                            instruction_main.classList.add('block');
+                            for (let elem of instruction_btn) {
+                                elem.classList.add('block');
+                            }
+                            nav_instruction.style.display = 'flex';
+                            
+                            this.go = this['2'];
+                        },
+                        '2' : function() {
+                            for (let elem of instruction_nav) {
+                                elem.classList.add('block');
+                            }
+                            for (let elem of instruction_btn_nav) {
+                                elem.classList.remove('block');
+                            }
+                            nav_instruction.style.display = 'none';
+                            navlist_instruction.style.display = 'flex';
+                            
+                            this.go = this['3'];
+                        },
+                        '3' : function() {
+                            for (let elem of instruction_btn_nav) {
+                                elem.classList.add('block');
+                            }
+                            instruction_btn_sort.classList.remove('block');
+                            navlist_instruction.style.display = 'none';
+                            sort_instruction.style.display = 'flex';
+                            
+                            this.go = this['4'];
+                        },
+                        '4' : function() {
+                            instruction_btn_sort.classList.add('block');
+
+                            instruction_btn_home.classList.remove('block');
+                            instruction_main.classList.remove('block');
+                            sort_instruction.style.display = 'none';
+                            for (let elem of home_instruction) {
+                                elem.style.display = 'block';
+                            }
+
+                            this.go = this['5'];
+                        },
+                        '5' : function() {
+                            for (let elem of instruction) {
+                                elem.classList.remove('block');
+                            }
+                            
+                            instruction_btn_sort.addEventListener('transitionend', scroll_mywork);
+                            for (let elem of home_instruction) {
+                                elem.style.display = 'none';
+                            }
+
+                            this.go = function() {
+                                return;
+                            };
+                        },
+                    }
+
                     function scroll_mywork() {
-                        r_transitionend([scroll_mywork], btn_img);
-                        smoothScrolling(wlcmscr, sneak, 3000, true, true, 500);
+                        r_transitionend([scroll_mywork], instruction_btn_sort);
+                        smoothScrolling(wlcmscr, sneak, 3000, true, true, 500, function() {
+                            for (let elem of instruction) {
+                                elem.remove();
+                            }
+                        });
                     }
 
                     function activate_Sortingfunc(param) {
@@ -568,28 +639,28 @@ function rmvE_(event) {
     return rmvE;
 }
 
-function smoothScrolling(parent, elem, duration, bot_check, reverse_check, duration__) { 
+function smoothScrolling(parent, elem, duration, bot_check, reverse_check, duration__, callback) { 
 
     let startingY = parent.scrollTop;
     let elementY = (bot_check ? (elem.getBoundingClientRect().bottom - parent.getBoundingClientRect().height) : elem.getBoundingClientRect().top) - parent.getBoundingClientRect().top + startingY;
     let diff = elementY - startingY;
     let start;
     let start__;
-  
+
     window.requestAnimationFrame(function step(timestamp) {
         // time_count //
         if (!start) start = timestamp;
         let time = timestamp - start;
 
         if (!start__) { 
-            time_count(time, duration, time);
+            time_count(time, duration, time, reverse_check ? false : true);
         }
 
         if (time > duration && reverse_check) {
             if (!start__) start__ = timestamp;
             let time__ = timestamp - start__;
 
-            time_count(time__, duration__, (duration__ - time__));
+            time_count(time__, duration__, (duration__ - time__), true);
         }
         
         // function //
@@ -597,13 +668,17 @@ function smoothScrolling(parent, elem, duration, bot_check, reverse_check, durat
             return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; 
         };
 
-        function time_count(time, duration, percent_param1) {
+        function time_count(time, duration, percent_param1, callbackcheck) {
             let percent = Math.min(percent_param1 / duration, 1);
             percent = easing(percent);
             parent.scrollTo(0, startingY + diff * percent);
             
             if (time < duration) {
                 window.requestAnimationFrame(step);
+            } else if (callbackcheck) {
+                if (typeof callback !== 'undefined') {
+                    callback();
+                }
             }
         }
     })

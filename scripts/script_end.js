@@ -65,6 +65,18 @@ const resume = $ulnav('#myresume');
 const btn_img = $ulnav('.btn img');
 const description = $ulnav('#description');
 
+const instruction = $$('.instruction');
+const instruction_main = $('.instruction.main');
+const instruction_nav = $$('.instruction.nav_');
+const instruction_btn = $$('.instruction.btn_');
+const instruction_btn_home = $('.instruction.btn_.tl');
+const instruction_btn_sort = $('.instruction.btn_.tr');
+const instruction_btn_nav = [$('.instruction.btn_.br'), $('.instruction.btn_.bl')];
+const nav_instruction = $('#nav_instruction');
+const navlist_instruction = $('#navlist_instruction');
+const sort_instruction = $('#sort_instruction');
+const home_instruction = $$('.home_instruction');
+
 //fragment
 const fragment = document.createDocumentFragment();
 const fragment_sneak = document.createDocumentFragment();

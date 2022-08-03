@@ -144,8 +144,6 @@ nav ul#nav {
 	height: var(--vh100); 
 	transition: width 0.5s, height 0.5s;
 	overflow: hidden;
-	-webkit-box-shadow: var(--boxsdstyle_inset);
-	box-shadow: var(--boxsdstyle_inset);
 	background-color: black;
 }
 
@@ -841,13 +839,136 @@ label#tglnav div {
 	box-shadow: none;
 }
 
-/* resume */
-#instruction {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+/* black instruction */
+.instruction {
+	z-index: 4;
+	background-color: rgba(0,0,0,0.9);
+	box-shadow: none;
+	padding: 0;
+	visibility: hidden;
+	display: block;
+	opacity: 0;
 }
 
+.instruction.trans {
+	transition: opacity 0.5s;
+}
+
+.instruction.main {
+	grid-column: 3 / var(--colmaxreal_1);
+	grid-row: 3 / var(--colmaxreal_1);
+}
+			.instruction.main > *, .home_instruction > * {
+				margin: 0 auto;
+				color: white;
+				height: 100%;
+				display: none;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.home_instruction {
+				z-index: 5;
+				display: none;
+				grid-column: 2 / var(--colmaxreal_2);
+				
+				background-color: transparent;
+				visibility: visible;
+				opacity: 1;
+			}
+
+							.home_instruction > * {
+								display: flex;
+								padding: 0 10%;
+							}
+
+							
+.canthover {
+	display: initial;
+}
+
+			body.hasHover .canthover {
+				display: none;
+			}
+
+.canhover {
+	display: none;
+}
+
+			body.hasHover .canhover {
+				display: initial;
+			}
+			
+
+.instruction.left {
+	grid-column: 1;
+	grid-row: 2 / var(--colmaxreal_2);
+}
+
+.instruction.right {
+	grid-column: var(--colmaxreal_2);
+	grid-row: 2 / var(--colmaxreal_2);
+}
+
+.instruction.top {
+	grid-column: 2 / var(--colmaxreal_2);
+	grid-row: 1;
+}
+
+.instruction.bot {
+	grid-column: 2 / var(--colmaxreal_2);
+	grid-row: var(--colmaxreal_2);
+}
+
+.instruction.left.bor_3d {
+	grid-column: 2;
+	grid-row: 2 / var(--colmaxreal_2);
+}
+
+.instruction.right.bor_3d {
+	grid-column: var(--colmaxreal_1);
+	grid-row: 2 / var(--colmaxreal_2);
+}
+
+.instruction.top.bor_3d {
+	grid-column: 3 / var(--colmaxreal_1);
+	grid-row: 2;
+}
+
+.instruction.bot.bor_3d {
+	grid-column: 3 / var(--colmaxreal_1);
+	grid-row: var(--colmaxreal_1);
+}
+
+.instruction.btn_.tl {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.instruction.btn_.tr {
+	grid-column: var(--colmaxreal_2);
+	grid-row: 1;
+}
+
+.instruction.btn_.bl {
+	grid-column: 1;
+	grid-row: var(--colmaxreal_2);
+}
+
+.instruction.btn_.br {
+	grid-column: var(--colmaxreal_2);
+	grid-row: var(--colmaxreal_2);
+}
+
+.instruction:is(.main, .btn_, .nav_).go {
+	visibility: visible;
+}
+
+.instruction:is(.main, .btn_, .nav_).block {
+	opacity: 1;
+}
+
+/* resume */
 #landing_pg {
 	height: calc(var(--vh100) - calc(var(--pad_welcome) * 2));
 	min-height: 200px;
@@ -1139,6 +1260,10 @@ div.vimeo {
 
 	div.btn > ul {
 		display: block;
+	}
+
+	.instruction.main > * {
+		max-width: 80%;
 	}
 }
 
