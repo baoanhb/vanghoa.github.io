@@ -428,6 +428,14 @@ li.soon {
 	background-color: var(--highlightcolor);
 }
 
+.btn[onclick="homescreen()"] {
+	background-color: white;
+}
+
+				.btn[onclick="homescreen()"].bw {
+					background-color: black;
+				}
+
 div.btn {
 	cursor: pointer;
 	width: 50%;
@@ -857,6 +865,7 @@ label#tglnav div {
 .instruction.main {
 	grid-column: 3 / var(--colmaxreal_1);
 	grid-row: 3 / var(--colmaxreal_1);
+	text-align: center;
 }
 			.instruction.main > *, .home_instruction > * {
 				margin: 0 auto;
@@ -865,6 +874,7 @@ label#tglnav div {
 				display: none;
 				justify-content: center;
 				align-items: center;
+				flex-direction: column;
 			}
 
 			.home_instruction {
@@ -875,6 +885,7 @@ label#tglnav div {
 				background-color: transparent;
 				visibility: visible;
 				opacity: 1;
+				text-align: center;
 			}
 
 							.home_instruction > * {
@@ -882,6 +893,10 @@ label#tglnav div {
 								padding: 0 10%;
 							}
 
+.click_any {
+	margin-top: 1em;
+	text-align: center;
+}
 							
 .canthover {
 	display: initial;
@@ -1283,6 +1298,10 @@ div.vimeo {
 }
 
 /* decoration */
+.horizontal, .vertical {
+	position: relative;
+}
+
 .horizontal {
 	background-image: 	linear-gradient(rgba(255, 255, 255, 0) 0%, 
 										rgba(255, 255, 255, 0) 10%, 
@@ -1300,6 +1319,22 @@ div.vimeo {
 										rgba(255, 255, 255, 0.6) 55%, 
 										rgba(255, 255, 255, 0) 90%, 
 										rgba(255, 255, 255, 0) 100%);
+}
+
+.horizontal::before, .vertical::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	opacity: 0;
+	border-radius: inherit;
+}
+
+.horizontal:active::before, .vertical:active::before {
+	opacity: 0.5;
 }
 
 .horizontal_ani::after, .vertical_ani::after {

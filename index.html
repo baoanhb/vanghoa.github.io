@@ -49,7 +49,7 @@
       <li id="main">
         <label id="tglnav">
           <input type="checkbox" onclick="togglenav(this)">
-          <div class="horizontal">toggle navbar</div>
+          <div class="horizontal">go fullscreen</div>
         </label>
         <section id="welcome" style="overflow: hidden;">
           <div id="landing_pg">
@@ -317,7 +317,7 @@
         </section>
       </li>
       <!-- -->
-      <li class="btn vertical" onclick="homescreen()" title="toggle homescreen" style="grid-column: 1 / 2; grid-row: 1 / 2; background-color: white;">
+      <li class="btn vertical" onclick="homescreen()" title="toggle homescreen" style="grid-column: 1 / 2; grid-row: 1 / 2;">
         <img src="icon/icon (2).jpg" alt="home button">
       </li>
       <!-- -->
@@ -385,17 +385,23 @@
           <p><span style="color: var(--colortheme);">Navigation tool:</span> <br>
             - Each <span style="color: var(--colortheme);">tab</span> is 1 project. <br>
             - <span class="canhover">Click</span><span class="canthover">Tap</span> to open <span class="canhover">/ Hover to see thumbnail + description</span> (don't do it now). <br>
-            <br> <i>**Click anywhere to continue**</i>
+          </p>
+          <p class="click_any">
+            <i>**Click anywhere to continue**</i>
           </p>
         </div>
         <div id="navlist_instruction">
-          <p><span style="color: yellow;">These 2 bottom buttons (backward/forward)</span> are to browse through 5 projects each on the <span style="color: var(--colortheme);">navigation tool</span>.<br>
-            <br> <i>**Click anywhere to continue**</i>
+          <p><span style="color: yellow;">These 2 bottom buttons (backward / forward)</span> are to browse through 5 projects each on the <span style="color: var(--colortheme);">navigation tool</span>.<br>
+          </p>
+          <p class="click_any">
+            <i>**Click anywhere to continue**</i>
           </p>
         </div>
         <div id="sort_instruction">
           <p><span style="color: var(--highlightcolor);">This top right button</span> is to sort and filter projects on the <span style="color: var(--colortheme);">navigation tool</span>.<br>
-            <br> <i>**Click anywhere to continue**</i>
+          </p>
+          <p class="click_any">
+            <i>**Click anywhere to continue**</i>
           </p>
         </div>
       </li>

@@ -288,6 +288,8 @@ function navlist_navigate(next, btn) {
 //
 function nav_navigate(item) {
     wlcmscr.classList.add('close');
+    homebtn.classList.add('bw');
+
     item.classList.add('current');
     let itemid = item.getAttribute('id').slice(1);
     let itemid_ = (+itemid == availit_num) ? 'misc' : itemid; //
@@ -328,6 +330,7 @@ function ifr_widthfit(frame) {
 //
 function homescreen() {
     wlcmscr.classList.toggle('close');
+    homebtn.classList.toggle('bw');
 
     if (!wlcmscr.classList.contains('close')) {
         removeseemore();
