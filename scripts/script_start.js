@@ -25,6 +25,20 @@ function mywork_btn() {
 }
 
                     let tutorial = {
+                        _none : [],
+                        display : function(flex, block) {
+                            /* */
+                            display(flex, 'flex');
+                            display(block, 'block');
+                            display(this._none, 'none');
+                            this._none = flex.concat(block)
+                            /* */
+                            function display(arr, dis) {
+                                for (let elem of arr) {
+                                    elem.style.display = dis;
+                                }
+                            }
+                        },
                         go : function() {
                             for (let elem of instruction) {
                                 elem.classList.add('go');
@@ -37,8 +51,8 @@ function mywork_btn() {
                             for (let elem of instruction_btn) {
                                 elem.classList.add('block');
                             }
-                            nav_instruction.style.display = 'flex';
-                            
+                            /* */
+                            this.display([nav_instruction],[]);
                             this.go = this['2'];
                         },
                         '2' : function() {
@@ -48,9 +62,8 @@ function mywork_btn() {
                             for (let elem of instruction_btn_nav) {
                                 elem.classList.remove('block');
                             }
-                            nav_instruction.style.display = 'none';
-                            navlist_instruction.style.display = 'flex';
-                            
+                            /* */
+                            this.display([navlist_instruction],[]);
                             this.go = this['3'];
                         },
                         '3' : function() {
@@ -58,33 +71,25 @@ function mywork_btn() {
                                 elem.classList.add('block');
                             }
                             instruction_btn_sort.classList.remove('block');
-                            navlist_instruction.style.display = 'none';
-                            sort_instruction.style.display = 'flex';
-                            
+                            /* */
+                            this.display([sort_instruction],[]);
                             this.go = this['4'];
                         },
                         '4' : function() {
                             instruction_btn_sort.classList.add('block');
-
                             instruction_btn_home.classList.remove('block');
                             instruction_main.classList.remove('block');
-                            sort_instruction.style.display = 'none';
-                            for (let elem of home_instruction) {
-                                elem.style.display = 'block';
-                            }
-
+                            /* */
+                            this.display([],[...home_instruction]);
                             this.go = this['5'];
                         },
                         '5' : function() {
                             for (let elem of instruction) {
                                 elem.classList.remove('block');
                             }
-                            
                             instruction_btn_sort.addEventListener('transitionend', scroll_mywork);
-                            for (let elem of home_instruction) {
-                                elem.style.display = 'none';
-                            }
-
+                            /* */
+                            this.display([],[]);
                             this.go = function() {
                                 return;
                             };

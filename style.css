@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap');
 
 :root {
 	--colmax: 21;
@@ -315,7 +315,7 @@ li > div.text > :not(:first-child) {
 }
 
 .date {
-	font-weight: 100;
+	font-weight: 400;
 	font-size: var(--lifontsz_small);
 	white-space: nowrap;
 }
@@ -894,7 +894,9 @@ label#tglnav div {
 							}
 
 .click_any {
-	margin-top: 1em;
+	position: absolute;
+	bottom: 2em;
+	font-weight: 100;
 	text-align: center;
 }
 							
