@@ -26,6 +26,16 @@ function mywork_btn() {
 
                     let tutorial = {
                         _none : [],
+                        _add : [],
+                        block : function(remove) {
+                            for (let elem of this._add) {
+                                elem.classList.add('block');
+                            }
+                            for (let elem of remove) {
+                                elem.classList.remove('block');
+                            }
+                            this._add = remove;
+                        },
                         display : function(flex, block) {
                             /* */
                             display(flex, 'flex');
@@ -43,56 +53,35 @@ function mywork_btn() {
                             for (let elem of instruction) {
                                 elem.classList.add('go');
                             }
-
+                            this._add = [instruction_main, ...instruction_btn];
                             this['1']();
                         },
                         '1' : function() {
-                            instruction_main.classList.add('block');
-                            for (let elem of instruction_btn) {
-                                elem.classList.add('block');
-                            }
-                            /* */
+                            this.block([...instruction_nav]);
                             this.display([nav_instruction],[]);
                             this.go = this['2'];
                         },
                         '2' : function() {
-                            for (let elem of instruction_nav) {
-                                elem.classList.add('block');
-                            }
-                            for (let elem of instruction_btn_nav) {
-                                elem.classList.remove('block');
-                            }
-                            /* */
+                            this.block([...instruction_btn_nav]);
                             this.display([navlist_instruction],[]);
                             this.go = this['3'];
                         },
                         '3' : function() {
-                            for (let elem of instruction_btn_nav) {
-                                elem.classList.add('block');
-                            }
-                            instruction_btn_sort.classList.remove('block');
-                            /* */
+                            this.block([instruction_btn_sort]);
                             this.display([sort_instruction],[]);
                             this.go = this['4'];
                         },
                         '4' : function() {
-                            instruction_btn_sort.classList.add('block');
-                            instruction_btn_home.classList.remove('block');
-                            instruction_main.classList.remove('block');
-                            /* */
+                            this.block([instruction_btn_home, instruction_main]);
                             this.display([],[...home_instruction]);
                             this.go = this['5'];
                         },
                         '5' : function() {
-                            for (let elem of instruction) {
-                                elem.classList.remove('block');
-                            }
                             instruction_btn_sort.addEventListener('transitionend', scroll_mywork);
                             /* */
+                            this.block([...instruction]);
                             this.display([],[]);
-                            this.go = function() {
-                                return;
-                            };
+                            this.go = function() {return;};
                         },
                     }
 
