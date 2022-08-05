@@ -34,6 +34,8 @@
 	--print: 255, 20, 147;
 	/* font weight */
 	--whght_bold: 600;
+	/* scrollbarwidth */
+	--scrlbrwd: 0px;
 }
 
 body {
@@ -52,7 +54,7 @@ hr {
 	width: 100vw;
 }
 
-img, .item, .column, p, h1 {
+img, .item, .column, p, h1, .scroller {
 	margin: var(--margin);
 	display: block;
 	width: var(--minsz169);
@@ -61,8 +63,22 @@ img, .item, .column, p, h1 {
 	object-fit: contain;
 	text-align: justify;
 }
+			.scroller {
+				overflow: auto;
+				width: var(--minsz);
+				height: calc(var(--minsz) + var(--scrlbrwd));
+				max-height: var(--maxsz);
+			}
 
-img, .item {
+			.scroller img {
+				border: none;
+				margin: 0;
+				width: auto;
+				max-width: none;
+				height: 100%;
+			}
+
+img, .item, .scroller {
 	border: solid 1px white;
 }
 

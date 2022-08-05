@@ -280,18 +280,23 @@ function navlist_navigate(next, btn) {
     nav_construct(navid);
 }
 //
+let frame_needscrollbar = false;
+
 function nav_navigate(item) {
     wlcmscr.classList.add('close');
     homebtn.classList.add('bw');
 
     item.classList.add('current');
     let itemid = item.getAttribute('id').slice(1);
-    let itemid_ = (+itemid == availit_num) ? 'misc' : itemid; //
+    let itemid_ = item.getAttribute('id_');
 
     if (crrntitemid == itemid) {
         projfr.firstElementChild.contentWindow.scrollTo(0,0);
         return;
     }
+
+    frame_needscrollbar = (itemid_ == 'misc') ? true : false;
+
     navitemobj[+crrntitemid - 1].elem.classList.remove('current');
 
     crrntitemid = itemid;
@@ -320,6 +325,14 @@ function ifr_widthfit(frame) {
     if (!+frame.getAttribute('hidecheck')) {return;}
 
     frame.contentWindow.document.body.style.width = `${innerWidth - offsetifr}px`;
+}
+
+function ifr_onload(frame) {
+    ifr_widthfit(frame);
+
+    if (frame_needscrollbar) {
+        frame.contentWindow.document.querySelector(':root').style.setProperty('--scrlbrwd', `${scrlbrwd}px`);
+    }
 }
 //
 function homescreen() {

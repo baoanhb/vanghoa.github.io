@@ -122,26 +122,29 @@ const soon_obj = {
     "description" : "",
     "soon" : true
 };
-const misc_obj = {
-    "name" : "Misc projects",
-    "date" : "1/2020 - present",
-    "field" : [
-        {
-            "name" : "Communication design",
-            "class" : ""
-        },
-        {
-            "name" : "Poster design",
-            "class" : "illus"
-        },
-        {
-            "name" : "NFT design",
-            "class" : "dg_pro"
-        }
-    ],
-    "description" : "Various small-scale projects, personal and full-time works",
-    "soon" : false
-};
+const last_obj = [
+    {
+        "name" : "Misc projects",
+        "date" : "1/2020 - present",
+        "field" : [
+            {
+                "name" : "Communication design",
+                "class" : ""
+            },
+            {
+                "name" : "Poster design",
+                "class" : "illus"
+            },
+            {
+                "name" : "NFT design",
+                "class" : "dg_pro"
+            }
+        ],
+        "description" : "Various small-scale projects, personal and full-time works",
+        "soon" : false,
+        "key_" : "misc"
+    }
+];
 
 // initialise //
 viewportheight();
@@ -155,10 +158,13 @@ projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_ev
 fetch('item.json')
                 .then(res => res.json())
                 .then(data => {
-                    availit_num = data.length + 1;
                     fetch_data = data;
 
-                    fetch_data.push(misc_obj);
+                    availit_num = data.length + last_obj.length;
+                    for (let item of last_obj) {
+                        fetch_data.push(item);
+                    }
+
                     soitem_soon = soitem_tong - availit_num;
                     for (let i = 1; i <= soitem_soon; i++) {
                         fetch_data.push(soon_obj);
@@ -171,7 +177,7 @@ fetch('item.json')
 function navli_html_generation(data) {
     for (let key in data) {
         let item = data[key];
-        let key_ = (+key + 1 == availit_num) ? 'misc' : (+key + 1);
+        let key_ = item.key_ ?? (+key + 1);
         navitemobj[key] = {
             dg_pro: false,
             print: false,
@@ -241,6 +247,7 @@ function navli_html_generation(data) {
         if (item.soon) {li.classList.add('soon');}
         li.setAttribute('onclick', 'nav_navigate(this)');
         li.id = `_${+key + 1}`;
+        li.setAttribute('id_', key_);
         li.title = `click to see this project: ${item.name}`;
         li.append(divtxt.elem, divhover);
         fragment.appendChild(li);
