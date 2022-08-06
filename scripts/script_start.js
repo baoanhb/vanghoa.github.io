@@ -183,7 +183,7 @@ function nav_construct(id) {
                 soon_border('bot', 'col', 'Bottom', 'bot');
                 ////////
                 if (divhover.dataset.src) {
-                    setprop('--preloadcss',`${getprop('--preloadcss')} url('thumbnail/${divhover.dataset.src}.jpg')`)
+                    setprop('--preloadcss',`${getprop('--preloadcss')} url('../thumbnail/${divhover.dataset.src}.jpg')`)
                     divhover.removeAttribute("data-src");
                 }
                 ////////
@@ -309,7 +309,7 @@ function nav_navigate(item) {
     })
 
     if (!touchable && itemid <= availit_num) {
-        setprop('--border_img',`url('thumbnail/border/${itemid_}.jpg')`);
+        setprop('--border_img',`url('../thumbnail/border/${itemid_}.jpg')`);
     }
 }
 // 

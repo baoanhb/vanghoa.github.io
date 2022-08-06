@@ -59,7 +59,7 @@
 	--right_color_aft: var(--colortheme_rgb);
 	--top_color_aft: var(--colortheme_rgb);
 
-	--border_img: url('thumbnail/border/1.jpg');
+	--border_img: url('../thumbnail/border/1.jpg');
 	--lr_alpha: 0.6;
 	--top_alpha: 0.8;
 	--bot_alpha: 0.4;
@@ -994,7 +994,7 @@ label#tglnav div {
 #landing_pg {
 	height: calc(var(--vh100) - calc(var(--pad_welcome) * 2));
 	min-height: 200px;
-	background-image: url(garage/background.jpg);
+	background-image: url(../garage/background.jpg);
 	background-size: 100% 100%;
 	padding-top: 20px;
 	display: flex;

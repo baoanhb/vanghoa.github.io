@@ -9,3 +9,7 @@ magick mogrify -resize 1700x> -quality 100 -path out *.jpg
 magick mogrify -format jpg *.jpeg   
 
 imagemin * --plugin.mozjpeg.progressive=true --plugin.mozjpeg.max=50 --plugin.mozjpeg.stripAll=true --plugin.mozjpeg.size=50 *.jpg --out-dir=./out
+
+cleancss -o style_min.css style.css
+
+terser script_start.js --compress --mangle --output script_start_min.js
