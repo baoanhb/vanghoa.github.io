@@ -1153,7 +1153,7 @@ a {
 	}
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1700px) {
 	:root {
 		--navsz_sampl: 60px;
 		--navszhover: 300px;
