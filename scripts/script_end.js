@@ -76,6 +76,7 @@ const nav_instruction = $('#nav_instruction');
 const navlist_instruction = $('#navlist_instruction');
 const sort_instruction = $('#sort_instruction');
 const home_instruction = $$('.home_instruction');
+const instruction_skip = $$('span.skip_tut');
 
 //fragment
 const fragment = document.createDocumentFragment();

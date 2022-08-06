@@ -856,6 +856,7 @@ label#tglnav div {
 	visibility: hidden;
 	display: block;
 	opacity: 0;
+	cursor: auto;
 }
 
 .instruction.trans {
@@ -899,6 +900,10 @@ label#tglnav div {
 	text-align: center;
 	font-style: italic;
 }
+			.skip_tut {
+				text-decoration: underline;
+				cursor: pointer;
+			}
 										
 .canthover {
 	display: initial;

@@ -27,21 +27,25 @@ function mywork_btn() {
                     let tutorial = {
                         _none : [],
                         _add : [],
-                        block : function(remove) {
+                        __add: [],
+                        go_ : function(remove, flex, block, no) {
+                            /* */
                             for (let elem of this._add) {
                                 elem.classList.add('block');
                             }
                             for (let elem of remove) {
                                 elem.classList.remove('block');
                             }
+                            this.__add = this._add;
                             this._add = remove;
-                        },
-                        display : function(flex, block) {
                             /* */
                             display(flex, 'flex');
                             display(block, 'block');
                             display(this._none, 'none');
                             this._none = flex.concat(block)
+                            /* */
+                            this.go = this[no];
+                            cl(no);
                             /* */
                             function display(arr, dis) {
                                 for (let elem of arr) {
@@ -54,35 +58,30 @@ function mywork_btn() {
                                 elem.classList.add('go');
                             }
                             this._add = [instruction_main, ...instruction_btn];
-                            this['1']();
+                            this.go_([...instruction_nav],[nav_instruction],[],'2');
                         },
-                        '1' : function() {
-                            this.block([...instruction_nav]);
-                            this.display([nav_instruction],[]);
-                            this.go = this['2'];
+                        skip : function(e) {
+                            tutorial['5']();
+                            e.stopPropagation();
                         },
                         '2' : function() {
-                            this.block([...instruction_btn_nav]);
-                            this.display([navlist_instruction],[]);
-                            this.go = this['3'];
+                            this.go_([...instruction_btn_nav],[navlist_instruction],[],'3');
                         },
                         '3' : function() {
-                            this.block([instruction_btn_sort]);
-                            this.display([sort_instruction],[]);
-                            this.go = this['4'];
+                            this.go_([instruction_btn_sort],[sort_instruction],[],'4');
                         },
                         '4' : function() {
-                            this.block([instruction_btn_home, instruction_main]);
-                            this.display([],[...home_instruction]);
-                            this.go = this['5'];
+                            this.go_([instruction_btn_home, instruction_main],[],[...home_instruction],'5');
                         },
                         '5' : function() {
-                            instruction_btn_sort.addEventListener('transitionend', scroll_mywork);
+                            cl(this.__add);
+                            this.__add[0].addEventListener('transitionend', scroll_mywork);
                             /* */
-                            this.block([...instruction]);
-                            this.display([],[]);
-                            this.go = function() {return;};
+                            this.go_([...instruction],[],[],'end');
                         },
+                        'end' : function() {
+                            return;
+                        }
                     }
 
                     function scroll_mywork() {
@@ -369,15 +368,15 @@ function togglenav(ckbx) {
         setprop('--navsz','0px');
         setprop('--pad_btn','0px');
         removeseemore();
-        offsetifr = offsetifr - navsz*2;
 
         if (!touchable) {
             setprop('--hbhwidth_top','0px');
             setprop('--hbhwidth_bot','0px');
             setprop('--hbhwidth_left','0px');
             setprop('--hbhwidth_right','0px');
-            offsetifr -= +getprop('--hbhwidth_ave').slice(0,-2)*2;
         }
+
+        offsetifr = scrlbrwd + 1;
 
         if (frame_alrload) {
             ifr_widthfit(projfr.querySelector('iframe'));
@@ -385,15 +384,15 @@ function togglenav(ckbx) {
     } else {
         setprop('--navsz',`var(--navsz_sampl)`);
         setprop('--pad_btn','10px');
-        offsetifr = offsetifr + navsz*2;
 
         if (!touchable) {
             setprop('--hbhwidth_top','var(--hbhwidth_ave)');
             setprop('--hbhwidth_bot','var(--hbhwidth_ave)');
             setprop('--hbhwidth_left','var(--hbhwidth_ave)');
             setprop('--hbhwidth_right','var(--hbhwidth_ave)');
-            offsetifr += +getprop('--hbhwidth_ave').slice(0,-2)*2;
         }
+        
+        offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
 
         if (frame_alrload) {
             ifr_widthfit(projfr.querySelector('iframe'));
