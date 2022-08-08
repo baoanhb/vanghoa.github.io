@@ -400,7 +400,7 @@ li.row.current > div.text > h2 > span:nth-child(1) {
 }
 
 body.hasHover li.row.current > div.text > h2 > span:nth-child(1) {
-	text-underline-offset: 0px;
+	text-underline-offset: auto;
 }
 
 li.soon {
