@@ -36,8 +36,10 @@
 	--lifontsz_small: 12px;
 	--whght_bold: 600;
 	/* color theme */
-	--colortheme: rgb(61, 235, 221);
-	--colortheme_rgb: 61, 235, 221;
+	--colortheme: rgb(196, 196, 196);
+	--colortheme_rgb: 196, 196, 196;
+	--color_arrow: rgb(255,255,255);
+	--color_arrow_rgb: 255, 255, 255;
 	/* sorting color */
 	--mo_gra: 255, 0, 255;
 	--illus: 0, 204, 102;
@@ -375,6 +377,7 @@ li > div.hovercontent {
 	-webkit-box-shadow: var(--boxsdstyle);
 	box-shadow: var(--boxsdstyle);
 	margin: 0 var(--offsetborderstyle) var(--offsetborderstyle) var(--offsetborderstyle);
+	filter: grayscale(100%);
 }
 
 body.hasHover li:hover > div.hovercontent {
@@ -404,7 +407,7 @@ body.hasHover li.row.current > div.text > h2 > span:nth-child(1) {
 }
 
 li.soon {
-	background-color: yellow;
+	background-color: var(--color_arrow);
 }
 
 /* nav item button */
@@ -1024,7 +1027,7 @@ label#tglnav div {
 	width: 100%;
 	height: var(--navsz_sampl);
 	text-align: center;
-	background-color: yellow;
+	background-color: var(--color_arrow);
 	font-weight: var(--whght_bold);
 	box-shadow: var(--boxsdstyle_inset);
 	cursor: pointer;

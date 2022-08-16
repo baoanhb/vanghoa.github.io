@@ -190,7 +190,7 @@ function nav_construct(id) {
                 function soon_border(check, check_, bor_name, alpha_name) {
                     if (class_.includes(check) && class_.includes(check_)) {
                         if (class_.includes('soon')) {
-                            border_3d[check].style[`border${bor_name}Color`] = `rgba(255, 255, 0, var(--${alpha_name}_alpha)`;
+                            border_3d[check].style[`border${bor_name}Color`] = `rgba(var(--color_arrow_rgb), var(--${alpha_name}_alpha)`;
                         }
                         border_3d[check].style.visibility = 'visible';
                     }
