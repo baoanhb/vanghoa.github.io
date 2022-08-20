@@ -791,6 +791,11 @@ body.hasHover #main > section {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	background-color: var(--color_arrow);
+	-webkit-box-shadow: var(--boxsdstyle_inset);
+	box-shadow: var(--boxsdstyle_inset);
+	width: var(--navsz_sampl);
+	height: var(--navsz_sampl);
 }
 
 label#tglnav input {
@@ -801,14 +806,11 @@ label#tglnav input {
 	width: 0;
 }
 
-label#tglnav div {
-	padding: 10px 15px 10px;
-	background-color: var(--colortheme);
-	border-radius: 50px;
-	font-weight: var(--whght_bold);
-	font-size: var(--lifontsz);
-	-webkit-box-shadow: var(--boxsdstyle_inset);
-	box-shadow: var(--boxsdstyle_inset);
+label#tglnav img {
+	mix-blend-mode: multiply;
+	padding: 10px;
+	object-fit: cover;
+	width: 100%;
 }
 
 /* main section */
@@ -864,6 +866,10 @@ label#tglnav div {
 
 .instruction.trans {
 	transition: opacity 0.5s;
+}
+
+.instruction.trans.nav_.clickable {
+	pointer-events: none;
 }
 
 .instruction.main {

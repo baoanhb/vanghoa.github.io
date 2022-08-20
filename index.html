@@ -27,9 +27,9 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="format-detection" content="telephone=no">
   <!-- css + script start --> 
-  <link href="style/style_min.css" rel="stylesheet">
+  <link href="style/style.css" rel="stylesheet">
   <script src="scripts/lodash.custom.min.js"></script>
-  <script src="scripts/script_start_min.js"></script>
+  <script src="scripts/script_start.js"></script>
 </head>
 
 <body>
@@ -47,9 +47,9 @@
     </div>
     <ul id="nav">
       <li id="main">
-        <label id="tglnav">
+        <label class="vertical" id="tglnav" title="full window view">
+          <img src="icon/icon (5).png" alt="fullscreen button">
           <input type="checkbox" onclick="togglenav(this)">
-          <div class="horizontal">go fullscreen</div>
         </label>
         <section id="welcome" style="overflow: hidden;">
           <div id="landing_pg">
@@ -328,19 +328,19 @@
       </li>
       <!-- -->
       <li class="btn vertical" onclick="homescreen()" title="toggle homescreen" style="grid-column: 1 / 2; grid-row: 1 / 2;">
-        <img src="icon/icon (2).jpg" alt="home button">
+        <img src="icon/icon (2).png" alt="home button">
       </li>
       <!-- -->
       <li class="btn vertical seemore_func" onclick="seemore()" title="sort & filter" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: 1 / 2;">
-        <img src="icon/icon (1).jpg" alt="sorting button">
+        <img src="icon/icon (1).png" alt="sorting button">
       </li>
       <!-- -->
       <li class="btn vertical" onclick="navlist_navigate(false)" title="navigate backward" style="grid-column: 1 / 2; grid-row: var(--colmaxreal_2) / var(--colmaxreal_3); background-color: var(--color_arrow);">
-        <img src="icon/icon (3).jpg" alt="left button">
+        <img src="icon/icon (3).png" alt="left button">
       </li>
       <!-- -->
       <li class="btn vertical" onclick="navlist_navigate(true)" title="navigate forward" style="grid-column: var(--colmaxreal_2) / var(--colmaxreal_3); grid-row: var(--colmaxreal_2) / var(--colmaxreal_3); background-color: var(--color_arrow);">
-        <img src="icon/icon (4).jpg" alt="right button">
+        <img src="icon/icon (4).png" alt="right button">
       </li>
       <!-- -->
       <li id="top_border">
@@ -434,7 +434,7 @@
     </ul>
   </nav>
 
-  <script src="scripts/script_end_min.js"></script>
+  <script src="scripts/script_end.js"></script>
 </body>
 
 </html>

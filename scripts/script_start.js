@@ -45,7 +45,6 @@ function mywork_btn() {
                             this._none = flex.concat(block)
                             /* */
                             this.go = this[no];
-                            cl(no);
                             /* */
                             function display(arr, dis) {
                                 for (let elem of arr) {
@@ -59,6 +58,10 @@ function mywork_btn() {
                             }
                             this._add = [instruction_main, ...instruction_btn];
                             this.go_([...instruction_nav],[nav_instruction],[],'2');
+                            
+                            for (let elem of instruction_nav) {
+                                elem.classList.add('clickable');
+                            }
                         },
                         skip : function(e) {
                             tutorial['5']();
@@ -66,6 +69,9 @@ function mywork_btn() {
                         },
                         '2' : function() {
                             this.go_([...instruction_btn_nav],[navlist_instruction],[],'3');
+                            for (let elem of instruction_nav) {
+                                elem.classList.remove('clickable');
+                            }
                         },
                         '3' : function() {
                             this.go_([instruction_btn_sort],[sort_instruction],[],'4');
@@ -74,8 +80,11 @@ function mywork_btn() {
                             this.go_([instruction_btn_home, instruction_main],[],[...home_instruction],'5');
                         },
                         '5' : function() {
-                            cl(this.__add);
                             this.__add[0].addEventListener('transitionend', scroll_mywork);
+                            eoins = false;
+                            for (let elem of instruction_nav) {
+                                elem.classList.remove('clickable');
+                            }
                             /* */
                             this.go_([...instruction],[],[],'end');
                         },
@@ -282,6 +291,8 @@ function navlist_navigate(next, btn) {
 let frame_needscrollbar = false;
 
 function nav_navigate(item) {
+    if (eoins) {return;}
+
     wlcmscr.classList.add('close');
     homebtn.classList.add('bw');
 

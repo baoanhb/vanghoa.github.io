@@ -46,6 +46,7 @@ let smallersd_min;
 let fetch_data;
 let soitem_soon;
 let not_firstload = false;
+let eoins = true;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -305,7 +306,6 @@ function navli_html_generation(data) {
 function init_vh() {
     r_transitionend([init_vh], btn_img);
     viewportheight();
-    cl('ok');
 }
 
 function fieldcheck(class_, item) {
