@@ -65,6 +65,7 @@ const sneak_title = $ulnav('#sneak_title');
 const resume = $ulnav('#myresume');
 const btn_img = $ulnav('.btn img');
 const description = $ulnav('#description');
+const opensep = $ulnav('#opensep');
 
 const instruction = $$('.instruction');
 const instruction_main = $('.instruction.main');

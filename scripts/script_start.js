@@ -339,6 +339,7 @@ let frame_alrload = false;
 
 function ifr_onload(frame) {
     if (!+frame.getAttribute('hidecheck')) {return;}
+    opensep.href = frame.src;
     frame_alrload = true;
     ifr_widthfit(frame);
     if (frame_needscrollbar) {

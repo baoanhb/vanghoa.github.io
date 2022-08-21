@@ -127,11 +127,7 @@ function nav_construct(data) {
   h1.parentNode.insertBefore(nav, h1);
 
   if (window.top !== window.self) {
-    let a_ct = $create('a');
-    a_ct.textContent = 'Open this project in a separate window';
-    a_ct.href = window.location.pathname;
-    a_ct.target = '_blank';
-    nav.append(a_ct);
+    nav.style.position = 'fixed';
     return;
   }
   // not iframe //

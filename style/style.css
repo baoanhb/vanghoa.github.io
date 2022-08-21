@@ -780,7 +780,7 @@ body.hasHover #main > section {
 
 /* label hover toggle */
 
-#main label#tglnav {
+#tglnav, #opensep {
 	position: absolute;
 	bottom: 0;
 	right: var(--scrlbrwd);
@@ -796,9 +796,15 @@ body.hasHover #main > section {
 	box-shadow: var(--boxsdstyle_inset);
 	width: var(--navsz_sampl);
 	height: var(--navsz_sampl);
+	border: none;
 }
 
-label#tglnav input {
+#opensep {
+	z-index: 1;
+	bottom: calc(10px + var(--navsz_sampl));
+}
+
+#tglnav input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
@@ -806,7 +812,7 @@ label#tglnav input {
 	width: 0;
 }
 
-label#tglnav img {
+:is(#tglnav, #opensep) img {
 	mix-blend-mode: multiply;
 	padding: 10px;
 	object-fit: cover;
