@@ -802,6 +802,7 @@ body.hasHover #main > section {
 #opensep {
 	z-index: 1;
 	bottom: calc(10px + var(--navsz_sampl));
+	margin-bottom: 0;
 }
 
 #tglnav input {
