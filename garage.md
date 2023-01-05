@@ -15,3 +15,5 @@ cleancss -o style_min.css style.css
 terser script_start.js --compress --mangle --output script_start_min.js
 
 terser script_end.js --compress --mangle --output script_end_min.js
+
+for %i in (*.MOV) do ffmpeg -i "%i" "%~ni.webm"
