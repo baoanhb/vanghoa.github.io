@@ -46,7 +46,7 @@ let smallersd_min;
 let fetch_data;
 let soitem_soon;
 let not_firstload = false;
-let eoins = true;
+let eoins;
 
 // query elements
 const projfr = $ulnav('section#iframe');
@@ -299,7 +299,19 @@ function navli_html_generation(data) {
     */
 
     btn_img.addEventListener('transitionend', init_vh);
-
+//
+    let hash = location.hash.substring(1);
+    if (+hash <= soitem_tong && +hash >= 1) {
+        mywork_btn(false);
+        delaypromise = delaypromise.then(function() {
+            nav_navigate(navitemobj[hash-1].elem);
+            return new Promise(function (resolve) {
+                resolve();
+            });
+        });
+        return;
+    }
+//
     ckbx.checked = true;
     togglenav(ckbx);
 }

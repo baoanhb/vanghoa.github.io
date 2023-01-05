@@ -3,7 +3,7 @@
 // local function //
 
 // initial nav func //
-function mywork_btn() {
+function mywork_btn(tutck = true) {
     ckbx.checked = false;
     togglenav(ckbx);
 
@@ -21,7 +21,12 @@ function mywork_btn() {
     ulnav.appendChild(fragment);
     nav_construct(0);
 
-    tutorial.go();
+    if (tutck) {tutorial.go();}
+    else {
+        for (let elem of instruction) {
+            elem.remove();
+        }
+    }
 }
 
                     let tutorial = {
@@ -53,6 +58,7 @@ function mywork_btn() {
                             }
                         },
                         go : function() {
+                            eoins = true;
                             for (let elem of instruction) {
                                 elem.classList.add('go');
                             }
@@ -297,7 +303,7 @@ function nav_navigate(item) {
     homebtn.classList.add('bw');
 
     item.classList.add('current');
-    let itemid = item.getAttribute('id').slice(1);
+    let itemid = location.hash = item.getAttribute('id').slice(1);
     let itemid_ = item.getAttribute('id_');
 
     if (crrntitemid == itemid) {
@@ -353,6 +359,9 @@ function homescreen() {
 
     if (!wlcmscr.classList.contains('close')) {
         removeseemore();
+        location.hash = 'home';
+    } else {
+        location.hash = crrntitemid;
     }
 }
 //
