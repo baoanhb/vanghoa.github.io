@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 // custom settings //
 const minsz = 10;
 const time_interval = 250;
@@ -60,6 +60,7 @@ const tglnav = $ulnav('label#tglnav');
 const main = $ulnav('#main');
 const sneak = $ulnav('#sneak_peek');
 const landing = $ulnav('#landing_pg');
+const bgimg = $$('#bgimg img');
 const about = $ulnav('#about');
 const sneak_title = $ulnav('#sneak_title');
 const resume = $ulnav('#myresume');
@@ -73,7 +74,10 @@ const instruction_nav = $$('.instruction.nav_');
 const instruction_btn = $$('.instruction.btn_');
 const instruction_btn_home = $('.instruction.btn_.tl');
 const instruction_btn_sort = $('.instruction.btn_.tr');
-const instruction_btn_nav = [$('.instruction.btn_.br'), $('.instruction.btn_.bl')];
+const instruction_btn_nav = [
+    $('.instruction.btn_.br'),
+    $('.instruction.btn_.bl'),
+];
 const nav_instruction = $('#nav_instruction');
 const navlist_instruction = $('#navlist_instruction');
 const sort_instruction = $('#sort_instruction');
@@ -86,101 +90,110 @@ const fragment_sneak = document.createDocumentFragment();
 
 // border 3d object
 const border_3d = {
-    top : $ulnav('#top_border'),
-    bot : $ulnav('#bot_border'),
-    left : $ulnav('#left_border'),
-    right : $ulnav('#right_border'),
-    removehighlight_border_top : function(e) {
+    top: $ulnav('#top_border'),
+    bot: $ulnav('#bot_border'),
+    left: $ulnav('#left_border'),
+    right: $ulnav('#right_border'),
+    removehighlight_border_top: function (e) {
         color_border('top', e.target, false, 'N/A');
     },
-    removehighlight_border_bot : function(e) {
+    removehighlight_border_bot: function (e) {
         color_border('bot', e.target, false, 'N/A');
     },
-    removehighlight_border_left : function(e) {
+    removehighlight_border_left: function (e) {
         color_border('left', e.target, false, 'N/A');
     },
-    removehighlight_border_right : function(e) {
+    removehighlight_border_right: function (e) {
         color_border('right', e.target, false, 'N/A');
     },
 };
 
 // extra objects
 const soon_obj = {
-    "name" : "Coming",
-    "date" : "soon",
-    "field" : [
+    name: 'Coming',
+    date: 'soon',
+    field: [
         {
-            "name" : "Intentionally",
-            "class" : ""
+            name: 'Intentionally',
+            class: '',
         },
         {
-            "name" : "left",
-            "class" : ""
+            name: 'left',
+            class: '',
         },
         {
-            "name" : "blank",
-            "class" : ""
-        }
+            name: 'blank',
+            class: '',
+        },
     ],
-    "description" : "",
-    "soon" : true
+    description: '',
+    soon: true,
 };
 const last_obj = [
     {
-        "name" : "Misc projects",
-        "date" : "1/2020 - present",
-        "field" : [
+        name: 'Misc projects',
+        date: '1/2020 - present',
+        field: [
             {
-                "name" : "Communication design",
-                "class" : ""
+                name: 'Communication design',
+                class: '',
             },
             {
-                "name" : "Poster design",
-                "class" : "illus"
+                name: 'Poster design',
+                class: 'illus',
             },
             {
-                "name" : "NFT design",
-                "class" : "dg_pro"
-            }
+                name: 'NFT design',
+                class: 'dg_pro',
+            },
         ],
-        "description" : "Various small-scale projects, personal and full-time works",
-        "soon" : false,
-        "key_" : "misc"
-    }
+        description:
+            'Various small-scale projects, personal and full-time works',
+        soon: false,
+        key_: 'misc',
+    },
 ];
 
 // initialise //
 viewportheight();
-const touchable = hasTouch(); hoveractivate();
-let scrlbrwd = getScrollbarWidth(); setprop('--scrlbrwd', `${scrlbrwd}px`);
-let offsetifr = navsz*2 + scrlbrwd + 1 + (!touchable ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
+const touchable = hasTouch();
+hoveractivate();
+let scrlbrwd = getScrollbarWidth();
+setprop('--scrlbrwd', `${scrlbrwd}px`);
+let offsetifr =
+    navsz * 2 +
+    scrlbrwd +
+    1 +
+    (!touchable ? +getprop('--hbhwidth_ave').slice(0, -2) : 0) * 2;
 
-projfr.querySelector('iframe').addEventListener('transitionend', nav_navigate_event);
+projfr
+    .querySelector('iframe')
+    .addEventListener('transitionend', nav_navigate_event);
 
 // nav fetch //
 fetch('item.json')
-                .then(res => res.json())
-                .then(data => {
-                    fetch_data = data;
+    .then((res) => res.json())
+    .then((data) => {
+        fetch_data = data;
 
-                    availit_num = data.length + last_obj.length;
-                    for (let item of last_obj) {
-                        fetch_data.push(item);
-                    }
+        availit_num = data.length + last_obj.length;
+        for (let item of last_obj) {
+            fetch_data.push(item);
+        }
 
-                    soitem_soon = soitem_tong - availit_num;
-                    for (let i = 1; i <= soitem_soon; i++) {
-                        fetch_data.push(soon_obj);
-                    }
-                    
-                    navli_html_generation(fetch_data);
-                })
-                .catch(err => console.error(err));
+        soitem_soon = soitem_tong - availit_num;
+        for (let i = 1; i <= soitem_soon; i++) {
+            fetch_data.push(soon_obj);
+        }
+
+        navli_html_generation(fetch_data);
+    })
+    .catch((err) => console.error(err));
 
 function navli_html_generation(data) {
     for (let key in data) {
         let item = data[key];
-        let key_ = item.key_ ?? (+key + 1);
+        let key_ = item.key_ ?? +key + 1;
         navitemobj[key] = {
             dg_pro: false,
             print: false,
@@ -190,64 +203,62 @@ function navli_html_generation(data) {
             gr_co: false,
             time: true,
             soon: false,
-        }
+        };
 
         // div text
         let divtxt = {
-            elem : $create('div'),
-            chld : [
-                { 
-                    elem : $create('h2'),
-                    chld : [
-                        $create('span'),
-                        $create('span')
-                    ],
+            elem: $create('div'),
+            chld: [
+                {
+                    elem: $create('h2'),
+                    chld: [$create('span'), $create('span')],
                 },
                 $create('p'),
                 $create('p'),
-            ]
+            ],
         };
-                                // div text h2
-                                divtxt.chld[0].chld[0].textContent = item.name;//-- json props
-                                divtxt.chld[0].chld[1].textContent = item.date;//-- json props
-                                    divtxt.chld[0].chld[1].classList.add('date');
-                                divtxt.chld[0].elem.append( divtxt.chld[0].chld[0],
-                                                            ' ',
-                                                            divtxt.chld[0].chld[1]
-                                )
-                                // div text p field
-                                divtxt.chld[1].classList.add('field');
-                                for (let index in item.field) {
-                                    let span = $create('span');
-                                    span.className = `field ${item.field[index].class}`;//-- json props
-                                    
-                                    fieldcheck(item.field[index].class, navitemobj[key]);
+        // div text h2
+        divtxt.chld[0].chld[0].textContent = item.name; //-- json props
+        divtxt.chld[0].chld[1].textContent = item.date; //-- json props
+        divtxt.chld[0].chld[1].classList.add('date');
+        divtxt.chld[0].elem.append(
+            divtxt.chld[0].chld[0],
+            ' ',
+            divtxt.chld[0].chld[1]
+        );
+        // div text p field
+        divtxt.chld[1].classList.add('field');
+        for (let index in item.field) {
+            let span = $create('span');
+            span.className = `field ${item.field[index].class}`; //-- json props
 
-                                    span.textContent = item.field[index].name;//-- json props
-                                    divtxt.chld[1].append(span,' ');
-                                }
-                                // div text p description
-                                divtxt.chld[2].textContent = item.description;//-- json props
-                                //div text
-                                divtxt.elem.classList.add('text');
-                                divtxt.elem.append( divtxt.chld[0].elem,
-                                                    divtxt.chld[1],
-                                                    divtxt.chld[2]
-                                );
+            fieldcheck(item.field[index].class, navitemobj[key]);
+
+            span.textContent = item.field[index].name; //-- json props
+            divtxt.chld[1].append(span, ' ');
+        }
+        // div text p description
+        divtxt.chld[2].textContent = item.description; //-- json props
+        //div text
+        divtxt.elem.classList.add('text');
+        divtxt.elem.append(divtxt.chld[0].elem, divtxt.chld[1], divtxt.chld[2]);
 
         // div hovercontent
         let divhover = $create('div');
         divhover.classList.add('hovercontent');
-                                if (!item.soon) {//-- json props
-                                    divhover.dataset.src = `${key_}`;
-                                    divhover.style.backgroundImage = `url('thumbnail/${key_}.jpg')`;
-                                } else {
-                                    navitemobj[key].soon = true;
-                                }
+        if (!item.soon) {
+            //-- json props
+            divhover.dataset.src = `${key_}`;
+            divhover.style.backgroundImage = `url('thumbnail/${key_}.jpg')`;
+        } else {
+            navitemobj[key].soon = true;
+        }
 
         //li
         let li = $create('li');
-        if (item.soon) {li.classList.add('soon');}
+        if (item.soon) {
+            li.classList.add('soon');
+        }
         li.setAttribute('onclick', 'nav_navigate(this)');
         li.id = `_${+key + 1}`;
         li.setAttribute('id_', key_);
@@ -255,37 +266,42 @@ function navli_html_generation(data) {
         li.append(divtxt.elem, divhover);
         fragment.appendChild(li);
 
-                                // li initialise
-                                if (key == 0) {li.classList.add('current');} // initial current nav
-                                navitemobj[key].elem = li;
-                                navitem[Math.floor(key/soitemperscreen)].push(li);
-                                if (!touchable) {
-                                    li.addEventListener("mouseleave", hover_out);
-                                }
+        // li initialise
+        if (key == 0) {
+            li.classList.add('current');
+        } // initial current nav
+        navitemobj[key].elem = li;
+        navitem[Math.floor(key / soitemperscreen)].push(li);
+        if (!touchable) {
+            li.addEventListener('mouseleave', hover_out);
+        }
 
         //sneak
         if (!item.soon) {
             let li_ = $create('li');
             let div = $create('div');
-                div.setAttribute('onclick', `nav_navigate(navitemobj[${key}].elem)`);
-                div.title = li.title;
+            div.setAttribute(
+                'onclick',
+                `nav_navigate(navitemobj[${key}].elem)`
+            );
+            div.title = li.title;
             let h2 = $create('h2');
             let name = $create('span');
-                name.textContent = `${+key + 1}/ ${item.name}`;
+            name.textContent = `${+key + 1}/ ${item.name}`;
             let date = $create('span');
-                date.textContent = item.date;
-                date.classList.add('date');
+            date.textContent = item.date;
+            date.classList.add('date');
             let img = $create('img');
-                img.src = `thumbnail/home/${key_}.jpg`;
-                img.alt = item.name;
-            h2.append(name,' ',date);
+            img.src = `thumbnail/home/${key_}.jpg`;
+            img.alt = item.name;
+            h2.append(name, ' ', date);
             div.append(img, h2);
             li_.appendChild(div);
             fragment_sneak.appendChild(li_);
         }
     }
 
-    // navbar construction // 
+    // navbar construction //
     onresizesortbtn(false);
 
     /*
@@ -299,19 +315,19 @@ function navli_html_generation(data) {
     */
 
     btn_img.addEventListener('transitionend', init_vh);
-//
+    //
     let hash = location.hash.substring(1);
     if (+hash <= soitem_tong && +hash >= 1) {
         mywork_btn(false);
-        delaypromise = delaypromise.then(function() {
-            nav_navigate(navitemobj[hash-1].elem);
+        delaypromise = delaypromise.then(function () {
+            nav_navigate(navitemobj[hash - 1].elem);
             return new Promise(function (resolve) {
                 resolve();
             });
         });
         return;
     }
-//
+    //
     ckbx.checked = true;
     togglenav(ckbx);
 }
@@ -322,31 +338,49 @@ function init_vh() {
 }
 
 function fieldcheck(class_, item) {
-    if (fieldcheck_('dg_pro')) {return;};
-    if (fieldcheck_('print')) {return;};
-    if (fieldcheck_('mo_gra')) {return;};
-    if (fieldcheck_('illus')) {return;};
-    if (fieldcheck_('spcl')) {return;};
+    if (fieldcheck_('dg_pro')) {
+        return;
+    }
+    if (fieldcheck_('print')) {
+        return;
+    }
+    if (fieldcheck_('mo_gra')) {
+        return;
+    }
+    if (fieldcheck_('illus')) {
+        return;
+    }
+    if (fieldcheck_('spcl')) {
+        return;
+    }
 
     function fieldcheck_(check) {
-        item[check] = item[check]  || (class_ == check);
+        item[check] = item[check] || class_ == check;
         return class_ == check;
     }
 }
 
-
 // on resize //
-window.onresize = _.debounce(function() {
+window.onresize = _.debounce(function () {
     // media change => get navbar
     navsz = +getprop('--navsz_sampl').slice(0, -2);
     // scrollbar width
     scrlbrwd = getScrollbarWidth();
     setprop('--scrlbrwd', `${scrlbrwd}px`);
     // offsetiframe width - change hbhwidth_ave on media css change
-    offsetifr = (ckbx.checked == false ? navsz*2 : 0) + scrlbrwd + 1 + ((!touchable && (ckbx.checked == false)) ? +getprop('--hbhwidth_ave').slice(0,-2) : 0) * 2;
+    offsetifr =
+        (ckbx.checked == false ? navsz * 2 : 0) +
+        scrlbrwd +
+        1 +
+        (!touchable && ckbx.checked == false
+            ? +getprop('--hbhwidth_ave').slice(0, -2)
+            : 0) *
+            2;
     ifr_widthfit(projfr.querySelector('iframe'));
     // ios vh fix
     viewportheight();
     // sort button reorganise + generate nav bar
     onresizesortbtn(true);
 }, 1000);
+
+bgimg_.activate();
