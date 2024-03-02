@@ -1150,8 +1150,10 @@ body.hasHover .canhover {
     padding: 0.4em 0.5em;
     line-height: 1.3em;
     display: flex;
-    align-items: center;
-    height: fit-content;
+    align-items: start;
+    height: 70%;
+    max-height: calc(600px + 1em);
+    overflow-y: auto;
     gap: 1em;
 }
 
